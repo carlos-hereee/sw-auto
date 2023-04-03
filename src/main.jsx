@@ -1,32 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
 import App from "./App";
 import "../src/stylesheets/index.scss";
 import { AppState } from "./utils/context/AppContext";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Landing from "./pages/Landing";
-// import Landing from "./pages/Landing";
+import Cars from "./pages/Cars";
+import Boats from "./pages/Boats";
+import RvAtv from "./pages/RvAtv";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "/lorem",
-        element: <Landing />,
-      },
-      {
-        path: "/ipsum",
-        element: <Landing />,
-      },
-      {
-        path: "/latel",
-        element: <Landing />,
-      },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  // routesList
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route path="/lorem" element={<Cars />} />
+      <Route path="/ipsum" element={<Boats />} />
+      <Route path="/latel" element={<RvAtv />} />
+    </Route>
+  )
+);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AppState>
