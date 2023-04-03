@@ -3,7 +3,7 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem;
+  // padding: 1rem;
   background-color: #{$secondary-color};
   border-bottom: 1px solid #{$secondary-color2};
   position: sticky;
@@ -16,25 +16,8 @@ header {
     margin: 0.5rem 0;
   }
 }
-.logo-wrapper {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  .logo {
-    border-radius: 100%;
-    display: flex;
-    // aspect-ratio: 1/1;
-    // height: 100px;
-  }
-  @include devices(mobile) {
-    flex-direction: row;
-    align-items: center;
-    .logo {
-      width: 70px;
-      height: 70px;
-      // aspect-ratio: 1/1;
-    }
-  }
+.logo {
+  max-width: 200px;
 }
 .card-secondary {
   width: 100%;

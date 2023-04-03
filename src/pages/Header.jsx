@@ -48,6 +48,13 @@ const Header = () => {
     <header>
       <Logo />
       <nav className="primary-navigation">
+        <ul className="navigation">
+          {menu.map((m) => (
+            <Navlink data={m} key={m.uid} handleClick={handleClick} />
+          ))}
+        </ul>
+      </nav>
+      <nav className="mobile-navigation">
         <BurgerButton isBurger={isActive} burger={burger} click={handleClick} />
         <ul
           className="navigation"

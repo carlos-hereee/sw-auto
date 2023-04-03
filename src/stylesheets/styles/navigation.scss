@@ -1,6 +1,17 @@
 .primary-navigation {
-  position: relative;
-  // flex: 1;
+  width: 100%;
+  @include devices(mobile) {
+    display: none;
+  }
+}
+.secondary-navigation {
+  display: flex;
+  align-items: flex-start;
+  background-color: #{$secondary-color};
+  padding: 1rem 0.5rem;
+}
+.mobile-navigation {
+  display: none;
   .navigation {
     flex-direction: column;
     justify-content: space-around;
@@ -8,7 +19,6 @@
     list-style: none;
     background-color: #{$primary-color2};
     border-radius: 4px;
-    padding: 1rem;
     gap: 1rem;
     top: 100%;
     right: 0%;
@@ -25,20 +35,15 @@
   .navigation[data-state="close"] {
     display: none;
   }
-}
-.secondary-navigation {
-  display: flex;
-  align-items: flex-start;
-  background-color: #{$secondary-color};
-  padding: 1rem 0.5rem;
-  .navigation {
-    flex-direction: column;
-    justify-content: space-around;
-    list-style: none;
-    border-radius: 4px;
-    padding: 1rem 0;
-    gap: 1rem;
+  @include devices(mobile) {
+    display: flex;
   }
+}
+.navigation {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  border-radius: 4px;
 }
 .navbar {
   // width: 100%;
