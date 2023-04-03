@@ -11,21 +11,11 @@ p,
 span {
   font-family: "Roboto", sans-serif;
 }
-.App {
-  background-color: $primary-color;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  line-height: normal;
-  margin: auto;
-  color: #{$text-color};
-}
 .app-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-  padding: 1rem;
-  gap: 1rem;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // flex-direction: column;
+  // flex-wrap: wrap;
+  // gap: 1rem;
 }

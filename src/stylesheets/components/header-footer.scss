@@ -1,8 +1,6 @@
 header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
   // padding: 1rem;
   background-color: #{$secondary-color};
   border-bottom: 1px solid #{$secondary-color2};
@@ -10,14 +8,8 @@ header {
   top: 0;
   z-index: 3;
   max-height: 15vh;
-  .header-title {
-    display: flex;
-    justify-content: flex-start;
-    margin: 0.5rem 0;
-  }
-}
-.logo {
-  max-width: 200px;
+  justify-content: space-between;
+  padding: 1rem;
 }
 .card-secondary {
   width: 100%;
