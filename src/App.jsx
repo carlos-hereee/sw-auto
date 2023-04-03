@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import Header from "./pages/Header";
 import Landing from "./pages/Landing";
 
@@ -6,6 +7,7 @@ function App() {
     <div className="app-body">
       <Header />
       <Landing />
+      <Outlet />
     </div>
   );
 }

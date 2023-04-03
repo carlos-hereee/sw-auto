@@ -37,12 +37,12 @@
 .card-container {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   gap: 1rem;
   position: relative;
   padding-bottom: 1rem;
   .card {
-    box-shadow: 2px 0px 5px 1px #{$primary-color};
+    box-shadow: 1px 0px 3px 1px #{$primary-color};
   }
 }
 .container-empty {
