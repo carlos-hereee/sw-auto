@@ -162,14 +162,14 @@ export const app = {
     ],
   },
   menu: [
-    { name: "Espanol", uid: shortid.generate(), notification: 0 },
-    { name: "Cars", uid: shortid.generate(), notification: 0 },
+    // { name: "Espanol", uid: shortid.generate(), notification: 0 },
+    { name: "Lorem", uid: shortid.generate(), notification: 0 },
     // { name: "Services", uid: shortid.generate(), notification: 0, },
     // { name: "booking", uid: shortid.generate(), notification: 0 , },
     // { name: "accessories", uid: shortid.generate(), notification: 0 , },
     // { name: "checkout", uid: shortid.generate(), notification: 0 , },
-    { name: "Financing", uid: shortid.generate(), notification: 0 },
-    { name: "Login", uid: shortid.generate(), notification: 0 },
+    { name: "Ipsum", uid: shortid.generate(), notification: 0 },
+    { name: "Latel", uid: shortid.generate(), notification: 0 },
   ],
   gallery: {
     title: "Check out what's in our lot!",
