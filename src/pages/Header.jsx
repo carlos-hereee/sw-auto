@@ -1,12 +1,17 @@
+import { useContext } from "react";
 import logo from "../assets/logo.jpg";
-import Btn from "../components/buttons/btn";
+import Btn from "../components/atoms/buttons/button";
+import { AppContext } from "../utils/context/AppContext";
 
 const Header = () => {
+  const { menu } = useContext(AppContext);
   return (
-    <div>
+    <header>
       <img src={logo} alt="sw-auto" />
-      <Btn />
-    </div>
+      {menu.map((m) => (
+        <Btn data={m} />
+      ))}
+    </header>
   );
 };
 export default Header;
