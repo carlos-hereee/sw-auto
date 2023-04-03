@@ -12,16 +12,24 @@ import { AppState } from "./utils/context/AppContext";
 import Cars from "./pages/Cars";
 import Boats from "./pages/Boats";
 import RvAtv from "./pages/RvAtv";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter(
   // routesList
-  createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route path="/lorem" element={<Cars />} />
-      <Route path="/ipsum" element={<Boats />} />
-      <Route path="/latel" element={<RvAtv />} />
-    </Route>
-  )
+  [
+    {
+      path: "/",
+      element: <App />,
+      errorElement: <ErrorPage />,
+    },
+  ]
+  // createRoutesFromElements(
+  //   <Route path="/" element={<App />}>
+  //     <Route path="/lorem" element={<Cars />} />
+  //     <Route path="/ipsum" element={<Boats />} />
+  //     <Route path="/latel" element={<RvAtv />} />
+  //   </Route>
+  // )
 );
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
