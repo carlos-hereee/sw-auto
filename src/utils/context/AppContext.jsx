@@ -20,10 +20,6 @@ export const AppState = ({ children }) => {
     paymentMethods: app.paymentMethods,
     burger: { notification: 0 },
     paymentType: {},
-    app: {
-      title: "SW Auto of Houston",
-      alt: "industry brand",
-    },
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   // useEffect(() => {

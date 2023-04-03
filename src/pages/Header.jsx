@@ -3,13 +3,14 @@ import { useContext, useEffect, useState } from "react";
 import BurgerButton from "../component/molecules/navigation/BugerButton";
 import Navlink from "../component/molecules/navigation/Navlink";
 import { AppContext } from "../utils/context/AppContext";
-import { ServicesContext } from "../utils/context/ServicesContext";
+import Logo from "../component/atoms/Logo";
+// import { ServicesContext } from "../utils/context/ServicesContext";
 
 const Header = () => {
   const [isActive, setActive] = useState(false);
   const [isClose, setClose] = useState(false);
-  const { cart } = useContext(ServicesContext);
-  const { menu, updateBurger, burger, updateMenu } = useContext(AppContext);
+  // const { cart } = useContext(ServicesContext);
+  const { menu, burger } = useContext(AppContext);
 
   // eslint-disable-next-line no-unused-vars
   useEffect(() => {
@@ -26,18 +27,18 @@ const Header = () => {
     return () => document.removeEventListener("animationend", endAnimation, true);
     // document.removeEventListener("mousedown", onClick, true);
   }, []);
-  useEffect(() => {
-    const menuPayload = {
-      accessoryCount: cart.filter((c) => c.isAccessory).length,
-      servicesCount: cart.filter((c) => c.isBookable).length,
-    };
-    const burgerPayload = {
-      name: isActive ? "x" : "burger",
-      notification: cart.length,
-    };
-    updateBurger(burgerPayload);
-    updateMenu(menuPayload);
-  }, [cart, isActive]);
+  // useEffect(() => {
+  //   const menuPayload = {
+  //     accessoryCount: cart.filter((c) => c.isAccessory).length,
+  //     servicesCount: cart.filter((c) => c.isBookable).length,
+  //   };
+  //   const burgerPayload = {
+  //     name: isActive ? "x" : "burger",
+  //     notification: cart.length,
+  //   };
+  //   updateBurger(burgerPayload);
+  //   updateMenu(menuPayload);
+  // }, [cart, isActive]);
 
   const handleClick = () => {
     setActive(!isActive);
