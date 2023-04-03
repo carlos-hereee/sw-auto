@@ -1,5 +1,11 @@
+import Header from "./Header";
+
 const Boats = () => {
-  return <div>Boats</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
 export default Boats;

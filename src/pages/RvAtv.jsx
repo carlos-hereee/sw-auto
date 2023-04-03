@@ -1,5 +1,11 @@
+import Header from "./Header";
+
 const RvAtv = () => {
-  return <div>RvAtv</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
 export default RvAtv;
