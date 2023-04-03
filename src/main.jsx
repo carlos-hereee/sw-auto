@@ -23,9 +23,9 @@ const router = createBrowserRouter(
         // { path: "latel", element: <RvAtv /> },
       ],
     },
-    { path: "lorem", element: <Cars />, errorElement: <ErrorPage /> },
-    { path: "ipsum", element: <Boats />, errorElement: <ErrorPage /> },
-    { path: "latel", element: <RvAtv />, errorElement: <ErrorPage /> },
+    { path: "cars", element: <Cars />, errorElement: <ErrorPage /> },
+    { path: "boats", element: <Boats />, errorElement: <ErrorPage /> },
+    { path: "RvAtv", element: <RvAtv />, errorElement: <ErrorPage /> },
   ]
   // createRoutesFromElements(
   //   <Route path="/" element={<App />}>
