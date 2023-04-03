@@ -162,17 +162,6 @@ export const app = {
     ],
   },
   menu: [
-    {
-      name: "Home",
-      uid: shortid.generate(),
-      notification: 0,
-      isHome: true,
-      home: {
-        title: "SW Auto of Houston",
-        src: "/src/assets/logo.jpg",
-        alt: "industry brand",
-      },
-    },
     { name: "Espanol", uid: shortid.generate(), notification: 0, isHome: false },
     { name: "About", uid: shortid.generate(), notification: 0, isHome: false },
     { name: "Services", uid: shortid.generate(), notification: 0, isHome: false },
