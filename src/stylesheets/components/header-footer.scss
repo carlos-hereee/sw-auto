@@ -1,0 +1,53 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #{$secondary-color};
+  border-bottom: 1px solid #{$secondary-color2};
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  max-height: 15vh;
+  .header-title {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0.5rem 0;
+  }
+}
+.logo-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  .logo {
+    border-radius: 100%;
+    width: 90px;
+    display: flex;
+    // aspect-ratio: 1/1;
+    // height: 100px;
+  }
+  @include devices(mobile) {
+    flex-direction: row;
+    align-items: center;
+    .logo {
+      width: 70px;
+      height: 70px;
+      // aspect-ratio: 1/1;
+    }
+  }
+}
+.card-secondary {
+  width: 100%;
+  padding: 1rem;
+}
+footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: #{$secondary-color};
+  border-top: 1px solid #{$secondary-color2};
+  padding: 1rem;
+  gap: 1rem;
+}

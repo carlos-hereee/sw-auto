@@ -1,0 +1,31 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  width: 100%;
+  font-family: "Cinzel", serif;
+}
+p,
+span {
+  font-family: "Roboto", sans-serif;
+}
+.App {
+  background-color: $primary-color;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  line-height: normal;
+  margin: auto;
+  color: #{$text-color};
+}
+.app-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 1rem;
+  gap: 1rem;
+}
