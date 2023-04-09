@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "./Header";
 
 const Cars = () => {
@@ -51,6 +52,9 @@ const Cars = () => {
       optionsInstalled: "",
     },
   ];
+  const seeDetails = (car) => {
+    console.log(car);
+  };
   return (
     <div>
       <Header />
@@ -62,23 +66,26 @@ const Cars = () => {
           <p>Compare</p>
         </div>
         <div className="card-container">
-          {inLot.map((cars) => (
-            <div key={cars.uid} className="card">
+          {inLot.map((car) => (
+            <div key={car.uid} className="card">
               <div className="card-header">
-                {cars.year} {cars.make} {cars.model}
+                {car.year} {car.make} {car.model}
               </div>
               <div className="card-body">
                 <h2>Picture</h2>
                 <p>
                   Miles:{" "}
-                  {cars.features.map(({ mileage }) => (
+                  {car.features.map(({ mileage }) => (
                     <span>{mileage.toLocaleString()}</span>
                   ))}
                 </p>
-                <p>${cars.price.toLocaleString()}</p>
+                <p>${car.price.toLocaleString()}</p>
               </div>
               <div className="card-footer">
-                <button>See Details</button>
+                <Link to={`/car?id=${car.uid}`}>See Details</Link>
+                {/* <button type="button" onClick={() => seeDetails(car)}>
+                  See Details
+                </button> */}
                 <button>Confirm Availibility</button>
               </div>
             </div>

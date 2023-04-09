@@ -6,9 +6,11 @@ import "../src/stylesheets/index.scss";
 import { AppState } from "./utils/context/AppContext";
 import ErrorPage from "./pages/ErrorPage";
 import Cars from "./pages/Cars";
+import Car from "./component/Car";
 import Boats from "./pages/Boats";
 import RvAtv from "./pages/RvAtv";
 import ContactUs from "./pages/ContactUs";
+import { ServiceState } from "./utils/context/ServiceContext";
 
 const router = createBrowserRouter(
   // routesList
@@ -39,7 +41,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AppState>
-      <RouterProvider router={router} />
+      <ServiceState>
+        <RouterProvider router={router} />
+      </ServiceState>
     </AppState>
   </React.StrictMode>
 );
