@@ -3,7 +3,16 @@ import { Link } from "react-router-dom";
 const Landing = () => {
   return (
     <div className="container">
-      {/* <div className="container"></div> */}
+      <h2>Se habla espanol</h2>
+      {/* <input /> */}
+      {/* <p>Search bar</p>
+       */}
+
+      <div className="search-bar">
+        <input type="text" />
+        <button>Search</button>
+      </div>
+
       <div className="card-container">
         <div className="card">
           <div className="card-header">Cars</div>
