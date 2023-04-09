@@ -17,7 +17,7 @@ function App() {
         <Route exact path="/" element={<Landing />} />
         <Route path="/cars" element={<Cars />} />
         <Route path="/vehicle" element={<Vehicle />} />
-        <Route path="/finance" element={<Finance />} />
+        <Route path="/financing" element={<Finance />} />
       </Routes>
       <Footer />
     </div>
