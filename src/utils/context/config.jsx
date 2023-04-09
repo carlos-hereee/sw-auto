@@ -170,6 +170,7 @@ export const app = {
     // { name: "checkout", uid: shortid.generate(), notification: 0 , },
     { name: "Boats", uid: shortid.generate(), notification: 0 },
     { name: "RvAtv", uid: shortid.generate(), notification: 0 },
+    { name: "contact", uid: shortid.generate(), notification: 0 },
   ],
   gallery: {
     title: "Check out what's in our lot!",

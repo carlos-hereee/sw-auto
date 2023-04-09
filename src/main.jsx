@@ -5,10 +5,10 @@ import App from "./App";
 import "../src/stylesheets/index.scss";
 import { AppState } from "./utils/context/AppContext";
 import ErrorPage from "./pages/ErrorPage";
-import Header from "./pages/Header";
 import Cars from "./pages/Cars";
 import Boats from "./pages/Boats";
 import RvAtv from "./pages/RvAtv";
+import ContactUs from "./pages/ContactUs";
 
 const router = createBrowserRouter(
   // routesList
@@ -26,6 +26,7 @@ const router = createBrowserRouter(
     { path: "cars", element: <Cars />, errorElement: <ErrorPage /> },
     { path: "boats", element: <Boats />, errorElement: <ErrorPage /> },
     { path: "RvAtv", element: <RvAtv />, errorElement: <ErrorPage /> },
+    { path: "contact", element: <ContactUs />, errorElement: <ErrorPage /> },
   ]
   // createRoutesFromElements(
   //   <Route path="/" element={<App />}>

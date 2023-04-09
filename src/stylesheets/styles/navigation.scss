@@ -22,6 +22,8 @@
     gap: 1rem;
     top: 100%;
     right: 0%;
+    min-width: 150px;
+    padding: 1rem 0.5rem;
     transition: clip-path ease-in-out 700ms;
   }
   .navigation[data-state="open"] {
