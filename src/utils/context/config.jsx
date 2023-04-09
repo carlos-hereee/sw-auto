@@ -9,9 +9,17 @@ const lorem30 =
   "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt explicabo accusantium vel. Quos, illo. Velit est voluptatum at dignissimos, amet alias veritatis obcaecati assumenda, repellat aliquid non quae nam! Nobis.";
 
 let random100 = (n) => Math.floor(Math.random() * n) + 1;
+const aboutMe1 =
+  "SW Auto of Houston treats our customers with paramount concern. We have a great varieties of vehicles for you to choose from. We all know that your time is precious and you have high expectations. As a fast growing used car dealer in Houston, we enjoy the challenge of meeting and exceeding those standards each and every time. So, come see us and find out.";
+
+const aboutMe2 =
+  "Our experienced and friendly sales are always eager to share their knowledge and enthusiasm with you. We encourage you to browse our online inventory. Please don't hesitate to call and schedule a test drive when you are ready.";
+const aboutMe3 =
+  "If you don't see a particular vehicle, we are only a phone call away. We will gladly work closely with you and inform you when a matching car arrives. Allow us to be your one-stop auto dealer. We look forward to serving you, always!";
 export const isDev = process.env.NODE_ENV === "development";
 
 export const app = {
+  // landing: {},
   socials: [
     {
       isEmpty: true,
@@ -51,8 +59,9 @@ export const app = {
     hero: { link: "", name: "main-hero" },
     sections: [
       {
-        title: "Why choose SW-Auto?",
-        response: lorem10 + lorem30,
+        title: "Welcome to SW Auto 59 of Houston",
+        response: aboutMe1,
+        sections: [aboutMe2, aboutMe3],
         uid: shortid.generate(),
         hasHero: false,
         hasIcon: false,
