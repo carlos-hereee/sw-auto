@@ -174,12 +174,11 @@ export const app = {
     // { name: "Espanol", uid: shortid.generate(), notification: 0 },
     { name: "Cars", uid: shortid.generate(), notification: 0 },
     // { name: "Services", uid: shortid.generate(), notification: 0, },
-    // { name: "booking", uid: shortid.generate(), notification: 0 , },
     // { name: "accessories", uid: shortid.generate(), notification: 0 , },
     // { name: "checkout", uid: shortid.generate(), notification: 0 , },
     { name: "Boats", uid: shortid.generate(), notification: 0 },
     { name: "RvAtv", uid: shortid.generate(), notification: 0 },
-    { name: "contact", uid: shortid.generate(), notification: 0 },
+    { name: "financing", uid: shortid.generate(), notification: 0 },
   ],
   gallery: {
     title: "Check out what's in our lot!",
