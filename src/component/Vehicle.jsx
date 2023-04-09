@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import Header from "../pages/Header";
 
-const Cars = ({ data }) => {
+const Vehicle = ({ data }) => {
   return (
     <div>
       <Header />
@@ -9,4 +8,4 @@ const Cars = ({ data }) => {
   );
 };
 
-export default Cars;
+export default Vehicle;

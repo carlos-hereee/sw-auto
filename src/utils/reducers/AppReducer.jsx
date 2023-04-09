@@ -55,6 +55,13 @@ const selectPaymentType = (state, action) => {
     paymentType: action.payload,
   };
 };
+const updateSelected = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    selected: action.payload,
+  };
+};
 export const reducer = (state, action) => {
   switch (action.type) {
     case "IS_LOADING":
@@ -69,6 +76,9 @@ export const reducer = (state, action) => {
       return updateBurger(state, action);
     case "SELECT_PAYMENT_TYPE":
       return selectPaymentType(state, action);
+    case "UPDATE_SELECTED":
+      return updateSelected(state, action);
+
     default:
       return state;
   }
