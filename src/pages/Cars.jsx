@@ -55,13 +55,34 @@ const Cars = () => {
     <div>
       <Header />
       <div className="container">
-        {inLot.map((cars) => (
-          <div key={cars.uid} className="card">
-            <div className="card-header">
-              {cars.year} {cars.make} {cars.model}
+        <h2>Cars</h2>
+        <div>
+          <h2>Filters</h2>
+          <p>Seach bar</p>
+          <p>Compare</p>
+        </div>
+        <div className="card-container">
+          {inLot.map((cars) => (
+            <div key={cars.uid} className="card">
+              <div className="card-header">
+                {cars.year} {cars.make} {cars.model}
+              </div>
+              <div className="card-body">
+                <h2>Picture</h2>
+                <p>
+                  Miles:{" "}
+                  {cars.features.map(({ mileage }) => (
+                    <span>{mileage.toLocaleString()}</span>
+                  ))}
+                </p>
+                <p>${cars.price.toLocaleString()}</p>
+              </div>
+              <div className="card-footer">
+                <button>Confirm Availibility</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
