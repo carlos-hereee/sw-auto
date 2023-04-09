@@ -78,6 +78,7 @@ const Cars = () => {
                 <p>${cars.price.toLocaleString()}</p>
               </div>
               <div className="card-footer">
+                <button>See Details</button>
                 <button>Confirm Availibility</button>
               </div>
             </div>

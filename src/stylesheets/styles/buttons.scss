@@ -6,6 +6,7 @@ button {
   justify-content: center;
   cursor: pointer;
   // margin: auto;
+  border-radius: 0.5rem;
   &:disabled {
     cursor: not-allowed;
   }
