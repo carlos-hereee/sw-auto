@@ -1,5 +1,5 @@
-import FollowUs from "../component/molecules/FollowUs";
-import Header from "./Header";
+import FollowUs from "./molecules/FollowUs";
+import Header from "../pages/Header";
 import * as yup from "yup";
 
 const schema = yup.object().shape({

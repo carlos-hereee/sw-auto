@@ -71,6 +71,8 @@ export const AppState = ({ children }) => {
       },
     ],
     selected: {},
+    disclaimer:
+      "** Photos are for illustrative purposes only. Not responsible for errors or omissions. **",
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   // useEffect(() => {
@@ -143,6 +145,7 @@ export const AppState = ({ children }) => {
         inLot: state.inLot,
         selected: state.selected,
         paymentType: state.paymentType,
+        disclaimer: state.disclaimer,
         updateBurger,
         updateMenu,
         newsletter,
