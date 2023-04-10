@@ -20,3 +20,10 @@
   display: flex;
   gap: 0.5rem;
 }
+.vehicle-card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  max-width: 300px;
+  box-shadow: 1px 0 3px 2px #eee;
+}

@@ -19,7 +19,11 @@ const Cars = () => {
       </div>
       <div className="card-container">
         {inLot.map((car) => (
-          <div key={car.uid} className="card">
+          <button
+            type="button"
+            onClick={() => seeDetails(car)}
+            key={car.uid}
+            className="vehicle-card">
             <div className="card-header">
               <h2>
                 {car.year} {car.make} {car.model}
@@ -41,13 +45,7 @@ const Cars = () => {
                 </p>
               </div>
             </div>
-            <div className="card-footer">
-              <button type="button" onClick={() => seeDetails(car)}>
-                See Details
-              </button>
-              {/* <button>Confirm Availibility</button> */}
-            </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>
