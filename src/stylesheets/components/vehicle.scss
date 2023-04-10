@@ -27,3 +27,16 @@
   max-width: 300px;
   box-shadow: 1px 0 3px 2px #eee;
 }
+.card-container-menu {
+  display: flex;
+  padding: 0;
+  width: 10vw;
+  .vehicle-img {
+    border-radius: 0.5rem;
+    width: 100%;
+  }
+}
+.vehicle-hero {
+  border-radius: 0.5rem;
+  width: 100%;
+}

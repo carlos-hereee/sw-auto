@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../utils/context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Icons from "../component/atoms/Icons";
 
 const Vehicle = () => {
   const { selected } = useContext(AppContext);
+  const [active, setActive] = useState({});
   const navigate = useNavigate();
   console.log("selected", selected);
   useEffect(() => {
@@ -34,13 +35,27 @@ const Vehicle = () => {
         </div>
       </div>
       <div>
-        <div>
+        <div className="card-container">
           {selected.photos &&
             selected.photos.map((p) => (
-              <div key={p.uid}>
-                <img src={p.src} alt={p.alt} />
-              </div>
+              <button
+                key={p.uid}
+                className="card-container-menu"
+                onClick={() => setActive(p)}>
+                <img src={p.src} alt={p.alt} className="vehicle-img" />
+              </button>
             ))}
+          {active.uid ? (
+            <img src={active.src} alt={active.alt} className="vehicle-hero" />
+          ) : (
+            selected.photos && (
+              <img
+                src={selected.photos[0].src}
+                alt={selected.photos[0].alt}
+                className="vehicle-hero"
+              />
+            )
+          )}
         </div>
         <div className="btns-container">
           <button>Prev</button>
