@@ -62,6 +62,13 @@ const updateSelected = (state, action) => {
     selected: action.payload,
   };
 };
+const resetSelect = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    selected: {},
+  };
+};
 export const reducer = (state, action) => {
   switch (action.type) {
     case "IS_LOADING":
@@ -78,6 +85,8 @@ export const reducer = (state, action) => {
       return selectPaymentType(state, action);
     case "UPDATE_SELECTED":
       return updateSelected(state, action);
+    case "RESET_SELECTED":
+      return resetSelect(state, action);
 
     default:
       return state;

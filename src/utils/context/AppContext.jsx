@@ -2,6 +2,7 @@ import { createContext, useReducer } from "react";
 // import { axiosWithAuth } from "../functions/axios";
 import { reducer } from "../reducers/AppReducer";
 import { app } from "./config";
+import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext();
 
@@ -74,7 +75,10 @@ export const AppState = ({ children }) => {
     disclaimer:
       "** Photos are for illustrative purposes only. Not responsible for errors or omissions. **",
   };
+
   const [state, dispatch] = useReducer(reducer, initialState);
+  const navigate = useNavigate();
+
   // useEffect(() => {
   //   // getAllAssets();
   // }, []);
@@ -125,6 +129,10 @@ export const AppState = ({ children }) => {
   };
   const seeDetails = (data) => {
     dispatch({ type: "UPDATE_SELECTED", payload: data });
+    navigate("/vehicle");
+  };
+  const resetSelect = () => {
+    dispatch({ type: "RESET_SELECTED", payload: {} });
   };
   return (
     <AppContext.Provider
@@ -152,6 +160,7 @@ export const AppState = ({ children }) => {
         selectPaymentType,
         readyCheckout,
         seeDetails,
+        resetSelect,
       }}>
       {children}
     </AppContext.Provider>

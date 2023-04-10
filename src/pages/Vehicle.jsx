@@ -7,10 +7,13 @@ const Vehicle = () => {
   const { selected } = useContext(AppContext);
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate(-1);
+  };
   return (
     <div className="vehicle-container">
       <div>
-        <button type="button" onClick={() => navigate(-1)} className="btn-back">
+        <button type="button" onClick={handleClick} className="btn-back">
           <Icons name="left" />
           Back
         </button>
@@ -27,13 +30,14 @@ const Vehicle = () => {
       <div>
         {/* <h2>Pictures</h2> */}
 
-        <div className="btns-container">
+        <div className="btns">
           <button>Prev</button>
           <button>Next</button>
         </div>
         <p>
-          ${selected.price.toLocaleString() || 0} |{" "}
-          {selected.features.map((f) => f.mileage.toLocaleString())} miles
+          ${selected.price ? selected.price.toLocaleString() : 0} |{" "}
+          {selected.features.map((f) => f.mileage && f.mileage.toLocaleString())}{" "}
+          miles
         </p>
       </div>
       <div>
