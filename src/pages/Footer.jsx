@@ -16,6 +16,7 @@ const Footer = () => {
         </div>
         <BusinessHours />
         <p>{disclaimer}</p>
+        <p>{new Date().getFullYear()} SWAuto59.com All rights reserved</p>
       </footer>
     </div>
   );

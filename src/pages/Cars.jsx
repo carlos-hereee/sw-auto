@@ -6,12 +6,17 @@ const Cars = () => {
   const { seeDetails, inLot } = useContext(AppContext);
 
   return (
-    <div className="container">
+    <div className="vehicle-container">
       <h2>Cars</h2>
-      <div>
-        <h2>Filters</h2>
-        <p>Seach bar</p>
-        <p>Compare</p>
+      <div className="container-header">
+        <div className="vehicle-filters">
+          <h2>Filters</h2>
+          <p>Search bar</p>
+          <p>Compare</p>
+        </div>
+        <div>
+          <p>Filters applied:</p>
+        </div>
       </div>
       <div className="card-container">
         {inLot.map((car) => (

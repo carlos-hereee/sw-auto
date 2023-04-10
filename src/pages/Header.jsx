@@ -6,7 +6,7 @@ import { AppContext } from "../utils/context/AppContext";
 import Logo from "../component/atoms/Logo";
 // import { ServicesContext } from "../utils/context/ServicesContext";
 
-const Header = ({ children }) => {
+const Header = () => {
   const [isActive, setActive] = useState(false);
   const [isClose, setClose] = useState(false);
   // const { cart } = useContext(ServicesContext);
