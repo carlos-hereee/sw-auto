@@ -6,7 +6,7 @@ const Cars = () => {
 
   return (
     <div className="vehicle-container">
-      <h2>Cars</h2>
+      {/* <h2>Cars</h2> */}
       <div className="container-header">
         <div className="vehicle-header">
           <h2>Filters</h2>
@@ -21,23 +21,31 @@ const Cars = () => {
         {inLot.map((car) => (
           <div key={car.uid} className="card">
             <div className="card-header">
-              {car.year} {car.make} {car.model}
+              <h2>
+                {car.year} {car.make} {car.model}
+              </h2>
             </div>
             <div className="card-body">
-              <h2>Picture</h2>
-              <p>
-                Miles:{" "}
-                {car.features.map(({ mileage }) => (
-                  <span>{mileage.toLocaleString()}</span>
-                ))}
-              </p>
-              <p>${car.price.toLocaleString()}</p>
+              <img
+                className="vehicle-card-hero"
+                src={car.photos[0]}
+                alt={car.year + " " + car.make + " " + car.model}
+              />
+              <div className="vehicle-details">
+                <p>${car.price.toLocaleString()}</p>
+                <p>
+                  Miles:{" "}
+                  {car.features.map(({ mileage }) => (
+                    <span>{mileage.toLocaleString()}</span>
+                  ))}
+                </p>
+              </div>
             </div>
             <div className="card-footer">
               <button type="button" onClick={() => seeDetails(car)}>
                 See Details
               </button>
-              <button>Confirm Availibility</button>
+              {/* <button>Confirm Availibility</button> */}
             </div>
           </div>
         ))}

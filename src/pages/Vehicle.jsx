@@ -28,9 +28,7 @@ const Vehicle = () => {
         </div>
       </div>
       <div>
-        {/* <h2>Pictures</h2> */}
-
-        <div className="btns">
+        <div className="btns-container">
           <button>Prev</button>
           <button>Next</button>
         </div>

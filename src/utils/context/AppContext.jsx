@@ -28,7 +28,17 @@ export const AppState = ({ children }) => {
         model: "TL Advance",
         year: 2013,
         price: 9875,
-        photos: [],
+        photos: [
+          "http://www.swauto59.com/photos/9360.jpg",
+          "http://www.swauto59.com/photos/cars/116224.jpg",
+          "http://www.swauto59.com/photos/cars/116225.jpg",
+          "http://www.swauto59.com/photos/cars/116226.jpg",
+          "http://www.swauto59.com/photos/cars/116227.jpg",
+          "http://www.swauto59.com/photos/cars/116228.jpg",
+          "http://www.swauto59.com/photos/cars/116229.jpg",
+          "http://www.swauto59.com/photos/cars/116230.jpg",
+          "http://www.swauto59.com/photos/cars/116231.jpg",
+        ],
         features: [
           {
             bodyStyle: "sedan",
@@ -52,7 +62,19 @@ export const AppState = ({ children }) => {
         model: "750 Li",
         year: 2013,
         price: 15750,
-        photos: [],
+        photos: [
+          "http://www.swauto59.com/photos/cars/103160.jpg",
+          "http://www.swauto59.com/photos/cars/103161.jpg",
+          "http://www.swauto59.com/photos/cars/103162.jpg",
+          "http://www.swauto59.com/photos/cars/103163.jpg",
+          "http://www.swauto59.com/photos/cars/103164.jpg",
+          "http://www.swauto59.com/photos/cars/103165.jpg",
+          "http://www.swauto59.com/photos/cars/103166.jpg",
+          "http://www.swauto59.com/photos/cars/103167.jpg",
+          "http://www.swauto59.com/photos/cars/103168.jpg",
+          "http://www.swauto59.com/photos/cars/103169.jpg",
+          "http://www.swauto59.com/photos/cars/103170.jpg",
+        ],
         features: [
           {
             bodyStyle: "sedan",
