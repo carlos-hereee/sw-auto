@@ -32,8 +32,8 @@ const Cars = () => {
             <div className="card-body">
               <img
                 className="vehicle-card-hero"
-                src={car.photos[0]}
-                alt={car.year + " " + car.make + " " + car.model}
+                src={car.photos[0].src}
+                alt={car.photos[0].alt}
               />
               <div className="vehicle-details">
                 <p>${car.price.toLocaleString()}</p>

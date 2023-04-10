@@ -3,6 +3,7 @@ import { createContext, useReducer } from "react";
 import { reducer } from "../reducers/AppReducer";
 import { app } from "./config";
 import { useNavigate } from "react-router-dom";
+import shortid from "shortid";
 
 export const AppContext = createContext();
 
@@ -29,15 +30,51 @@ export const AppState = ({ children }) => {
         year: 2013,
         price: 9875,
         photos: [
-          "http://www.swauto59.com/photos/9360.jpg",
-          "http://www.swauto59.com/photos/cars/116224.jpg",
-          "http://www.swauto59.com/photos/cars/116225.jpg",
-          "http://www.swauto59.com/photos/cars/116226.jpg",
-          "http://www.swauto59.com/photos/cars/116227.jpg",
-          "http://www.swauto59.com/photos/cars/116228.jpg",
-          "http://www.swauto59.com/photos/cars/116229.jpg",
-          "http://www.swauto59.com/photos/cars/116230.jpg",
-          "http://www.swauto59.com/photos/cars/116231.jpg",
+          {
+            src: "http://www.swauto59.com/photos/9360.jpg",
+            uid: shortid.generate(),
+            alt: "2013 Acura TL Advance",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/116224.jpg",
+            uid: shortid.generate(),
+            alt: "2013 Acura TL Advance",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/116225.jpg",
+            uid: shortid.generate(),
+            alt: "2013 Acura TL Advance",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/116226.jpg",
+            uid: shortid.generate(),
+            alt: "2013 Acura TL Advance",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/116227.jpg",
+            uid: shortid.generate(),
+            alt: "2013 Acura TL Advance",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/116228.jpg",
+            uid: shortid.generate(),
+            alt: "2013 Acura TL Advance",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/116229.jpg",
+            uid: shortid.generate(),
+            alt: "2013 Acura TL Advance",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/116230.jpg",
+            uid: shortid.generate(),
+            alt: "2013 Acura TL Advance",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/116231.jpg",
+            uid: shortid.generate(),
+            alt: "2013 Acura TL Advance",
+          },
         ],
         features: [
           {
@@ -63,17 +100,61 @@ export const AppState = ({ children }) => {
         year: 2013,
         price: 15750,
         photos: [
-          "http://www.swauto59.com/photos/cars/103160.jpg",
-          "http://www.swauto59.com/photos/cars/103161.jpg",
-          "http://www.swauto59.com/photos/cars/103162.jpg",
-          "http://www.swauto59.com/photos/cars/103163.jpg",
-          "http://www.swauto59.com/photos/cars/103164.jpg",
-          "http://www.swauto59.com/photos/cars/103165.jpg",
-          "http://www.swauto59.com/photos/cars/103166.jpg",
-          "http://www.swauto59.com/photos/cars/103167.jpg",
-          "http://www.swauto59.com/photos/cars/103168.jpg",
-          "http://www.swauto59.com/photos/cars/103169.jpg",
-          "http://www.swauto59.com/photos/cars/103170.jpg",
+          {
+            src: "http://www.swauto59.com/photos/cars/103160.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103161.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103162.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103163.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103164.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103165.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103166.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103167.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103168.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103169.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
+          {
+            src: "http://www.swauto59.com/photos/cars/103170.jpg",
+            uid: shortid.generate(),
+            alt: "2013 BMW 750li",
+          },
         ],
         features: [
           {

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../utils/context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Icons from "../component/atoms/Icons";
@@ -6,6 +6,12 @@ import Icons from "../component/atoms/Icons";
 const Vehicle = () => {
   const { selected } = useContext(AppContext);
   const navigate = useNavigate();
+  console.log("selected", selected);
+  useEffect(() => {
+    if (!selected.uid) {
+      navigate("/");
+    }
+  }, [selected]);
 
   const handleClick = () => {
     navigate(-1);
@@ -28,13 +34,24 @@ const Vehicle = () => {
         </div>
       </div>
       <div>
+        <div>
+          {selected.photos &&
+            selected.photos.map((p) => (
+              <div key={p.uid}>
+                <img src={p.src} alt={p.alt} />
+              </div>
+            ))}
+        </div>
         <div className="btns-container">
           <button>Prev</button>
           <button>Next</button>
         </div>
         <p>
           ${selected.price ? selected.price.toLocaleString() : 0} |{" "}
-          {selected.features.map((f) => f.mileage && f.mileage.toLocaleString())}{" "}
+          {selected.features &&
+            selected.features.map(
+              (f) => f.mileage && f.mileage.toLocaleString()
+            )}{" "}
           miles
         </p>
       </div>
