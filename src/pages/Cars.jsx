@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import Header from "./Header";
 import { AppContext } from "../utils/context/AppContext";
 
 const Cars = () => {
@@ -9,7 +8,7 @@ const Cars = () => {
     <div className="vehicle-container">
       <h2>Cars</h2>
       <div className="container-header">
-        <div className="vehicle-filters">
+        <div className="vehicle-header">
           <h2>Filters</h2>
           <p>Search bar</p>
           <p>Compare</p>

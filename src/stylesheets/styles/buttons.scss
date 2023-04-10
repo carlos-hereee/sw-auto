@@ -58,7 +58,7 @@ button {
   justify-content: flex-start;
   gap: 1rem;
   flex: 1;
-  border-radius: 0.5rem;
+  // border-radius: 0.5rem;
   // box-shadow: 0 1px 5px 1px #{$shadow-color};
   background-color: #{$secondary-color2};
   color: #{$text-color};
@@ -150,4 +150,13 @@ button {
 }
 .btn-next {
   margin: 1rem;
+}
+.btn-back {
+  display: flex;
+  color: white;
+  gap: 1rem;
+}
+.btns-container {
+  display: flex;
+  gap: 1rem;
 }

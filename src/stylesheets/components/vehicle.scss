@@ -1,12 +1,13 @@
-.vehicle-container {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-}
 .container-header {
   display: flex;
   flex-direction: column;
 }
-.vehicle-filters {
+.vehicle-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+.vehicle-header {
   display: flex;
 }
