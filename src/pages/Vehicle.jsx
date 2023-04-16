@@ -7,26 +7,31 @@ const Vehicle = () => {
   const { selected, disclaimer } = useContext(AppContext);
   const [active, setActive] = useState(selected.photos ? selected.photos[0] : {});
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!selected.uid) {
-      navigate(-1);
-    }
-  }, [selected]);
+  const findIdx = () => selected.photos.findIndex((p) => p.uid === active.uid);
 
-  const viewControl = (cmd) => {
-    // find index
-    if (active.uid) {
-      const idx = selected.photos.findIndex((p) => p.uid === active.uid);
-      if (idx === -1) {
+  useEffect(() => {
+    if (!active.uid) {
+      if (selected.photos) {
         setActive(selected.photos[0]);
-      }
-      const last = selected.photos.length - 1;
-      if (cmd === "next" && idx !== last) {
-        setActive(selected.photos[idx + 1]);
-      }
-      if (cmd === "prev" && idx !== 0) {
-        setActive(selected.photos[idx - 1]);
-      }
+      } else navigate(-1);
+    }
+  }, [active]);
+
+  const controls = (cmd) => {
+    // find index
+    const idx = findIdx();
+    if (idx === -1 || cmd === "first") {
+      setActive(selected.photos[0]);
+    }
+    const last = selected.photos.length - 1;
+    if (cmd === "next" && idx !== last) {
+      setActive(selected.photos[idx + 1]);
+    }
+    if (cmd === "prev" && idx !== 0) {
+      setActive(selected.photos[idx - 1]);
+    }
+    if (cmd === "last") {
+      setActive(selected.photos[last]);
     }
   };
   return (
@@ -74,14 +79,34 @@ const Vehicle = () => {
             )
           )}
           <small classname="disclaimer">{disclaimer}</small>
-        </div>
-        <div className="btns-container">
-          <button type="button" className="btn" onClick={() => viewControl("prev")}>
-            Prev
-          </button>
-          <button type="button" className="btn" onClick={() => viewControl("next")}>
-            Next
-          </button>
+          <div className="display-gap">
+            <button
+              type="button"
+              className="btn-main"
+              onClick={() => controls("first")}>
+              <Icons name="leftChevron" />
+            </button>
+            <button
+              type="button"
+              className="btn-main"
+              onClick={() => controls("prev")}>
+              <Icons name="left" />
+              Prev
+            </button>
+            <button
+              type="button"
+              className="btn-main"
+              onClick={() => controls("next")}>
+              Next
+              <Icons name="right" />
+            </button>
+            <button
+              type="button"
+              className="btn-main"
+              onClick={() => controls("last")}>
+              <Icons name="rightChevron" />
+            </button>
+          </div>
         </div>
         <div>
           <p>
