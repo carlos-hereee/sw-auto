@@ -30,10 +30,10 @@
 .disclaimer {
   text-align: center;
 }
-
 .vehicle-photos {
   display: flex;
   gap: 0.5rem;
+  padding-bottom: 0.5rem;
   overflow-x: auto;
 }
 .vehicle-photo,
@@ -48,11 +48,17 @@
 .vehicle-hero {
   border-radius: 0.5rem;
   width: 100%;
+  max-width: 900px;
 }
 .vehicle-img {
   border-radius: 0.5rem;
   width: 100%;
 }
-.disclaimer {
-  text-align: center;
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .disclaimer {
+    text-align: center;
+  }
 }

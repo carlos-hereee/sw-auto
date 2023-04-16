@@ -237,6 +237,9 @@ export const AppState = ({ children }) => {
   const resetSelect = () => {
     dispatch({ type: "RESET_SELECTED", payload: {} });
   };
+  // const viewControl = (dir) => {
+
+  // };
   return (
     <AppContext.Provider
       value={{
@@ -264,6 +267,7 @@ export const AppState = ({ children }) => {
         readyCheckout,
         seeDetails,
         resetSelect,
+        // viewControl,
       }}>
       {children}
     </AppContext.Provider>

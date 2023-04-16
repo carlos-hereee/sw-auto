@@ -11,7 +11,7 @@ import Finance from "./pages/Finance";
 
 function App() {
   return (
-    <div className="app-body">
+    <>
       <Header />
       <Routes>
         <Route exact path="/" element={<Landing />} />
@@ -20,7 +20,7 @@ function App() {
         <Route path="/financing" element={<Finance />} />
       </Routes>
       <Footer />
-    </div>
+    </>
   );
 }
 
