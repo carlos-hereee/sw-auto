@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AppContext } from "../utils/context/AppContext";
 
 const Cars = () => {
-  const { seeDetails, inLot } = useContext(AppContext);
+  const { seeDetails, inLot, disclaimer } = useContext(AppContext);
 
   return (
     <div className="vehicle-container">
@@ -23,7 +23,7 @@ const Cars = () => {
             type="button"
             onClick={() => seeDetails(car)}
             key={car.uid}
-            className="vehicle-card">
+            className="card">
             <div className="card-header">
               <h2>
                 {car.year} {car.make} {car.model}

@@ -26,6 +26,5 @@
 @mixin card() {
   display: flex;
   gap: 1rem;
-  // box-shadow: 0 1px 5px 1px #{$shadow-color};
   border-radius: 4px;
 }

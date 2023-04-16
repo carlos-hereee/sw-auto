@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Icons from "../component/atoms/Icons";
 
 const Vehicle = () => {
-  const { selected } = useContext(AppContext);
+  const { selected, disclaimer } = useContext(AppContext);
   const [active, setActive] = useState({});
   const navigate = useNavigate();
   console.log("selected", selected);
@@ -57,6 +57,7 @@ const Vehicle = () => {
             )
           )}
         </div>
+        <p classname="disclaimer">{disclaimer}</p>
         <div className="btns-container">
           <button>Prev</button>
           <button>Next</button>

@@ -12,7 +12,7 @@ const values = { name: "", email: "", message: "" };
 const ContactUs = () => {
   return (
     <div className="container">
-      <div className="card">
+      <div>
         <h2>Shop with us:</h2>
         <p>
           <strong>Phone:</strong> <a href="tel:713-780-1616"> 713-780-1616</a> or{" "}

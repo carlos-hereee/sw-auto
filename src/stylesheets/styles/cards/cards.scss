@@ -6,6 +6,7 @@
   overflow: hidden;
   // background-color: #{$primary-color};
   padding: 1rem;
+  box-shadow: 1px 0 3px 2px #eee;
   min-width: 200px;
   .hero {
     border-radius: 1rem;
@@ -13,7 +14,6 @@
   }
   &:has(> div > .ribbon) {
     position: relative;
-    // box-shadow: 0 1px 5px 1px #{$shadow-color2};
     // height: auto;
     max-width: 275px;
     .btn-primary {

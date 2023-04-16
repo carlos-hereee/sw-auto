@@ -5,8 +5,7 @@ import CardHeader from "./card/CardHeader";
 const BusinessHours = () => {
   const { schedule } = useContext(AppContext);
   return (
-    <div className="card">
-      {/* <h4>Business Hours</h4> */}
+    <div>
       <CardHeader data={schedule} />
       <table className="responsive-table">
         <thead>

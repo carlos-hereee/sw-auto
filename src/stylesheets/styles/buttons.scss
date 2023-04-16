@@ -1,5 +1,6 @@
 button {
   border: none;
+  background-color: transparent;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
@@ -16,7 +17,6 @@ button {
   background-color: #{$primary-color};
   color: #{$text-color};
   flex: 1;
-  // box-shadow: 0 0 3px 0px #{$shadow-color2};
   &:hover {
     background-color: #{$primary-color2};
     color: #{$text-color};
@@ -31,7 +31,6 @@ button {
   }
 }
 .btn-secondary {
-  box-shadow: none;
   position: absolute;
   // background-color: #{$third-color};
   color: #{$text-color};
@@ -58,8 +57,6 @@ button {
   justify-content: flex-start;
   gap: 1rem;
   flex: 1;
-  // border-radius: 0.5rem;
-  // box-shadow: 0 1px 5px 1px #{$shadow-color};
   background-color: #{$secondary-color2};
   color: #{$text-color};
   .icon-label {
