@@ -10,6 +10,7 @@
 }
 .vehicle-header {
   display: flex;
+  align-items: center;
 }
 .vehicle-card-hero {
   border-radius: 0.5rem;
@@ -30,16 +31,25 @@
   text-align: center;
 }
 
-.card-container-menu {
+.vehicle-photos {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+.vehicle-photo,
+.active-vehicle-photo {
+  min-width: 75px;
   display: flex;
   padding: 0;
-  width: 10vw;
-  .vehicle-img {
-    border-radius: 0.5rem;
-    width: 100%;
-  }
+}
+.active-vehicle-photo {
+  border: 2px solid #{$secondary-color};
 }
 .vehicle-hero {
+  border-radius: 0.5rem;
+  width: 100%;
+}
+.vehicle-img {
   border-radius: 0.5rem;
   width: 100%;
 }

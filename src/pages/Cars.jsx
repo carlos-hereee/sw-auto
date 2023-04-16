@@ -2,11 +2,10 @@ import { useContext } from "react";
 import { AppContext } from "../utils/context/AppContext";
 
 const Cars = () => {
-  const { seeDetails, inLot, disclaimer } = useContext(AppContext);
+  const { seeDetails, inLot } = useContext(AppContext);
 
   return (
     <div className="vehicle-container">
-      {/* <h2>Cars</h2> */}
       <div className="container-header">
         <div className="vehicle-header">
           <h2>Filters</h2>

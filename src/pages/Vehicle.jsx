@@ -36,15 +36,19 @@ const Vehicle = () => {
       </div>
       <div>
         <div className="card-container">
-          {selected.photos &&
-            selected.photos.map((p) => (
-              <button
-                key={p.uid}
-                className="card-container-menu"
-                onClick={() => setActive(p)}>
-                <img src={p.src} alt={p.alt} className="vehicle-img" />
-              </button>
-            ))}
+          <div className="vehicle-photos">
+            {selected.photos &&
+              selected.photos.map((p) => (
+                <button
+                  key={p.uid}
+                  className={
+                    active.uid === p.uid ? "active-vehicle-photo" : "vehicle-photo"
+                  }
+                  onClick={() => setActive(p)}>
+                  <img src={p.src} alt={p.alt} className="vehicle-img" />
+                </button>
+              ))}
+          </div>
           {active.uid ? (
             <img src={active.src} alt={active.alt} className="vehicle-hero" />
           ) : (
