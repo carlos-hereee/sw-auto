@@ -7,10 +7,9 @@ const Vehicle = () => {
   const { selected, disclaimer } = useContext(AppContext);
   const [active, setActive] = useState({});
   const navigate = useNavigate();
-  console.log("selected", selected);
   useEffect(() => {
     if (!selected.uid) {
-      navigate("/");
+      navigate(-1);
     }
   }, [selected]);
 
@@ -60,8 +59,8 @@ const Vehicle = () => {
               />
             )
           )}
+          <small classname="disclaimer">{disclaimer}</small>
         </div>
-        <p classname="disclaimer">{disclaimer}</p>
         <div className="btns-container">
           <button>Prev</button>
           <button>Next</button>
