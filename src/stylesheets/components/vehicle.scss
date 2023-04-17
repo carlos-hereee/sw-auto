@@ -23,13 +23,26 @@
     text-align: right;
   }
 }
+.card-item {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 0 3px 2px #eee;
+  min-width: 250px;
+  flex: 1;
+  .card-body {
+    width: 100%;
+    text-align: left;
+  }
+}
 .vehicle-card-hero {
+  flex: 1;
   border-radius: 0.5rem;
   width: 100%;
   object-fit: cover;
 }
 .vehicle-details {
   display: flex;
+  justify-content: space-between;
   gap: 0.5rem;
 }
 .vehicle-card {

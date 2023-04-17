@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { AppContext } from "../utils/context/AppContext";
 import VehicleHeading from "../component/molecules/vehicle/VehicleHeading";
+import CardHeader from "../component/molecules/card/CardHeader";
 
 const Cars = () => {
   const { seeDetails, lot } = useContext(AppContext);
 
-  console.log("lot", lot);
   return (
     <div className="vehicle-container">
       <div className="container-header">
@@ -24,23 +24,24 @@ const Cars = () => {
             type="button"
             onClick={() => seeDetails(l)}
             key={l.objectId}
-            className="card">
-            <VehicleHeading data={l} />
+            className="card-item">
+            <img
+              className="vehicle-card-hero"
+              src={l.photos[0]}
+              alt={`${l.Make} ${l.Model}`}
+            />
             <div className="card-body">
-              <img
-                className="vehicle-card-hero"
-                src={l.photos[0]}
-                alt={`${l.Make} ${l.Model}`}
-              />
-              {/* <div className="vehicle-details">
-                <p>${l.price.toLocaleString()}</p>
+              <h3>
+                {l.Year} {l.Make} {l.Model}
+              </h3>
+              <div className="vehicle-details">
                 <p>
-                  Miles:{" "}
-                  {l.features.map(({ mileage }) => (
-                    <span>{mileage.toLocaleString()}</span>
-                  ))}
+                  Miles: <span>{l.mileage.toLocaleString()}</span>
                 </p>
-              </div> */}
+                <p>
+                  <strong>${l.price.toLocaleString()}</strong>
+                </p>
+              </div>
             </div>
           </button>
         ))}
