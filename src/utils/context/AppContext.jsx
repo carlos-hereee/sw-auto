@@ -39,6 +39,7 @@ export const AppState = ({ children }) => {
     selected: {},
     isFiltered: false,
     activeFilter: [],
+    filtered: [],
     disclaimer:
       "** Photos are for illustrative purposes only. Not responsible for errors or omissions. **",
   };
@@ -160,7 +161,7 @@ export const AppState = ({ children }) => {
   const resetSelect = () => {
     dispatch({ type: "RESET_SELECTED", payload: {} });
   };
-  const updateFilter = (filter) => {
+  const updateFilter = (lot, filter) => {
     dispatch({ type: "UPDATE_FILTER", payload: filter });
   };
   return (

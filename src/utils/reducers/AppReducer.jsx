@@ -77,7 +77,7 @@ const updateFilter = (state, action) => {
   return {
     ...state,
     isLoading: false,
-    isFiltered: true,
+    // isFiltered: true,
     activeFilter: !state.activeFilter.includes(action.payload)
       ? [...state.activeFilter, action.payload]
       : [...state.activeFilter],
