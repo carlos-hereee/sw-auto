@@ -16,6 +16,7 @@ const Vehicle = () => {
       } else navigate(-1);
     }
   }, [active]);
+  console.log("selected", selected.features);
   const controls = (cmd) => {
     // find index
     const idx = findIdx();
@@ -87,7 +88,7 @@ const Vehicle = () => {
               />
             )
           )}
-          <small classname="disclaimer">{disclaimer}</small>
+          <small className="disclaimer">{disclaimer}</small>
           <div className="display-gap">
             <button
               type="button"
@@ -119,10 +120,25 @@ const Vehicle = () => {
         </div>
         {/* <div>{selected.uid && }</div> */}
       </div>
-      <div>
-        <h2>Features</h2>
-        <p>NO warranty AS IS</p>
-      </div>
+      {selected.uid && (
+        <div className="section">
+          <h2>Features</h2>
+          {selected.features.map((f) => (
+            <div key={f.uid} className="section-card">
+              <p>Transmission: {f.transmission}</p>
+              <p>Cylinders: {f.cylinders}</p>
+              <p>Body Style: {f.bodyStyle}</p>
+              <p>Drive Train: {f.driveTrain}</p>
+              <p>Color: {f.color}</p>
+              <p>Mileage: {f.mileage.toLocaleString()}</p>
+              <p>Engine: {f.engine}</p>
+              <p>Doors: {f.doors}</p>
+              <p>Stock Number: {f.stockNumber}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {/* <p>NO warranty AS IS</p> */}
       <div>
         <button>Add to bucket</button>
         <button>compare</button>

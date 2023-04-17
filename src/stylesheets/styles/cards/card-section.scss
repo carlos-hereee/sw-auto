@@ -125,3 +125,11 @@
   //   flex-wrap: wrap;
   // }
 }
+.section-card {
+  display: flex;
+  flex-wrap: wrap;
+  * {
+    flex: 1;
+    min-width: 250px;
+  }
+}
