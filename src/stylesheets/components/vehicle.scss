@@ -10,7 +10,18 @@
 }
 .vehicle-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+  .title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .price {
+    text-align: right;
+  }
 }
 .vehicle-card-hero {
   border-radius: 0.5rem;

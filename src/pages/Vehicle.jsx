@@ -16,7 +16,6 @@ const Vehicle = () => {
       } else navigate(-1);
     }
   }, [active]);
-
   const controls = (cmd) => {
     // find index
     const idx = findIdx();
@@ -41,15 +40,25 @@ const Vehicle = () => {
           <Icons name="left" />
           Back
         </button>
-        <div className="vehicle-header">
-          <h2>
-            {selected.year} {selected.make} {selected.model}{" "}
-          </h2>
-          <button type="button" className="btn-back">
-            <Icons name="heart" />
-            Like
-          </button>
-        </div>
+        {selected.uid && (
+          <div className="vehicle-header">
+            <div className="title">
+              <h2>
+                {selected.year} {selected.make} {selected.model}
+              </h2>
+              <h2 className="price">
+                ${selected.price ? selected.price.toLocaleString() : 0}
+              </h2>
+            </div>
+            <div className="title">
+              <p>{selected.mileage.toLocaleString()} miles</p>{" "}
+              <button type="button" className="btn-back">
+                <Icons name="heart" />
+                Save
+              </button>
+            </div>
+          </div>
+        )}
       </div>
       <div>
         <div className="vehicle-photos">
@@ -108,16 +117,7 @@ const Vehicle = () => {
             </button>
           </div>
         </div>
-        <div>
-          <p>
-            ${selected.price ? selected.price.toLocaleString() : 0} |{" "}
-            {selected.features &&
-              selected.features.map(
-                (f) => f.mileage && f.mileage.toLocaleString()
-              )}{" "}
-            miles
-          </p>
-        </div>
+        {/* <div>{selected.uid && }</div> */}
       </div>
       <div>
         <h2>Features</h2>

@@ -29,6 +29,7 @@ export const AppState = ({ children }) => {
         model: "TL Advance",
         year: 2013,
         price: 9875,
+        mileage: 152000,
         photos: [
           {
             src: "http://www.swauto59.com/photos/9360.jpg",
@@ -99,6 +100,7 @@ export const AppState = ({ children }) => {
         model: "750 Li",
         year: 2013,
         price: 15750,
+        mileage: 61000,
         photos: [
           {
             src: "http://www.swauto59.com/photos/cars/103160.jpg",
