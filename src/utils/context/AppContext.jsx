@@ -1,9 +1,9 @@
-import { createContext, useReducer } from "react";
-// import { axiosWithAuth } from "../functions/axios";
+import { createContext, useEffect, useReducer } from "react";
+import { axiosWithAuth } from "../functions/axios";
 import { reducer } from "../reducers/AppReducer";
 import { app } from "./config";
 import { useNavigate } from "react-router-dom";
-import shortid from "shortid";
+// import shortid from "shortid";
 
 export const AppContext = createContext();
 
@@ -32,7 +32,7 @@ export const AppState = ({ children }) => {
   const navigate = useNavigate();
 
   // useEffect(() => {
-  //   // getAllAssets();
+  //   getAllAssets();
   // }, []);
   // const getAssets = async () => {
   //   try {
@@ -43,17 +43,18 @@ export const AppState = ({ children }) => {
   //     dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: error.response.data });
   //   }
   // };
-  // const getAllAssets = async () => {
-  //   dispatch({ type: "IS_LOADING", payload: true });
-  //   try {
-  //     const { data } = await axiosWithAuth.get("/gallery/all?path=assets");
-  //     console.log("data", data);
-  //     dispatch({ type: "LOAD_ASSETS", payload: data });
-  //   } catch (err) {
-  //     const data = err.response.data;
-  //     dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: data });
-  //   }
-  // };
+  const getAllAssets = async () => {
+    // dispatch({ type: "IS_LOADING", payload: true });
+    try {
+      const { data } = await axiosWithAuth.get("/Car_Model_List?limit=10");
+      console.log("data", data);
+      // console.log("data", data);
+      // dispatch({ type: "LOAD_ASSETS", payload: data });
+    } catch (err) {
+      // const data = err.response.data;
+      // dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: data });
+    }
+  };
   const updateBurger = (payload) => {
     dispatch({ type: "UPDATE_BURGER", payload: payload });
   };

@@ -1,30 +1,20 @@
 import axios from "axios";
+const env = import.meta.env;
 
 export const axiosWithAuth = axios.create({
-  baseURL: process.env.REACT_APP_DB_URL,
-  withCredentials: true,
+  baseURL: env.VITE_DB_URL,
   headers: {
-    "Access-Control-Allow-Origin": process.env.REACT_APP_CLIENT_URL,
-    "Content-Type": "application/json; charset=utf-8",
-    Accept: "application/json",
+    "X-Parse-Application-Id": env.VITE_APP_ID, // This is the fake app's application id
+    "X-Parse-Master-Key": env.VITE_MASTER_KEY, // This is the fake app's readonly master key
   },
 });
-export const axiosOAuth2 = axios.create({
-  baseURL: "https://accounts.google.com/o/oauth2/v2/auth",
-  headers: {
-    "Access-Control-Allow-Origin": process.env.REACT_APP_CLIENT_URL,
-    Accept: "application/json",
-  },
-});
-export const axiosCalendar = axios.create({
-  baseURL: process.env.REACT_APP_DB_URL,
-  withCredentials: true,
-  headers: {
-    "Access-Control-Allow-Origin": process.env.REACT_APP_CLIENT_URL,
-    Accept: "application/json",
-    CalendarId: process.env.REACT_APP_CALENDAR_ID,
-  },
-});
+// export const axiosOAuth2 = axios.create({
+//   baseURL: "https://accounts.google.com/o/oauth2/v2/auth",
+//   headers: {
+//     "Access-Control-Allow-Origin": REACT_APP_CLIENT_URL,
+//     Accept: "application/json",
+//   },
+// });
 
 export const getCookie = (name) => {
   var d = new Date();
