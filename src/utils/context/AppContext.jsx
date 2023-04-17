@@ -59,7 +59,11 @@ export const AppState = ({ children }) => {
     try {
       const res = await axiosWithAuth.get("/Car_Model_List?limit=20");
       let data = res.data.results;
-      data.map((d) => {
+      const result = data.map((d) => {
+        d.year = d.Year;
+        d.make = d.Make;
+        d.model = d.Model;
+        d.category = d.Category;
         d.mileage = randomMileague();
         d.price = randomPrice();
         if (d.Make.toLowerCase() === "audi") {
@@ -89,8 +93,10 @@ export const AppState = ({ children }) => {
         if (d.Make.toLowerCase() === "buick") {
           d.photos = buick;
         }
+        return d;
       });
-      dispatch({ type: "LOAD_CAR_ASSETS", payload: data });
+      // console.log(result);
+      dispatch({ type: "LOAD_CAR_ASSETS", payload: result });
     } catch (err) {
       const data = err.response.data;
       dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: data });

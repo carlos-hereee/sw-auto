@@ -30,6 +30,7 @@ const NoCaptchaForm = ({ data, submit, isHorizontal }) => {
     username: "",
     password: "",
     confirmPassword: "",
+    search: "Search..",
   };
   const { handleSubmit, handleBlur, handleChange, values, errors } = useFormik({
     initialValues: data.values,
