@@ -7,11 +7,7 @@
   padding: 1rem;
   input,
   textarea {
-    background-color: #{$primary-color};
-    border-bottom: 2px solid #{$secondary-color};
-    box-sizing: border-box;
-    border: none;
-    width: 100%;
+    border: 1px solid #{$primary-color};
     padding: 0.5rem 1rem;
     border-radius: 4px;
   }
@@ -28,7 +24,7 @@
 }
 .shipping-form {
   label {
-    max-width: 150px;
+    text-decoration: underline;
   }
   .form-fields {
     display: flex;
@@ -50,10 +46,10 @@
   }
 }
 .btn-submit {
-  background-color: #{$secondary-color2};
+  background-color: #{$secondary-color};
+  color: #{$text-color};
   margin: 1rem auto;
   max-width: 300px;
-  width: 100%;
 }
 .form-link-wrapper {
   padding: 1rem;
@@ -67,6 +63,12 @@
   flex-direction: column;
   .input {
     max-width: 500px;
-    width: 100%;
   }
+}
+.filter-form {
+  // display: flex;
+  gap: 0.5rem;
+  flex-direction: row;
+  align-items: flex-end;
+  // align-content: center;
 }

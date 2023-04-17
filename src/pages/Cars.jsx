@@ -1,18 +1,25 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../utils/context/AppContext";
 import VehicleHeading from "../component/molecules/vehicle/VehicleHeading";
 import CardHeader from "../component/molecules/card/CardHeader";
+import Icons from "../component/atoms/Icons";
+import NoCaptchaForm from "../component/molecules/forms/NoCaptchaForm";
 
 const Cars = () => {
   const { seeDetails, lot } = useContext(AppContext);
-
+  const [filter, setFilter] = useState("");
+  const values = { search: "" };
+  const handleSubmit = () => console.log("first");
   return (
     <div className="vehicle-container">
       <div className="container-header">
         <div className="vehicle-header">
-          <h2>Filters</h2>
-          <p>Search bar</p>
-          <p>Compare</p>
+          <h2 className="title">Filters</h2>
+
+          {/* <input value="" placeholder="Search..." /> */}
+          <NoCaptchaForm data={{ values }} submit={handleSubmit} isHorizontal />
+          <Icons name="search" />
+          {/* <p>Compare</p> */}
         </div>
         <div>
           <p>Filters applied:</p>

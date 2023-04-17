@@ -15,6 +15,7 @@ const NoCaptchaForm = ({ data, submit, isHorizontal }) => {
     username: "Username",
     password: "Password",
     confirmPassword: "Confirm Password",
+    search: "Search",
   };
   const placeholder = {
     firstName: "Peter..",
@@ -37,16 +38,14 @@ const NoCaptchaForm = ({ data, submit, isHorizontal }) => {
   });
 
   return (
-    <form className="form shipping-form" onSubmit={handleSubmit}>
+    <form className="form filter-form" onSubmit={handleSubmit}>
       <div className={`form-fields ${isHorizontal && "horizontal-fields"}`}>
         {Object.keys(data.values).map((v) => (
           <div key={v} className="input-wrapper">
-            <div className="label">
-              <label htmlFor={v}>
-                {label[v]} <br />
-                {errors[v] && <span className="required">{errors[v]}</span>}
-              </label>
-            </div>
+            <label htmlFor={v} className="label">
+              {label[v]} <br />
+              {errors[v] && <span className="required">{errors[v]}</span>}
+            </label>
             <input
               type={label[v]}
               autoComplete="on"
@@ -60,8 +59,7 @@ const NoCaptchaForm = ({ data, submit, isHorizontal }) => {
           </div>
         ))}
       </div>
-
-      <button type="submit" className="btn btn-submit">
+      <button type="submit" className="btn-main">
         <Icons name="submit" /> Confirm
       </button>
     </form>
