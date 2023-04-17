@@ -1,6 +1,7 @@
 .container-header {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid #eee;
 }
 .vehicle-container {
   display: flex;
@@ -77,4 +78,13 @@
 .vehicle-img {
   border-radius: 0.5rem;
   width: 100%;
+}
+.filter-container {
+  display: flex;
+  gap: 1rem;
+}
+.filter-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
 }

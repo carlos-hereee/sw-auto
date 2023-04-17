@@ -70,6 +70,17 @@ const loadFilters = (state, action) => {
     ...state,
     isLoading: false,
     filters: action.payload,
+    // isFiltered: false,
+  };
+};
+const updateFilter = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    isFiltered: true,
+    activeFilter: !state.activeFilter.includes(action.payload)
+      ? [...state.activeFilter, action.payload]
+      : [...state.activeFilter],
   };
 };
 export const reducer = (state, action) => {
@@ -92,6 +103,8 @@ export const reducer = (state, action) => {
       return updateSelected(state, action);
     case "RESET_SELECTED":
       return resetSelect(state, action);
+    case "UPDATE_FILTER":
+      return updateFilter(state, action);
 
     default:
       return state;

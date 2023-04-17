@@ -6,15 +6,24 @@ import Icons from "../component/atoms/Icons";
 import NoCaptchaForm from "../component/molecules/forms/NoCaptchaForm";
 
 const Cars = () => {
-  const { seeDetails, lot, filters, isFiltered } = useContext(AppContext);
+  const { seeDetails, lot, filters, isFiltered, updateFilter, activeFilter } =
+    useContext(AppContext);
 
-  console.log("filter", filters);
+  console.log("filters", activeFilter);
   const handleFilter = () => console.log("first");
   return (
     <div className="vehicle-container">
       <div className="container-header">
         <h2 className="title">Filters</h2>
-        <div className="vehicle-header">
+        <div className="filter-container">
+          <div className="filter-wrapper">
+            {filters &&
+              Object.keys(filters).map((f) => (
+                <button key={f} className="btn-main" onClick={() => updateFilter(f)}>
+                  {f}
+                </button>
+              ))}
+          </div>
           <NoCaptchaForm
             data={{ values: { search: "" } }}
             submit={handleFilter}
@@ -24,7 +33,21 @@ const Cars = () => {
         </div>
         {isFiltered && (
           <div>
-            <p>Filters applied:</p>
+            <p>Filters applied: </p>
+            {/* {filters[]} */}
+            {/* {activeFilter.map((a) => (
+              <div key={a}>
+                <h3 className="title">{a.toUpperCase()}</h3>
+                {filters[a].map((f) => (
+                  <button
+                    type="button"
+                    className="btn-main"
+                    onclick={() => updateFilter(f)}>
+                    {f}
+                  </button>
+                ))}
+              </div>
+            ))} */}
           </div>
         )}
       </div>

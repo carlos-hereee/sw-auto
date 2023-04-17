@@ -38,6 +38,7 @@ export const AppState = ({ children }) => {
     lot: app.lot,
     selected: {},
     isFiltered: false,
+    activeFilter: [],
     disclaimer:
       "** Photos are for illustrative purposes only. Not responsible for errors or omissions. **",
   };
@@ -128,7 +129,6 @@ export const AppState = ({ children }) => {
         filters.category.push(l.category);
       }
     });
-    console.log("filters", filters);
     dispatch({ type: "LOAD_FILTERS", payload: filters });
   };
   const updateBurger = (payload) => {
@@ -160,9 +160,9 @@ export const AppState = ({ children }) => {
   const resetSelect = () => {
     dispatch({ type: "RESET_SELECTED", payload: {} });
   };
-  // const viewControl = (dir) => {
-
-  // };
+  const updateFilter = (filter) => {
+    dispatch({ type: "UPDATE_FILTER", payload: filter });
+  };
   return (
     <AppContext.Provider
       value={{
@@ -184,6 +184,7 @@ export const AppState = ({ children }) => {
         paymentType: state.paymentType,
         disclaimer: state.disclaimer,
         filters: state.filters,
+        activeFilter: state.activeFilter,
         isFiltered: state.isFiltered,
         updateBurger,
         updateMenu,
@@ -192,7 +193,7 @@ export const AppState = ({ children }) => {
         readyCheckout,
         seeDetails,
         resetSelect,
-        // viewControl,
+        updateFilter,
       }}>
       {children}
     </AppContext.Provider>
