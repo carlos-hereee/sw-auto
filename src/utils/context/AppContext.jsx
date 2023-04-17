@@ -37,6 +37,7 @@ export const AppState = ({ children }) => {
     paymentType: {},
     lot: app.lot,
     selected: {},
+    isFiltered: false,
     disclaimer:
       "** Photos are for illustrative purposes only. Not responsible for errors or omissions. **",
   };
@@ -58,8 +59,9 @@ export const AppState = ({ children }) => {
   const getCarAssets = async () => {
     try {
       const res = await axiosWithAuth.get("/Car_Model_List?limit=20");
-      let data = res.data.results;
-      const result = data.map((d) => {
+      // restructure data
+      const result = res.data.results.map((d) => {
+        // load dummy data
         d.year = d.Year;
         d.make = d.Make;
         d.model = d.Model;
@@ -95,12 +97,39 @@ export const AppState = ({ children }) => {
         }
         return d;
       });
-      // console.log(result);
+      loadFilters(result);
       dispatch({ type: "LOAD_CAR_ASSETS", payload: result });
     } catch (err) {
       const data = err.response.data;
       dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: data });
     }
+  };
+  const loadFilters = (arr) => {
+    let filters = { year: [], make: [], category: [], mileage: [] };
+    arr.forEach((l) => {
+      const idx = filters.make.findIndex((i) => i.make === l.make);
+      let current = filters.make[idx];
+
+      if (!filters.year.includes(l.year)) {
+        filters.year.push(l.year);
+      }
+      // if index is not found add record to dataset
+      if (idx === -1) {
+        filters.make.push({ make: l.make, model: [l.model] });
+      }
+      // if index is found check if model has been checked
+      if (idx >= 0 && !current.model.includes(l.model)) {
+        current.model.push(l.model);
+      }
+      if (!filters.mileage.includes(l.mileage)) {
+        filters.mileage.push(l.mileage);
+      }
+      if (!filters.category.includes(l.category)) {
+        filters.category.push(l.category);
+      }
+    });
+    console.log("filters", filters);
+    dispatch({ type: "LOAD_FILTERS", payload: filters });
   };
   const updateBurger = (payload) => {
     dispatch({ type: "UPDATE_BURGER", payload: payload });
@@ -154,6 +183,8 @@ export const AppState = ({ children }) => {
         selected: state.selected,
         paymentType: state.paymentType,
         disclaimer: state.disclaimer,
+        filters: state.filters,
+        isFiltered: state.isFiltered,
         updateBurger,
         updateMenu,
         newsletter,

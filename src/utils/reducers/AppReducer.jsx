@@ -65,6 +65,13 @@ const resetSelect = (state, action) => {
     selected: {},
   };
 };
+const loadFilters = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    filters: action.payload,
+  };
+};
 export const reducer = (state, action) => {
   switch (action.type) {
     case "IS_LOADING":
@@ -73,6 +80,8 @@ export const reducer = (state, action) => {
       return updateMenu(state, action);
     case "LOAD_CONTENT":
       return loadContent(state, action);
+    case "LOAD_FILTERS":
+      return loadFilters(state, action);
     case "LOAD_CAR_ASSETS":
       return loadCarAssets(state, action);
     case "UPDATE_BURGER":

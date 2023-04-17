@@ -6,34 +6,9 @@ import Icons from "../component/atoms/Icons";
 import NoCaptchaForm from "../component/molecules/forms/NoCaptchaForm";
 
 const Cars = () => {
-  const { seeDetails, lot } = useContext(AppContext);
-  const [filter, setFilter] = useState();
-  const values = { search: "" };
+  const { seeDetails, lot, filters, isFiltered } = useContext(AppContext);
 
-  useEffect(() => {
-    if (lot.length) {
-      let filters = { year: [], make: [], model: [], category: [], mileage: [] };
-      lot.forEach((l) => {
-        if (!filters.year.includes(l.year)) {
-          filters.year.push(l.year);
-        }
-        if (!filters.make.includes(l.make)) {
-          filters.make.push(l.make);
-        }
-        if (!filters.model.includes(l.model)) {
-          filters.model.push(l.model);
-        }
-        if (!filters.mileage.includes(l.mileage)) {
-          filters.mileage.push(l.mileage);
-        }
-        if (!filters.category.includes(l.category)) {
-          filters.category.push(l.category);
-        }
-      });
-      setFilter(filters);
-    }
-  }, [lot]);
-  console.log("filter", filter);
+  console.log("filter", filters);
   const handleFilter = () => console.log("first");
   return (
     <div className="vehicle-container">
@@ -41,15 +16,17 @@ const Cars = () => {
         <h2 className="title">Filters</h2>
         <div className="vehicle-header">
           <NoCaptchaForm
-            data={{ values }}
+            data={{ values: { search: "" } }}
             submit={handleFilter}
             isHorizontal
             change={handleFilter}
           />
         </div>
-        <div>
-          <p>Filters applied:</p>
-        </div>
+        {isFiltered && (
+          <div>
+            <p>Filters applied:</p>
+          </div>
+        )}
       </div>
       <div className="card-container">
         {lot.map((l) => (
