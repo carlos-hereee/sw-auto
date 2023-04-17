@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { AppContext } from "../utils/context/AppContext";
+import VehicleHeading from "../component/molecules/vehicle/VehicleHeading";
 
 const Cars = () => {
   const { seeDetails, lot } = useContext(AppContext);
 
+  console.log("lot", lot);
   return (
     <div className="vehicle-container">
       <div className="container-header">
@@ -21,19 +23,17 @@ const Cars = () => {
           <button
             type="button"
             onClick={() => seeDetails(l)}
-            key={l.uid}
+            key={l}
             className="card">
             <div className="card-header">
-              <h2>
-                {l.year} {l.make} {l.model}
-              </h2>
+              <VehicleHeading data={l} />
             </div>
             <div className="card-body">
-              {/* <img
+              <img
                 className="vehicle-card-hero"
-                src={l.photos[0].src}
-                alt={l.photos[0].alt}
-              /> */}
+                src={l.photos[0]}
+                alt={`${l.Make} ${l.Model}`}
+              />
               {/* <div className="vehicle-details">
                 <p>${l.price.toLocaleString()}</p>
                 <p>

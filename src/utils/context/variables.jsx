@@ -7,6 +7,7 @@ export const lorem30 =
 
 export let random100 = (n) => Math.floor(Math.random() * n) + 1;
 export let randomMileague = () => Math.floor(Math.random() * 300000) + 1;
+export let randomPrice = () => Math.floor(Math.random() * 65000) + 1;
 export const aboutMe1 =
   "SW Auto of Houston treats our customers with paramount concern. We have a great varieties of vehicles for you to choose from. We all know that your time is precious and you have high expectations. As a fast growing used car dealer in Houston, we enjoy the challenge of meeting and exceeding those standards each and every time. So, come see us and find out.";
 

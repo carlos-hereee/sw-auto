@@ -73,7 +73,7 @@ export const reducer = (state, action) => {
       return updateMenu(state, action);
     case "LOAD_CONTENT":
       return loadContent(state, action);
-    case "LOAD_ASSETS":
+    case "LOAD_CAR_ASSETS":
       return loadCarAssets(state, action);
     case "UPDATE_BURGER":
       return updateBurger(state, action);

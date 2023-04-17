@@ -14,6 +14,7 @@ import {
   ford,
   infinity,
   randomMileague,
+  randomPrice,
 } from "./variables";
 // import shortid from "shortid";
 
@@ -55,12 +56,12 @@ export const AppState = ({ children }) => {
   //   }
   // };
   const getCarAssets = async () => {
-    // dispatch({ type: "IS_LOADING", payload: true });
     try {
       const res = await axiosWithAuth.get("/Car_Model_List?limit=20");
       let data = res.data.results;
       data.map((d) => {
         d.mileage = randomMileague();
+        d.price = randomPrice();
         if (d.Make.toLowerCase() === "audi") {
           d.photos = audi;
         }
@@ -89,7 +90,7 @@ export const AppState = ({ children }) => {
           d.photos = buick;
         }
       });
-      dispatch({ type: "LOAD_ASSETS", payload: data });
+      dispatch({ type: "LOAD_CAR_ASSETS", payload: data });
     } catch (err) {
       const data = err.response.data;
       dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: data });
