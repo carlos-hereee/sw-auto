@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../utils/context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Icons from "../component/atoms/Icons";
+import VehicleHeading from "../component/molecules/vehicle/VehicleHeading";
 
 const Vehicle = () => {
   const { selected, disclaimer } = useContext(AppContext);
@@ -16,7 +17,6 @@ const Vehicle = () => {
       } else navigate(-1);
     }
   }, [active]);
-  console.log("selected", selected.features);
   const controls = (cmd) => {
     // find index
     const idx = findIdx();
@@ -43,14 +43,9 @@ const Vehicle = () => {
         </button>
         {selected.uid && (
           <div className="vehicle-header">
-            <div className="title">
-              <h2>
-                {selected.year} {selected.make} {selected.model}
-              </h2>
-              <h2 className="price">
-                ${selected.price ? selected.price.toLocaleString() : 0}
-              </h2>
-            </div>
+            <VehicleHeading data={selected} />
+
+            {/* </div> */}
             <div className="title">
               <p>{selected.mileage.toLocaleString()} miles</p>{" "}
               <button type="button" className="btn-back">

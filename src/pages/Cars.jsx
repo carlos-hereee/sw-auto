@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AppContext } from "../utils/context/AppContext";
 
 const Cars = () => {
-  const { seeDetails, inLot } = useContext(AppContext);
+  const { seeDetails, lot } = useContext(AppContext);
 
   return (
     <div className="vehicle-container">
@@ -17,7 +17,7 @@ const Cars = () => {
         </div>
       </div>
       <div className="card-container">
-        {inLot.map((car) => (
+        {lot.map((car) => (
           <button
             type="button"
             onClick={() => seeDetails(car)}
