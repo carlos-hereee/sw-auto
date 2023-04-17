@@ -139,11 +139,15 @@ const Vehicle = () => {
         </div>
       )}
       {/* <p>NO warranty AS IS</p> */}
+      {/* 
+      TODO: add to saved
+            create compare feature
+            confirm avaliblitly
       <div>
         <button>Add to bucket</button>
         <button>compare</button>
         <button>Confirm Availibility</button>
-      </div>
+      </div> */}
     </div>
   );
 };
