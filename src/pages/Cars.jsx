@@ -17,32 +17,32 @@ const Cars = () => {
         </div>
       </div>
       <div className="card-container">
-        {lot.map((car) => (
+        {lot.map((l) => (
           <button
             type="button"
-            onClick={() => seeDetails(car)}
-            key={car.uid}
+            onClick={() => seeDetails(l)}
+            key={l.uid}
             className="card">
             <div className="card-header">
               <h2>
-                {car.year} {car.make} {car.model}
+                {l.year} {l.make} {l.model}
               </h2>
             </div>
             <div className="card-body">
-              <img
+              {/* <img
                 className="vehicle-card-hero"
-                src={car.photos[0].src}
-                alt={car.photos[0].alt}
-              />
-              <div className="vehicle-details">
-                <p>${car.price.toLocaleString()}</p>
+                src={l.photos[0].src}
+                alt={l.photos[0].alt}
+              /> */}
+              {/* <div className="vehicle-details">
+                <p>${l.price.toLocaleString()}</p>
                 <p>
                   Miles:{" "}
-                  {car.features.map(({ mileage }) => (
+                  {l.features.map(({ mileage }) => (
                     <span>{mileage.toLocaleString()}</span>
                   ))}
                 </p>
-              </div>
+              </div> */}
             </div>
           </button>
         ))}

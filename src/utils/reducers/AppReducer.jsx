@@ -14,15 +14,11 @@ const loadContent = (state, action) => {
     schedule: action.payload.schedule,
   };
 };
-const loadAssets = (state, action) => {
+const loadCarAssets = (state, action) => {
   return {
     ...state,
     isLoading: false,
-    gallery: action.payload,
-    // socials: action.payload.socials,
-    // about: action.payload.about,
-    // services: action.payload.services,
-    // schedule: action.payload.schedule,
+    lot: action.payload,
   };
 };
 const updateMenu = (state, action) => {
@@ -78,7 +74,7 @@ export const reducer = (state, action) => {
     case "LOAD_CONTENT":
       return loadContent(state, action);
     case "LOAD_ASSETS":
-      return loadAssets(state, action);
+      return loadCarAssets(state, action);
     case "UPDATE_BURGER":
       return updateBurger(state, action);
     case "SELECT_PAYMENT_TYPE":

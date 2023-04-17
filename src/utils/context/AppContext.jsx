@@ -3,6 +3,18 @@ import { axiosWithAuth } from "../functions/axios";
 import { reducer } from "../reducers/AppReducer";
 import { app } from "./config";
 import { useNavigate } from "react-router-dom";
+import {
+  acura,
+  audi,
+  bmw,
+  buick,
+  cadillac,
+  chevy,
+  chrysler,
+  ford,
+  infinity,
+  randomMileague,
+} from "./variables";
 // import shortid from "shortid";
 
 export const AppContext = createContext();
@@ -27,13 +39,12 @@ export const AppState = ({ children }) => {
     disclaimer:
       "** Photos are for illustrative purposes only. Not responsible for errors or omissions. **",
   };
-
   const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   getAllAssets();
-  // }, []);
+  useEffect(() => {
+    getCarAssets();
+  }, []);
   // const getAssets = async () => {
   //   try {
   //     const { data } = await axiosWithAuth.get("/app/glamourella");
@@ -43,16 +54,45 @@ export const AppState = ({ children }) => {
   //     dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: error.response.data });
   //   }
   // };
-  const getAllAssets = async () => {
+  const getCarAssets = async () => {
     // dispatch({ type: "IS_LOADING", payload: true });
     try {
-      const { data } = await axiosWithAuth.get("/Car_Model_List?limit=10");
-      console.log("data", data);
-      // console.log("data", data);
-      // dispatch({ type: "LOAD_ASSETS", payload: data });
+      const res = await axiosWithAuth.get("/Car_Model_List?limit=20");
+      let data = res.data.results;
+      data.map((d) => {
+        d.mileage = randomMileague();
+        if (d.Make.toLowerCase() === "audi") {
+          d.photos = audi;
+        }
+        if (d.Make.toLowerCase() === "chevrolet") {
+          d.photos = chevy;
+        }
+        if (d.Make.toLowerCase() === "cadillac") {
+          d.photos = cadillac;
+        }
+        if (d.Make.toLowerCase() === "acura") {
+          d.photos = acura;
+        }
+        if (d.Make.toLowerCase() === "bmw") {
+          d.photos = bmw;
+        }
+        if (d.Make.toLowerCase() === "chrysler") {
+          d.photos = chrysler;
+        }
+        if (d.Make.toLowerCase() === "infinity") {
+          d.photos = infinity;
+        }
+        if (d.Make.toLowerCase() === "ford") {
+          d.photos = ford;
+        }
+        if (d.Make.toLowerCase() === "buick") {
+          d.photos = buick;
+        }
+      });
+      dispatch({ type: "LOAD_ASSETS", payload: data });
     } catch (err) {
-      // const data = err.response.data;
-      // dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: data });
+      const data = err.response.data;
+      dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: data });
     }
   };
   const updateBurger = (payload) => {
@@ -71,10 +111,7 @@ export const AppState = ({ children }) => {
     }
   };
   const selectPaymentType = (method) => {
-    const data = {
-      ...method,
-      title: `Payment type: ${method.name}`,
-    };
+    const data = { ...method, title: `Payment type: ${method.name}` };
     dispatch({ type: "SELECT_PAYMENT_TYPE", payload: data });
   };
   const readyCheckout = (paymentType, user, cart) => {
