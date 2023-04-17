@@ -20,8 +20,11 @@ footer {
   align-items: flex-start;
   justify-content: space-around;
   flex-wrap: wrap;
+  color: #{$text-color};
   background-color: #{$secondary-color};
-  border-top: 1px solid #{$secondary-color2};
   padding: 1rem;
   gap: 1rem;
+}
+.link {
+  color: #{$text-color};
 }

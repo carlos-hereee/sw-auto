@@ -1,5 +1,4 @@
 import FollowUs from "./molecules/FollowUs";
-import Header from "../pages/Header";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -11,24 +10,30 @@ const values = { name: "", email: "", message: "" };
 
 const ContactUs = () => {
   return (
-    <div className="container">
-      <div>
-        <h2>Shop with us:</h2>
-        <p>
-          <strong>Phone:</strong> <a href="tel:713-780-1616"> 713-780-1616</a> or{" "}
-          <a href="tel:713-780-3838">713-780-3838</a>
-        </p>
-        <p>
-          <strong>Address:</strong>{" "}
-          <a
-            href="https://www.google.com/maps?q=6802 Southwest Fwy, Houston, TX 77074"
-            target="_blank">
-            {" "}
-            6802 Southwest FWY
-          </a>
-        </p>
-        <button>Send us a message</button>
-      </div>
+    <div>
+      <h2>Shop with us:</h2>
+      <p>
+        <strong>Phone:</strong>{" "}
+        <a href="tel:713-780-1616" className="link">
+          {" "}
+          713-780-1616
+        </a>{" "}
+        or{" "}
+        <a href="tel:713-780-3838" className="link">
+          713-780-3838
+        </a>
+      </p>
+      <p>
+        <strong>Address:</strong>{" "}
+        <a
+          href="https://www.google.com/maps?q=6802+Southwest+Fwy,+Houston,+TX+77074"
+          target="_blank"
+          className="link">
+          {" "}
+          6802 Southwest Fwy
+        </a>
+      </p>
+      <button>Send us a message</button>
       <FollowUs />
     </div>
   );
