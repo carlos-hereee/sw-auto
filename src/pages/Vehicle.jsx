@@ -3,6 +3,7 @@ import { AppContext } from "../utils/context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Icons from "../component/atoms/Icons";
 import VehicleHeading from "../component/molecules/vehicle/VehicleHeading";
+import VehicleDetails from "../component/molecules/vehicle/VehicleDetails";
 
 const Vehicle = () => {
   const { selected, disclaimer } = useContext(AppContext);
@@ -44,15 +45,7 @@ const Vehicle = () => {
         {selected.uid && (
           <div className="vehicle-header">
             <VehicleHeading data={selected} />
-
-            {/* </div> */}
-            <div className="title">
-              <p>{selected.mileage.toLocaleString()} miles</p>{" "}
-              <button type="button" className="btn-back">
-                <Icons name="heart" />
-                Save
-              </button>
-            </div>
+            <VehicleDetails data={selected} />
           </div>
         )}
       </div>
