@@ -80,7 +80,7 @@ export const AppState = ({ children }) => {
         if (d.Make.toLowerCase() === "chrysler") {
           d.photos = chrysler;
         }
-        if (d.Make.toLowerCase() === "infinity") {
+        if (d.Make.toLowerCase() === "infiniti") {
           d.photos = infinity;
         }
         if (d.Make.toLowerCase() === "ford") {

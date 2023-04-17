@@ -23,11 +23,9 @@ const Cars = () => {
           <button
             type="button"
             onClick={() => seeDetails(l)}
-            key={l}
+            key={l.objectId}
             className="card">
-            <div className="card-header">
-              <VehicleHeading data={l} />
-            </div>
+            <VehicleHeading data={l} />
             <div className="card-body">
               <img
                 className="vehicle-card-hero"
