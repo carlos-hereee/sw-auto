@@ -34,14 +34,15 @@ const Cars = () => {
         {filters && (
           <div className="filter-wrapper">
             {Object.keys(filters).map((f) => (
-              <select key={f} onChange={optionChange} placeholder={f}>
+              <select className="dropdown-input" key={f} onChange={optionChange}>
                 <label htmlFor={f}>{f}</label>
+                <option name={f} value={f} className="dropdown-item">
+                  {f}
+                </option>
                 {filters[f].map((opt) => (
-                  <>
-                    <option key={opt} name={f} value={opt}>
-                      {opt}
-                    </option>
-                  </>
+                  <option key={opt} name={f} value={opt} className="dropdown-item">
+                    {opt}
+                  </option>
                 ))}
               </select>
             ))}
