@@ -23,36 +23,31 @@ const Cars = () => {
     <div className="vehicle-container">
       <div className="container-header">
         <SearchBar values={values} handleFilter={handleFilter} />
-        <div className="container-header">
-          <h2 className="title">Filters</h2>
-          <div className="filter-wrapper">
-            {filters &&
-              Object.keys(filters).map((f) => (
-                <button key={f} className="btn-main" onClick={() => updateFilter(f)}>
-                  {f}
-                </button>
-              ))}
+      </div>
+      <div className="container-header">
+        <h3>Filters </h3>
+        {/* {filters[]} */}
+        <div className="filter-wrapper">
+          {filters &&
+            Object.keys(filters).map((f) => (
+              <button key={f} className="btn-main" onClick={() => updateFilter(f)}>
+                {f}
+              </button>
+            ))}
+        </div>
+        {activeFilter.map((a) => (
+          <div key={a} style={{ paddingBottom: "1rem" }}>
+            <h3 className="title">{a.toUpperCase()}</h3>
+            {filters[a].map((f) => (
+              <button
+                type="button"
+                className="btn-main"
+                onClick={() => updateFilter(lot, f)}>
+                {f}
+              </button>
+            ))}
           </div>
-        </div>
-        {/* {isFiltered && ( */}
-        <div>
-          <h3>Filters applied: </h3>
-          {/* {filters[]} */}
-          {activeFilter.map((a) => (
-            <div key={a} style={{ paddingBottom: "1rem" }}>
-              <h3 className="title">{a.toUpperCase()}</h3>
-              {filters[a].map((f) => (
-                <button
-                  type="button"
-                  className="btn-main"
-                  onClick={() => updateFilter(lot, f)}>
-                  {f}
-                </button>
-              ))}
-            </div>
-          ))}
-        </div>
-        {/* )} */}
+        ))}
       </div>
       <div className="card-container">
         {isFiltered
