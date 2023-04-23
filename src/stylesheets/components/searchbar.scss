@@ -5,7 +5,8 @@
 .filter-wrapper {
   display: flex;
   align-items: flex-end;
-  overflow-x: auto;
+  // overflow-x: auto;
+  flex-wrap: wrap;
   text-align: left;
   gap: 0.5rem;
   padding-bottom: 0.5rem;
@@ -16,14 +17,16 @@
 }
 
 .dropdown-input {
-  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   user-select: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .dropdown-item {
+  cursor: pointer;
   padding: 5px;
   cursor: pointer;
 }

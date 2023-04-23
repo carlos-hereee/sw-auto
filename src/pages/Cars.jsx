@@ -23,7 +23,6 @@ const Cars = () => {
     console.log("e", e.target.value);
     console.log("activeFilter", activeFilter);
   };
-  console.log("filters", filters && filters.make);
   return (
     <div className="vehicle-container">
       <div className="container-header">
@@ -39,11 +38,15 @@ const Cars = () => {
                 <option name={f} value={f} className="dropdown-item">
                   {f}
                 </option>
-                {filters[f].map((opt) => (
-                  <option key={opt} name={f} value={opt} className="dropdown-item">
-                    {opt}
-                  </option>
-                ))}
+                {filters[f].map((opt) =>
+                  f === "price" ? (
+                    <input placeholder={opt} />
+                  ) : (
+                    <option key={opt} name={f} value={opt} className="dropdown-item">
+                      {opt}
+                    </option>
+                  )
+                )}
               </select>
             ))}
           </div>

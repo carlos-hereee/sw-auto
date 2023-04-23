@@ -58,19 +58,23 @@ export const AppState = ({ children }) => {
             year: Year,
             model: Model,
             category: Category,
-            vin: objectId,
-            mileage: randomMileague(),
-            price: randomPrice(),
           };
           filters.push(dummyData);
           // load dummy data
           return {
             ...dummyData,
+            mileage: randomMileague(),
+            price: randomPrice(),
+            vin: objectId,
             photos: vehicles[Make.toLowerCase()],
           };
         }
       );
-      loadFilters(filters);
+      loadFilters([
+        ...filters,
+        { mileage: [25000, 50000, 75000, 100000] },
+        { price: [5000, 10000] },
+      ]);
       dispatch({ type: "LOAD_CAR_ASSETS", payload: data });
     } catch (err) {
       console.log("err", err);
