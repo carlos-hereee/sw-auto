@@ -3,19 +3,7 @@ import { axiosWithAuth } from "../functions/axios";
 import { reducer } from "../reducers/AppReducer";
 import { app } from "./config";
 import { useNavigate } from "react-router-dom";
-import {
-  acura,
-  audi,
-  bmw,
-  buick,
-  cadillac,
-  chevy,
-  chrysler,
-  ford,
-  infinity,
-  randomMileague,
-  randomPrice,
-} from "./variables";
+import { vehicles, randomMileague, randomPrice } from "./variables";
 // import shortid from "shortid";
 
 export const AppContext = createContext();
@@ -62,45 +50,23 @@ export const AppState = ({ children }) => {
     try {
       const res = await axiosWithAuth.get("/Car_Model_List?limit=20");
       // restructure data
-      const result = res.data.results.map((d) => {
-        // load dummy data
-        d.year = d.Year;
-        d.make = d.Make;
-        d.model = d.Model;
-        d.category = d.Category;
-        d.mileage = randomMileague();
-        d.price = randomPrice();
-        if (d.Make.toLowerCase() === "audi") {
-          d.photos = audi;
+      const data = res.data.results.map(
+        ({ Make, Year, Model, Category, objectId }) => {
+          // load dummy data
+          return {
+            make: Make,
+            year: Year,
+            model: Model,
+            category: Category,
+            uid: objectId,
+            photos: vehicles[Make.toLowerCase()],
+            mileage: randomMileague(),
+            price: randomPrice(),
+          };
         }
-        if (d.Make.toLowerCase() === "chevrolet") {
-          d.photos = chevy;
-        }
-        if (d.Make.toLowerCase() === "cadillac") {
-          d.photos = cadillac;
-        }
-        if (d.Make.toLowerCase() === "acura") {
-          d.photos = acura;
-        }
-        if (d.Make.toLowerCase() === "bmw") {
-          d.photos = bmw;
-        }
-        if (d.Make.toLowerCase() === "chrysler") {
-          d.photos = chrysler;
-        }
-        if (d.Make.toLowerCase() === "infiniti") {
-          d.photos = infinity;
-        }
-        if (d.Make.toLowerCase() === "ford") {
-          d.photos = ford;
-        }
-        if (d.Make.toLowerCase() === "buick") {
-          d.photos = buick;
-        }
-        return d;
-      });
-      loadFilters(result);
-      dispatch({ type: "LOAD_CAR_ASSETS", payload: result });
+      );
+      loadFilters(data);
+      dispatch({ type: "LOAD_CAR_ASSETS", payload: data });
     } catch (err) {
       console.log("err", err);
       // const data = err.response.data;
