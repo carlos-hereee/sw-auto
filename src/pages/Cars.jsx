@@ -15,7 +15,7 @@ const Cars = () => {
       // handle submit
       console.log("data, isSubmit", data, isSubmit);
     } else {
-      updateFilter(data);
+      updateFilter(lot, activeFilter, data);
     }
   };
   return (
@@ -54,32 +54,34 @@ const Cars = () => {
         {/* )} */}
       </div>
       <div className="card-container">
-        {lot.map((l) => (
-          <button
-            type="button"
-            onClick={() => seeDetails(l)}
-            key={l.objectId}
-            className="card">
-            <img
-              className="vehicle-card-hero"
-              src={l.photos[0]}
-              alt={`${l.make} ${l.model}`}
-            />
-            <div className="card-body">
-              <h3>
-                {l.year} {l.make} {l.model}
-              </h3>
-              <div className="vehicle-details">
-                <p>
-                  Miles: <span>{l.mileage.toLocaleString()}</span>
-                </p>
-                <p>
-                  <strong>${l.price.toLocaleString()}</strong>
-                </p>
-              </div>
-            </div>
-          </button>
-        ))}
+        {isFiltered
+          ? filters && filters.map((f) => <div></div>)
+          : lot.map((l) => (
+              <button
+                type="button"
+                onClick={() => seeDetails(l)}
+                key={l.objectId}
+                className="card">
+                <img
+                  className="vehicle-card-hero"
+                  src={l.photos[0]}
+                  alt={`${l.make} ${l.model}`}
+                />
+                <div className="card-body">
+                  <h3>
+                    {l.year} {l.make} {l.model}
+                  </h3>
+                  <div className="vehicle-details">
+                    <p>
+                      Miles: <span>{l.mileage.toLocaleString()}</span>
+                    </p>
+                    <p>
+                      <strong>${l.price.toLocaleString()}</strong>
+                    </p>
+                  </div>
+                </div>
+              </button>
+            ))}
       </div>
     </div>
   );

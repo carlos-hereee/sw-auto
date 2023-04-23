@@ -70,17 +70,25 @@ const loadFilters = (state, action) => {
     ...state,
     isLoading: false,
     filters: action.payload,
-    // isFiltered: false,
+    isFiltered: false,
   };
 };
 const updateFilter = (state, action) => {
   return {
     ...state,
     isLoading: false,
-    // isFiltered: true,
+    isFiltered: true,
     activeFilter: !state.activeFilter.includes(action.payload)
       ? [...state.activeFilter, action.payload]
       : [...state.activeFilter],
+  };
+};
+const resetFilter = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    isFiltered: false,
+    activeFilter: action.payload,
   };
 };
 export const reducer = (state, action) => {
@@ -105,6 +113,8 @@ export const reducer = (state, action) => {
       return resetSelect(state, action);
     case "UPDATE_FILTER":
       return updateFilter(state, action);
+    case "RESET_FILTER":
+      return resetFilter(state, action);
 
     default:
       return state;

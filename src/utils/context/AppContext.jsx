@@ -161,8 +161,14 @@ export const AppState = ({ children }) => {
   const resetSelect = () => {
     dispatch({ type: "RESET_SELECTED", payload: {} });
   };
-  const updateFilter = (lot, filter) => {
-    dispatch({ type: "UPDATE_FILTER", payload: filter });
+  const updateFilter = (lot, activeFilters, keyword) => {
+    if (keyword) {
+      const data = lot.filter(
+        (l) =>
+          Object.keys(l).filter((f) => l[f].toString().includes(keyword)).length > 1
+      );
+      dispatch({ type: "UPDATE_FILTER", payload: data });
+    } else dispatch({ type: "RESET_FILTER", payload: lot });
   };
   return (
     <AppContext.Provider
