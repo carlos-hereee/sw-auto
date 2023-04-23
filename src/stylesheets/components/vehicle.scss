@@ -1,8 +1,3 @@
-.container-header {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid #eee;
-}
 .vehicle-container {
   display: flex;
   flex-direction: column;
@@ -24,19 +19,10 @@
     text-align: right;
   }
 }
-.card-item {
-  display: flex;
-  flex-direction: column;
-  box-shadow: 1px 0 3px 2px #eee;
-  min-width: 250px;
-  flex: 1;
-  .card-body {
-    width: 100%;
-    text-align: left;
-  }
-}
+
 .vehicle-card-hero {
-  flex: 1;
+  // flex: 1;
+  aspect-ratio: 4/3;
   border-radius: 0.5rem;
   width: 100%;
   object-fit: cover;
@@ -45,6 +31,8 @@
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
+  border-top: 1px dashed #d3d1d1;
+  border-bottom: 1px dashed #d3d1d1;
 }
 .vehicle-card {
   display: flex;
@@ -79,12 +67,10 @@
   border-radius: 0.5rem;
   width: 100%;
 }
-.filter-container {
-  display: flex;
-  gap: 1rem;
-}
 .filter-wrapper {
   display: flex;
   align-items: flex-end;
+  overflow-x: auto;
   gap: 0.5rem;
+  padding-bottom: 0.5rem;
 }

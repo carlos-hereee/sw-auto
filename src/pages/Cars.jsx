@@ -3,19 +3,27 @@ import { AppContext } from "../utils/context/AppContext";
 import VehicleHeading from "../component/molecules/vehicle/VehicleHeading";
 import CardHeader from "../component/molecules/card/CardHeader";
 import Icons from "../component/atoms/Icons";
-import NoCaptchaForm from "../component/molecules/forms/NoCaptchaForm";
+import SearchBar from "../component/molecules/SearchBar";
 
 const Cars = () => {
   const { seeDetails, lot, filters, isFiltered, updateFilter, activeFilter } =
     useContext(AppContext);
+  const values = { search: "" };
 
-  console.log("filters", activeFilter);
-  const handleFilter = () => console.log("first");
+  const handleFilter = (data, isSubmit) => {
+    if (isSubmit) {
+      // handle submit
+      console.log("data, isSubmit", data, isSubmit);
+    } else {
+      updateFilter(data);
+    }
+  };
   return (
     <div className="vehicle-container">
       <div className="container-header">
-        <h2 className="title">Filters</h2>
-        <div className="filter-container">
+        <SearchBar values={values} handleFilter={handleFilter} />
+        <div className="container-header">
+          <h2 className="title">Filters</h2>
           <div className="filter-wrapper">
             {filters &&
               Object.keys(filters).map((f) => (
@@ -24,12 +32,6 @@ const Cars = () => {
                 </button>
               ))}
           </div>
-          <NoCaptchaForm
-            data={{ values: { search: "" } }}
-            submit={handleFilter}
-            isHorizontal
-            change={handleFilter}
-          />
         </div>
         {/* {isFiltered && ( */}
         <div>
@@ -57,7 +59,7 @@ const Cars = () => {
             type="button"
             onClick={() => seeDetails(l)}
             key={l.objectId}
-            className="card-item">
+            className="card">
             <img
               className="vehicle-card-hero"
               src={l.photos[0]}

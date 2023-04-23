@@ -1,7 +1,7 @@
 import { getIn, useFormik } from "formik";
 import Icons from "../../atoms/Icons";
 
-const NoCaptchaForm = ({ data, submit, isHorizontal }) => {
+const NoCaptchaForm = ({ data, submit, isHorizontal, type }) => {
   const label = {
     firstName: "First name",
     lastName: "Last name",
@@ -34,17 +34,23 @@ const NoCaptchaForm = ({ data, submit, isHorizontal }) => {
   };
   const { handleSubmit, handleBlur, handleChange, values, errors } = useFormik({
     initialValues: data.values,
-    onSubmit: (e) => submit(e),
+    onSubmit: (e) => submit(e, true),
     validationSchema: data.schema,
   });
-
+  const change = (data) => {
+    handleChange(data);
+    submit(data.target.value);
+  };
   return (
     <form className="form filter-form" onSubmit={handleSubmit}>
       <div className={`form-fields ${isHorizontal && "horizontal-fields"}`}>
         {Object.keys(data.values).map((v) => (
           <div key={v} className="input-wrapper">
             <label htmlFor={v} className="label">
-              {label[v]} <br />
+              <strong>
+                {" "}
+                {label[v]}: <br />
+              </strong>
               {errors[v] && <span className="required">{errors[v]}</span>}
             </label>
             <input
@@ -53,7 +59,7 @@ const NoCaptchaForm = ({ data, submit, isHorizontal }) => {
               name={v}
               value={getIn(values, v)}
               placeholder={placeholder[v]}
-              onChange={handleChange}
+              onChange={type === "search" ? change : handleChange}
               onBlur={handleBlur}
               className="input"
             />

@@ -78,7 +78,7 @@ button {
 }
 .btn-main {
   display: flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   gap: 0.5rem;
   color: white;
   background-color: #{$secondary-color};
