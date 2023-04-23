@@ -102,34 +102,29 @@ export const AppState = ({ children }) => {
       loadFilters(result);
       dispatch({ type: "LOAD_CAR_ASSETS", payload: result });
     } catch (err) {
-      const data = err.response.data;
-      dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: data });
+      console.log("err", err);
+      // const data = err.response.data;
+      // dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: data });
     }
   };
   const loadFilters = (arr) => {
-    let filters = { year: [], make: [], category: [], mileage: [] };
-    arr.forEach((l) => {
-      const idx = filters.make.findIndex((i) => i.make === l.make);
-      let current = filters.make[idx];
-
-      if (!filters.year.includes(l.year)) {
-        filters.year.push(l.year);
-      }
-      // if index is not found add record to dataset
-      if (idx === -1) {
-        filters.make.push({ make: l.make, model: [l.model] });
-      }
-      // if index is found check if model has been checked
-      if (idx >= 0 && !current.model.includes(l.model)) {
-        current.model.push(l.model);
-      }
-      if (!filters.mileage.includes(l.mileage)) {
-        filters.mileage.push(l.mileage);
-      }
-      if (!filters.category.includes(l.category)) {
-        filters.category.push(l.category);
-      }
+    let filters = {};
+    arr.forEach((a) => {
+      // if f == brand then a[f] == acura
+      Object.keys(a).filter((f) => {
+        // if filter option exist
+        if (filters[f]) {
+          if (!filters[f].some((s) => s === a[f])) {
+            filters[f].push(a[f]);
+          }
+        }
+        // if filter option does not exist add it to the filter arr
+        if (!filters[f]) {
+          filters[f] = [a[f]];
+        }
+      });
     });
+    console.log("filters", filters);
     dispatch({ type: "LOAD_FILTERS", payload: filters });
   };
   const updateBurger = (payload) => {
