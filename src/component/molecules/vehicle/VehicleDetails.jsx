@@ -1,14 +1,18 @@
-import Icons from "../../atoms/Icons";
-
 const VehicleDetails = ({ data }) => {
   return (
-    <div className="title">
-      <p>{data.mileage.toLocaleString()} miles</p>
+    <div className="card-body">
       {/* todo add to saved list */}
-      <button type="button" className="btn-main">
-        <Icons name="heart" />
-        Save
-      </button>
+      <h3 className="title">
+        {data.year} {data.make} {data.model}
+      </h3>
+      <div className="vehicle-details">
+        <p>
+          Miles: <span>{data.mileage.toLocaleString()}</span>
+        </p>
+        <p>
+          <strong>${data.price.toLocaleString()}</strong>
+        </p>
+      </div>
     </div>
   );
 };

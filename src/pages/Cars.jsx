@@ -4,6 +4,7 @@ import VehicleHeading from "../component/molecules/vehicle/VehicleHeading";
 import CardHeader from "../component/molecules/card/CardHeader";
 import Icons from "../component/atoms/Icons";
 import SearchBar from "../component/molecules/SearchBar";
+import VehicleDetails from "../component/molecules/vehicle/VehicleDetails";
 
 const Cars = () => {
   const { seeDetails, lot, filters, isFiltered, updateFilter, activeFilter } =
@@ -67,19 +68,7 @@ const Cars = () => {
                   src={l.photos[0]}
                   alt={`${l.make} ${l.model}`}
                 />
-                <div className="card-body">
-                  <h3>
-                    {l.year} {l.make} {l.model}
-                  </h3>
-                  <div className="vehicle-details">
-                    <p>
-                      Miles: <span>{l.mileage.toLocaleString()}</span>
-                    </p>
-                    <p>
-                      <strong>${l.price.toLocaleString()}</strong>
-                    </p>
-                  </div>
-                </div>
+                <VehicleDetails data={l} />
               </button>
             ))}
       </div>
