@@ -50,22 +50,27 @@ export const AppState = ({ children }) => {
     try {
       const res = await axiosWithAuth.get("/Car_Model_List?limit=20");
       // restructure data
+      let filters = [];
       const data = res.data.results.map(
         ({ Make, Year, Model, Category, objectId }) => {
-          // load dummy data
-          return {
+          const dummyData = {
             make: Make,
             year: Year,
             model: Model,
             category: Category,
-            uid: objectId,
-            photos: vehicles[Make.toLowerCase()],
+            vin: objectId,
             mileage: randomMileague(),
             price: randomPrice(),
           };
+          filters.push(dummyData);
+          // load dummy data
+          return {
+            ...dummyData,
+            photos: vehicles[Make.toLowerCase()],
+          };
         }
       );
-      loadFilters(data);
+      loadFilters(filters);
       dispatch({ type: "LOAD_CAR_ASSETS", payload: data });
     } catch (err) {
       console.log("err", err);
@@ -90,7 +95,6 @@ export const AppState = ({ children }) => {
         }
       });
     });
-    console.log("filters", filters);
     dispatch({ type: "LOAD_FILTERS", payload: filters });
   };
   const updateBurger = (payload) => {

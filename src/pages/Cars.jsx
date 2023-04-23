@@ -19,7 +19,11 @@ const Cars = () => {
       updateFilter(lot, activeFilter, data);
     }
   };
-  console.log("activeFilter", activeFilter);
+  const optionChange = (e) => {
+    console.log("e", e.target.value);
+    console.log("activeFilter", activeFilter);
+  };
+  console.log("filters", filters && filters.make);
   return (
     <div className="vehicle-container">
       <div className="container-header">
@@ -27,15 +31,22 @@ const Cars = () => {
       </div>
       <div className="container-header">
         <h3>Filters </h3>
-        {/* {filters[]} */}
-        <div className="filter-wrapper">
-          {filters &&
-            Object.keys(filters).map((f) => (
-              <button key={f} className="btn-main" onClick={() => updateFilter(f)}>
-                {f}
-              </button>
+        {filters && (
+          <div className="filter-wrapper">
+            {Object.keys(filters).map((f) => (
+              <select key={f} onChange={optionChange} placeholder={f}>
+                <label htmlFor={f}>{f}</label>
+                {filters[f].map((opt) => (
+                  <>
+                    <option key={opt} name={f} value={opt}>
+                      {opt}
+                    </option>
+                  </>
+                ))}
+              </select>
             ))}
-        </div>
+          </div>
+        )}
         {isFiltered &&
           activeFilter.map((a) => (
             <div key={a} style={{ paddingBottom: "1rem" }}>

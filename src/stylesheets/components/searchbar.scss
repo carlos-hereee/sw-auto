@@ -2,3 +2,13 @@
   display: flex;
   justify-content: flex-end;
 }
+.filter-wrapper {
+  display: flex;
+  align-items: flex-end;
+  overflow-x: auto;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  * {
+    flex: 1;
+  }
+}
