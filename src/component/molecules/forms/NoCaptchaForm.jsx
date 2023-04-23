@@ -67,7 +67,17 @@ const NoCaptchaForm = ({ data, submit, isHorizontal, type }) => {
         ))}
       </div>
       <button type="submit" className="btn-main">
-        <Icons name="submit" /> Confirm
+        {type === "search" ? (
+          <>
+            <Icons name="save" />
+            Save
+          </>
+        ) : (
+          <>
+            <Icons name="submit" />
+            Confirm
+          </>
+        )}
       </button>
     </form>
   );

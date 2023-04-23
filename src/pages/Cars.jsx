@@ -19,6 +19,7 @@ const Cars = () => {
       updateFilter(lot, activeFilter, data);
     }
   };
+  console.log("activeFilter", activeFilter);
   return (
     <div className="vehicle-container">
       <div className="container-header">
@@ -35,19 +36,20 @@ const Cars = () => {
               </button>
             ))}
         </div>
-        {activeFilter.map((a) => (
-          <div key={a} style={{ paddingBottom: "1rem" }}>
-            <h3 className="title">{a.toUpperCase()}</h3>
-            {filters[a].map((f) => (
-              <button
-                type="button"
-                className="btn-main"
-                onClick={() => updateFilter(lot, f)}>
-                {f}
-              </button>
-            ))}
-          </div>
-        ))}
+        {isFiltered &&
+          activeFilter.map((a) => (
+            <div key={a} style={{ paddingBottom: "1rem" }}>
+              <h3 className="title">{a.toUpperCase()}</h3>
+              {filters[a].map((f) => (
+                <button
+                  type="button"
+                  className="btn-main"
+                  onClick={() => updateFilter(lot, f)}>
+                  {f}
+                </button>
+              ))}
+            </div>
+          ))}
       </div>
       <div className="card-container">
         {isFiltered
