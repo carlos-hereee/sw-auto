@@ -26,6 +26,7 @@ export const AppState = ({ children }) => {
     lot: app.lot,
     selected: {},
     isFiltered: false,
+    appliedFilters: [],
     activeFilter: [],
     filtered: [],
     disclaimer:
@@ -128,8 +129,13 @@ export const AppState = ({ children }) => {
   const resetSelect = () => {
     dispatch({ type: "RESET_SELECTED", payload: {} });
   };
-  const updateFilter = (lot, activeFilters, keyword) => {
-    if (keyword) {
+  const updateFilter = (lot, activeFilters, keyword, key) => {
+    if (key) {
+      const data = lot.filter((l) => l[key] === keyword);
+
+      dispatch({ type: "UPDATE_ACTIVE_FILTER", payload: { key, keyword } });
+      dispatch({ type: "UPDATE_FILTER", payload: data });
+    } else if (keyword) {
       const data = lot.filter(
         (l) =>
           Object.keys(l).filter((f) => l[f].toString().includes(keyword)).length > 1
@@ -159,6 +165,7 @@ export const AppState = ({ children }) => {
         disclaimer: state.disclaimer,
         filters: state.filters,
         activeFilter: state.activeFilter,
+        appliedFilters: state.appliedFilters,
         isFiltered: state.isFiltered,
         updateBurger,
         updateMenu,

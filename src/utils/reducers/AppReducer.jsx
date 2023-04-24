@@ -83,6 +83,16 @@ const updateFilter = (state, action) => {
       : [...state.activeFilter],
   };
 };
+const updateActiveFilter = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    isFiltered: true,
+    appliedFilters: !state.appliedFilters.includes(action.payload)
+      ? [...state.appliedFilters, action.payload]
+      : [...state.appliedFilters],
+  };
+};
 const resetFilter = (state, action) => {
   return {
     ...state,
@@ -109,6 +119,8 @@ export const reducer = (state, action) => {
       return selectPaymentType(state, action);
     case "UPDATE_SELECTED":
       return updateSelected(state, action);
+    case "UPDATE_ACTIVE_FILTER":
+      return updateActiveFilter(state, action);
     case "RESET_SELECTED":
       return resetSelect(state, action);
     case "UPDATE_FILTER":

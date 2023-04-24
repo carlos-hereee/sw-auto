@@ -8,8 +8,15 @@ import VehicleDetails from "../component/molecules/vehicle/VehicleDetails";
 import FieldQuantity from "../component/molecules/forms/FieldQuantity";
 
 const Cars = () => {
-  const { seeDetails, lot, filters, isFiltered, updateFilter, activeFilter } =
-    useContext(AppContext);
+  const {
+    seeDetails,
+    lot,
+    filters,
+    isFiltered,
+    updateFilter,
+    activeFilter,
+    appliedFilters,
+  } = useContext(AppContext);
   const values = { search: "" };
 
   const handleFilter = (data, isSubmit) => {
@@ -20,11 +27,10 @@ const Cars = () => {
       updateFilter(lot, activeFilter, data);
     }
   };
-  const optionChange = (e) => {
-    console.log("e", e.target.value);
-    console.log("activeFilter", activeFilter);
+  const optionChange = (e, name) => {
+    updateFilter(lot, activeFilter, e.target.value, name);
   };
-  console.log("filters", filters);
+  // console.log("appliedFilters", appliedFilters);
   return (
     <div className="vehicle-container">
       <div className="container-header">
@@ -45,7 +51,10 @@ const Cars = () => {
                     />
                   </>
                 ) : (
-                  <select className="dropdown-input" key={f} onChange={optionChange}>
+                  <select
+                    className="dropdown-input"
+                    key={f}
+                    onChange={(e) => optionChange(e, f)}>
                     <option name={f} value={f} className="dropdown-item">
                       {f}
                     </option>
@@ -67,23 +76,23 @@ const Cars = () => {
           </div>
         )}
         {isFiltered &&
-          activeFilter.map((a) => (
+          appliedFilters.map((a) => (
             <div key={a} style={{ paddingBottom: "1rem" }}>
-              <h3 className="title">{a.toUpperCase()}</h3>
-              {filters[a].map((f) => (
-                <button
-                  type="button"
-                  className="btn-main"
-                  onClick={() => updateFilter(lot, f)}>
-                  {f}
-                </button>
-              ))}
+              <h3 className="title">{a.key.toUpperCase()}</h3>
+              {/* {[a].map((f) => ( */}
+              <button
+                type="button"
+                className="btn-main"
+                onClick={() => updateFilter(lot, f)}>
+                {a.keyword}
+              </button>
+              {/* ))} */}
             </div>
           ))}
       </div>
       <div className="card-container">
         {isFiltered
-          ? filters && filters.map((f) => <div></div>)
+          ? activeFilter && activeFilter.map((a) => <div key={a.vin}>{a.make}</div>)
           : lot.map((l) => (
               <button
                 type="button"
