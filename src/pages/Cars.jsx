@@ -5,6 +5,7 @@ import CardHeader from "../component/molecules/card/CardHeader";
 import Icons from "../component/atoms/Icons";
 import SearchBar from "../component/molecules/SearchBar";
 import VehicleDetails from "../component/molecules/vehicle/VehicleDetails";
+import FieldQuantity from "../component/molecules/forms/FieldQuantity";
 
 const Cars = () => {
   const { seeDetails, lot, filters, isFiltered, updateFilter, activeFilter } =
@@ -23,6 +24,7 @@ const Cars = () => {
     console.log("e", e.target.value);
     console.log("activeFilter", activeFilter);
   };
+  console.log("filters", filters);
   return (
     <div className="vehicle-container">
       <div className="container-header">
@@ -33,21 +35,34 @@ const Cars = () => {
         {filters && (
           <div className="filter-wrapper">
             {Object.keys(filters).map((f) => (
-              <select className="dropdown-input" key={f} onChange={optionChange}>
-                <label htmlFor={f}>{f}</label>
-                <option name={f} value={f} className="dropdown-item">
-                  {f}
-                </option>
-                {filters[f].map((opt) =>
-                  f === "price" ? (
-                    <input placeholder={opt} />
-                  ) : (
-                    <option key={opt} name={f} value={opt} className="dropdown-item">
-                      {opt}
+              <>
+                {f === "price" ? (
+                  <>
+                    <FieldQuantity
+                      data={{ values: { min: "", max: "" } }}
+                      change={handleFilter}
+                      max={filters[f][1]}
+                    />
+                  </>
+                ) : (
+                  <select className="dropdown-input" key={f} onChange={optionChange}>
+                    <option name={f} value={f} className="dropdown-item">
+                      {f}
                     </option>
-                  )
+                    {filters[f].map((opt) => (
+                      <>
+                        <option
+                          key={opt}
+                          name={f}
+                          value={opt}
+                          className="dropdown-item">
+                          {opt}
+                        </option>
+                      </>
+                    ))}
+                  </select>
                 )}
-              </select>
+              </>
             ))}
           </div>
         )}

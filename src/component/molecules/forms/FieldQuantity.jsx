@@ -4,6 +4,10 @@ const FieldQuantity = ({ data, max, change }) => {
   const types = {
     quantity: "number",
   };
+  const labels = {
+    max: "Max Price:",
+    min: "Min Price:",
+  };
   const { handleSubmit, handleBlur, handleChange, values, errors } = useFormik({
     initialValues: data.values,
     validationSchema: data.schema,
@@ -18,7 +22,7 @@ const FieldQuantity = ({ data, max, change }) => {
       {Object.keys(data.values).map((v) => (
         <div key={v} className="field">
           <label htmlFor={v}>
-            {v.charAt(0).toUpperCase() + v.slice(1)}{" "}
+            {labels[v].charAt(0).toUpperCase() + labels[v].slice(1)}{" "}
             {errors[v] && <span className="required">{errors[v]}</span>}
           </label>
           <input

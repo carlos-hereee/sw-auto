@@ -14,19 +14,28 @@
   * {
     flex: 1;
   }
+  .form {
+    flex-direction: row;
+  }
 }
-
+.filter-price {
+  display: flex;
+  gap: 0.5rem;
+}
 .dropdown-input {
   display: flex;
   align-items: center;
   justify-content: space-between;
   user-select: none;
   cursor: pointer;
-  padding: 5px;
+  max-width: 150px;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
 }
 
 .dropdown-item {
   cursor: pointer;
+  border-radius: 0.5rem;
   padding: 5px;
   cursor: pointer;
 }
@@ -49,7 +58,7 @@
 .dropdown-tag-item {
   background-color: #ddd;
   padding: 2px 4px;
-  border-radius: 2px;
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
 }

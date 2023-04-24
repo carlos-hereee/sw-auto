@@ -70,11 +70,7 @@ export const AppState = ({ children }) => {
           };
         }
       );
-      loadFilters([
-        ...filters,
-        { mileage: [25000, 50000, 75000, 100000] },
-        { price: [5000, 10000] },
-      ]);
+      loadFilters(filters);
       dispatch({ type: "LOAD_CAR_ASSETS", payload: data });
     } catch (err) {
       console.log("err", err);
@@ -99,6 +95,8 @@ export const AppState = ({ children }) => {
         }
       });
     });
+    filters.price = [5000, 10000];
+    filters.mileage = [25000, 50000, 75000, 100000, 150000, 200000];
     dispatch({ type: "LOAD_FILTERS", payload: filters });
   };
   const updateBurger = (payload) => {
