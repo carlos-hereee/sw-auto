@@ -83,14 +83,12 @@ const updateFilter = (state, action) => {
       : [...state.activeFilter],
   };
 };
-const updateActiveFilter = (state, action) => {
+const updateAppliedFilter = (state, action) => {
   return {
     ...state,
     isLoading: false,
     isFiltered: true,
-    appliedFilters: !state.appliedFilters.includes(action.payload)
-      ? [...state.appliedFilters, action.payload]
-      : [...state.appliedFilters],
+    appliedFilters: action.payload,
   };
 };
 const resetFilter = (state, action) => {
@@ -98,7 +96,8 @@ const resetFilter = (state, action) => {
     ...state,
     isLoading: false,
     isFiltered: false,
-    activeFilter: action.payload,
+    // activeFilter: action.payload,
+    // appliedFilters: action.payload,
   };
 };
 export const reducer = (state, action) => {
@@ -120,7 +119,7 @@ export const reducer = (state, action) => {
     case "UPDATE_SELECTED":
       return updateSelected(state, action);
     case "UPDATE_ACTIVE_FILTER":
-      return updateActiveFilter(state, action);
+      return updateAppliedFilter(state, action);
     case "RESET_SELECTED":
       return resetSelect(state, action);
     case "UPDATE_FILTER":

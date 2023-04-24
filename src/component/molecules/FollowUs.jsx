@@ -25,7 +25,7 @@ const FollowUs = () => {
   const { socials } = useContext(AppContext);
   return (
     <div className="social">
-      <h4 className="title">Dont miss a thing, Follow us on our socials</h4>
+      <h4>Dont miss a thing, Follow us on our socials</h4>
       <div className="social-icons">
         {socials.map(({ name, isEmpty, uid }) => (
           <SocialLink data={{ name, isEmpty }} key={uid} />

@@ -27,8 +27,8 @@ const Cars = () => {
       updateFilter(lot, activeFilter, data);
     }
   };
-  const optionChange = (e, name) => {
-    updateFilter(lot, activeFilter, e.target.value, name);
+  const optionChange = (value, key) => {
+    updateFilter(lot, activeFilter, value, key);
   };
   // console.log("appliedFilters", appliedFilters);
   return (
@@ -43,18 +43,17 @@ const Cars = () => {
             {Object.keys(filters).map((f) => (
               <>
                 {f === "price" ? (
-                  <>
-                    <FieldQuantity
-                      data={{ values: { min: "", max: "" } }}
-                      change={handleFilter}
-                      max={filters[f][1]}
-                    />
-                  </>
+                  <FieldQuantity
+                    key={f}
+                    data={{ values: { min: "", max: "" } }}
+                    change={handleFilter}
+                    max={filters[f][1]}
+                  />
                 ) : (
                   <select
                     className="dropdown-input"
                     key={f}
-                    onChange={(e) => optionChange(e, f)}>
+                    onChange={(e) => optionChange(e.target.value, f)}>
                     <option name={f} value={f} className="dropdown-item">
                       {f}
                     </option>
@@ -75,20 +74,25 @@ const Cars = () => {
             ))}
           </div>
         )}
-        {isFiltered &&
-          appliedFilters.map((a) => (
-            <div key={a} style={{ paddingBottom: "1rem" }}>
-              <h3 className="title">{a.key.toUpperCase()}</h3>
-              {/* {[a].map((f) => ( */}
-              <button
-                type="button"
-                className="btn-main"
-                onClick={() => updateFilter(lot, f)}>
-                {a.keyword}
-              </button>
-              {/* ))} */}
-            </div>
-          ))}
+        {isFiltered && (
+          <div>
+            <h3 className="title">Filters Applied: </h3>
+            {appliedFilters.length > 0 &&
+              appliedFilters.map((a) => (
+                <div key={a.key} className="">
+                  <h3>{a.key?.toUpperCase()}</h3>
+                  <button
+                    type="button"
+                    className="btn-main"
+                    onClick={() =>
+                      optionChange(lot, activeFilter, a.keyword, a.key)
+                    }>
+                    {a.keyword}
+                  </button>
+                </div>
+              ))}
+          </div>
+        )}
       </div>
       <div className="card-container">
         {isFiltered

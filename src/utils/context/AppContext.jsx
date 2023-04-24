@@ -133,8 +133,20 @@ export const AppState = ({ children }) => {
     if (key) {
       const data = lot.filter((l) => l[key] === keyword);
 
-      dispatch({ type: "UPDATE_ACTIVE_FILTER", payload: { key, keyword } });
-      dispatch({ type: "UPDATE_FILTER", payload: data });
+      const filters =
+        activeFilters.length > 0
+          ? activeFilters.filter((a) => a.key === keyword)
+          : [{ key, keyword }];
+      if (!filters.length) {
+        console.log("filters", filters);
+        dispatch({ type: "RESET_FILTER", payload: [] });
+      }
+      if (filters.length) {
+        dispatch({ type: "UPDATE_ACTIVE_FILTER", payload: filters });
+      }
+      if (data.length) {
+        dispatch({ type: "UPDATE_FILTER", payload: data });
+      }
     } else if (keyword) {
       const data = lot.filter(
         (l) =>
