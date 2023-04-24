@@ -16,6 +16,7 @@ const Cars = () => {
     updateFilter,
     activeFilter,
     appliedFilters,
+    updateAppliedFilter,
   } = useContext(AppContext);
   const values = { search: "" };
 
@@ -24,11 +25,12 @@ const Cars = () => {
       // handle submit
       console.log("data, isSubmit", data, isSubmit);
     } else {
-      updateFilter(lot, activeFilter, data);
+      updateFilter(lot, data);
     }
   };
   const optionChange = (value, key) => {
-    updateFilter(lot, activeFilter, value, key);
+    updateFilter(lot, value, key);
+    updateAppliedFilter(activeFilter, value, key);
   };
   // console.log("appliedFilters", appliedFilters);
   return (
@@ -85,7 +87,7 @@ const Cars = () => {
                     type="button"
                     className="btn-main"
                     onClick={() =>
-                      optionChange(lot, activeFilter, a.keyword, a.key)
+                      updateAppliedFilter(activeFilter, a.keyword, a.key)
                     }>
                     {a.keyword}
                   </button>

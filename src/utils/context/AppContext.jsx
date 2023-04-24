@@ -129,24 +129,11 @@ export const AppState = ({ children }) => {
   const resetSelect = () => {
     dispatch({ type: "RESET_SELECTED", payload: {} });
   };
-  const updateFilter = (lot, activeFilters, keyword, key) => {
+  const updateFilter = (lot, keyword, key) => {
     if (key) {
       const data = lot.filter((l) => l[key] === keyword);
-
-      const filters =
-        activeFilters.length > 0
-          ? activeFilters.filter((a) => a.key === keyword)
-          : [{ key, keyword }];
-      if (!filters.length) {
-        console.log("filters", filters);
-        dispatch({ type: "RESET_FILTER", payload: [] });
-      }
-      if (filters.length) {
-        dispatch({ type: "UPDATE_ACTIVE_FILTER", payload: filters });
-      }
-      if (data.length) {
-        dispatch({ type: "UPDATE_FILTER", payload: data });
-      }
+      dispatch({ type: "UPDATE_FILTER", payload: data });
+      return data;
     } else if (keyword) {
       const data = lot.filter(
         (l) =>
@@ -154,6 +141,19 @@ export const AppState = ({ children }) => {
       );
       dispatch({ type: "UPDATE_FILTER", payload: data });
     } else dispatch({ type: "RESET_FILTER", payload: lot });
+  };
+  const updateAppliedFilter = (activeFilters, keyword, key) => {
+    const filters =
+      activeFilters.length > 0
+        ? activeFilters.filter((a) => a.key === keyword)
+        : [{ key, keyword }];
+    console.log("filters", filters);
+    if (filters.length <= 0) {
+      dispatch({ type: "RESET_FILTER", payload: [] });
+    }
+    if (filters.length) {
+      dispatch({ type: "UPDATE_ACTIVE_FILTER", payload: filters });
+    }
   };
   return (
     <AppContext.Provider
@@ -187,6 +187,7 @@ export const AppState = ({ children }) => {
         seeDetails,
         resetSelect,
         updateFilter,
+        updateAppliedFilter,
       }}>
       {children}
     </AppContext.Provider>

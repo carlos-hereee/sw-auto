@@ -96,8 +96,8 @@ const resetFilter = (state, action) => {
     ...state,
     isLoading: false,
     isFiltered: false,
-    // activeFilter: action.payload,
-    // appliedFilters: action.payload,
+    activeFilter: action.payload,
+    appliedFilters: action.payload,
   };
 };
 export const reducer = (state, action) => {
