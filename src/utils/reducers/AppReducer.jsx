@@ -78,9 +78,7 @@ const updateFilter = (state, action) => {
     ...state,
     isLoading: false,
     isFiltered: true,
-    activeFilter: !state.activeFilter.includes(action.payload)
-      ? [...state.activeFilter, action.payload]
-      : [...state.activeFilter],
+    activeFilter: action.payload,
   };
 };
 const updateAppliedFilter = (state, action) => {

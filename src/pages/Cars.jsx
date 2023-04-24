@@ -6,6 +6,7 @@ import Icons from "../component/atoms/Icons";
 import SearchBar from "../component/molecules/SearchBar";
 import VehicleDetails from "../component/molecules/vehicle/VehicleDetails";
 import FieldQuantity from "../component/molecules/forms/FieldQuantity";
+import Hero from "../component/atoms/Hero";
 
 const Cars = () => {
   const {
@@ -98,12 +99,25 @@ const Cars = () => {
       </div>
       <div className="card-container">
         {isFiltered
-          ? activeFilter && activeFilter.map((a) => <div key={a.vin}>{a.make}</div>)
+          ? activeFilter.map((a) => (
+              <button
+                type="button"
+                className="card"
+                onClick={() => seeDetails(a)}
+                key={a.vin}>
+                <img
+                  className="vehicle-card-hero"
+                  src={a.photos[0]}
+                  alt={`${a.make} ${a.model} ${a.year}`}
+                />
+                <VehicleDetails data={a} />
+              </button>
+            ))
           : lot.map((l) => (
               <button
                 type="button"
                 onClick={() => seeDetails(l)}
-                key={l.objectId}
+                key={l.vin}
                 className="card">
                 <img
                   className="vehicle-card-hero"
