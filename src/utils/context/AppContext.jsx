@@ -142,18 +142,25 @@ export const AppState = ({ children }) => {
       dispatch({ type: "UPDATE_FILTER", payload: data });
     } else dispatch({ type: "RESET_FILTER", payload: lot });
   };
-  const updateAppliedFilter = (activeFilters, keyword, key) => {
-    const filters =
-      activeFilters.length > 0
-        ? activeFilters.filter((a) => a.key === keyword)
-        : [{ key, keyword }];
-    console.log("filters", filters);
-    if (filters.length <= 0) {
-      dispatch({ type: "RESET_FILTER", payload: [] });
+  const updateAppliedFilter = (appliedFilters, keyword, key) => {
+    if (appliedFilters.filter((af) => af[key] === keyword)[0]) {
+      appliedFilters.pop({ [key]: keyword, type: key });
+      // console.log("appliedFilters", appliedFilters);
+    } else {
+      appliedFilters.push({ [key]: keyword, type: key });
     }
-    if (filters.length) {
-      dispatch({ type: "UPDATE_ACTIVE_FILTER", payload: filters });
-    }
+    console.log("activeFilters", appliedFilters);
+    if (appliedFilters.length > 0) {
+      dispatch({ type: "UPDATE_APPLIED_FILTER", payload: appliedFilters });
+    } else dispatch({ type: "RESET_FILTER", payload: [] });
+    // const filters =
+    //   activeFilters.length > 0
+    //     ? activeFilters.filter((a) => a.key === keyword)
+    //     : [{ key, keyword }];
+    // if (filters.length <= 0) {
+    // }
+    // if (filters.length) {
+    // }
   };
   return (
     <AppContext.Provider

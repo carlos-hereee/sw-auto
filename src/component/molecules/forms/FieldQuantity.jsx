@@ -1,13 +1,7 @@
 import { getIn, useFormik } from "formik";
 
 const FieldQuantity = ({ data, max, change }) => {
-  const types = {
-    quantity: "number",
-  };
-  const labels = {
-    max: "Max Price:",
-    min: "Min Price:",
-  };
+  const labels = { max: "Max Price:", min: "Min Price:" };
   const { handleSubmit, handleBlur, handleChange, values, errors } = useFormik({
     initialValues: data.values,
     validationSchema: data.schema,
@@ -26,7 +20,7 @@ const FieldQuantity = ({ data, max, change }) => {
             {errors[v] && <span className="required">{errors[v]}</span>}
           </label>
           <input
-            type={types[v]}
+            type="number"
             autoComplete="on"
             max={max}
             min={1}

@@ -116,7 +116,7 @@ export const reducer = (state, action) => {
       return selectPaymentType(state, action);
     case "UPDATE_SELECTED":
       return updateSelected(state, action);
-    case "UPDATE_ACTIVE_FILTER":
+    case "UPDATE_APPLIED_FILTER":
       return updateAppliedFilter(state, action);
     case "RESET_SELECTED":
       return resetSelect(state, action);

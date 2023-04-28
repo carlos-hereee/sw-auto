@@ -13,9 +13,19 @@
   position: relative;
   * {
     flex: 1;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
   }
   .form {
+    flex: auto;
+    order: 99;
     flex-direction: row;
+    flex-wrap: wrap;
+    .field {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 }
 .filter-price {

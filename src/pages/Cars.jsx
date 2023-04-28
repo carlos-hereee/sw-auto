@@ -31,7 +31,7 @@ const Cars = () => {
   };
   const optionChange = (value, key) => {
     updateFilter(lot, value, key);
-    updateAppliedFilter(activeFilter, value, key);
+    updateAppliedFilter(appliedFilters, value, key);
   };
   // console.log("appliedFilters", appliedFilters);
   return (
@@ -56,7 +56,8 @@ const Cars = () => {
                   <select
                     className="dropdown-input"
                     key={f}
-                    onChange={(e) => optionChange(e.target.value, f)}>
+                    onChange={(e) => optionChange(e.target.value, f)}
+                    onSubmit={(e) => optionChange(e.target.value, f)}>
                     <option name={f} value={f} className="dropdown-item">
                       {f}
                     </option>
@@ -79,18 +80,18 @@ const Cars = () => {
         )}
         {isFiltered && (
           <div>
-            <h3 className="title">Filters Applied: </h3>
+            <h3>Filters Applied: </h3>
             {appliedFilters.length > 0 &&
               appliedFilters.map((a) => (
-                <div key={a.key} className="">
-                  <h3>{a.key?.toUpperCase()}</h3>
+                <div key={a.type} className="">
+                  <h3>{a.type?.toUpperCase()}</h3>
                   <button
                     type="button"
                     className="btn-main"
                     onClick={() =>
-                      updateAppliedFilter(activeFilter, a.keyword, a.key)
+                      updateAppliedFilter(appliedFilters, a[a.type], a.type)
                     }>
-                    {a.keyword}
+                    {a[a.type]}
                   </button>
                 </div>
               ))}
@@ -99,20 +100,23 @@ const Cars = () => {
       </div>
       <div className="card-container">
         {isFiltered
-          ? activeFilter.map((a) => (
-              <button
-                type="button"
-                className="card"
-                onClick={() => seeDetails(a)}
-                key={a.vin}>
-                <img
-                  className="vehicle-card-hero"
-                  src={a.photos[0]}
-                  alt={`${a.make} ${a.model} ${a.year}`}
-                />
-                <VehicleDetails data={a} />
-              </button>
-            ))
+          ? activeFilter.map(
+              (a) =>
+                a.photos && (
+                  <button
+                    type="button"
+                    className="card"
+                    onClick={() => seeDetails(a)}
+                    key={a.vin}>
+                    <img
+                      className="vehicle-card-hero"
+                      src={a.photos[0]}
+                      alt={`${a.make} ${a.model} ${a.year}`}
+                    />
+                    <VehicleDetails data={a} />
+                  </button>
+                )
+            )
           : lot.map((l) => (
               <button
                 type="button"
