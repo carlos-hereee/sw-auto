@@ -30,10 +30,12 @@ const Cars = () => {
     }
   };
   const optionChange = (value, key) => {
-    updateFilter(lot, value, key);
+    if (isFiltered) {
+      console.log("activeFilter", activeFilter);
+      updateFilter(activeFilter, value, key);
+    } else updateFilter(lot, value, key);
     updateAppliedFilter(appliedFilters, value, key);
   };
-  // console.log("appliedFilters", appliedFilters);
   return (
     <div className="vehicle-container">
       <div className="container-header">
@@ -81,20 +83,23 @@ const Cars = () => {
         {isFiltered && (
           <div>
             <h3>Filters Applied: </h3>
-            {appliedFilters.length > 0 &&
-              appliedFilters.map((a) => (
-                <div key={a.type} className="">
-                  <h3>{a.type?.toUpperCase()}</h3>
-                  <button
-                    type="button"
-                    className="btn-main"
-                    onClick={() =>
-                      updateAppliedFilter(appliedFilters, a[a.type], a.type)
-                    }>
-                    {a[a.type]}
-                  </button>
-                </div>
-              ))}
+            <div className="applied-filter">
+              {appliedFilters.length > 0 &&
+                appliedFilters.map((a) => (
+                  <div key={a.type}>
+                    <h3>{a.type?.toUpperCase()}</h3>
+                    <button
+                      type="button"
+                      className="btn-main"
+                      onClick={() =>
+                        updateAppliedFilter(appliedFilters, a[a.type], a.type)
+                      }>
+                      {a[a.type]}
+                      <Icons name="x" />
+                    </button>
+                  </div>
+                ))}
+            </div>
           </div>
         )}
       </div>

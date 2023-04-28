@@ -153,14 +153,6 @@ export const AppState = ({ children }) => {
     if (appliedFilters.length > 0) {
       dispatch({ type: "UPDATE_APPLIED_FILTER", payload: appliedFilters });
     } else dispatch({ type: "RESET_FILTER", payload: [] });
-    // const filters =
-    //   activeFilters.length > 0
-    //     ? activeFilters.filter((a) => a.key === keyword)
-    //     : [{ key, keyword }];
-    // if (filters.length <= 0) {
-    // }
-    // if (filters.length) {
-    // }
   };
   return (
     <AppContext.Provider
