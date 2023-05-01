@@ -3,7 +3,7 @@ import { axiosWithAuth } from "../functions/axios";
 import { reducer } from "../reducers/AppReducer";
 import { app } from "./config";
 import { useNavigate } from "react-router-dom";
-import { vehicles, randomMileague, randomPrice } from "./variables";
+import { vehicles, randomMileague, randomPrice, minPrice } from "./variables";
 import shortid from "shortid";
 // import shortid from "shortid";
 
@@ -31,6 +31,7 @@ export const AppState = ({ children }) => {
     activeFilter: [],
     filtered: [],
     filterToggle: false,
+    brands: [],
     disclaimer:
       "** Photos are for illustrative purposes only. Not responsible for errors or omissions. **",
   };
@@ -57,18 +58,14 @@ export const AppState = ({ children }) => {
       let brands = [];
       const data = res.data.results.map(
         ({ Make, Year, Model, Category, objectId }) => {
-          const dummyData = {
-            make: Make,
-            year: Year,
-            category: Category,
-            model: Model,
-          };
+          const dummyData = { make: Make, year: Year, category: Category };
           filters.push(dummyData);
           // load dummy data
           return {
             ...dummyData,
             mileage: randomMileague(),
             price: randomPrice(),
+            model: Model,
             vin: objectId,
             photos: vehicles[Make.toLowerCase()],
           };
@@ -87,6 +84,7 @@ export const AppState = ({ children }) => {
       }
 
       loadFilters(filters);
+      dispatch({ type: "LOAD_CAR_BRANDS", payload: brands });
       dispatch({ type: "LOAD_CAR_ASSETS", payload: data });
     } catch (err) {
       console.log("err", err);
@@ -111,8 +109,12 @@ export const AppState = ({ children }) => {
         }
       });
     });
-    filters.price = [5000, 10000];
+    const min = minPrice(20, 1500);
+    console.log("min", min);
+    filters.minPrice = min;
+    filters.maxPrice = min;
     filters.mileage = [25000, 50000, 75000, 100000, 150000, 200000];
+    console.log("filters", filters);
     dispatch({ type: "LOAD_FILTERS", payload: filters });
   };
   const updateBurger = (payload) => {
@@ -217,6 +219,7 @@ export const AppState = ({ children }) => {
         appliedFilters: state.appliedFilters,
         isFiltered: state.isFiltered,
         filterToggle: state.filterToggle,
+        brands: state.brands,
         updateBurger,
         updateMenu,
         newsletter,

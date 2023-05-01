@@ -21,6 +21,13 @@ const loadCarAssets = (state, action) => {
     lot: action.payload,
   };
 };
+const loadCarBrands = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    brands: action.payload,
+  };
+};
 const updateMenu = (state, action) => {
   return {
     ...state,
@@ -110,6 +117,8 @@ export const reducer = (state, action) => {
       return loadFilters(state, action);
     case "LOAD_CAR_ASSETS":
       return loadCarAssets(state, action);
+    case "LOAD_CAR_BRANDS":
+      return loadCarBrands(state, action);
     case "UPDATE_BURGER":
       return updateBurger(state, action);
     case "SELECT_PAYMENT_TYPE":
