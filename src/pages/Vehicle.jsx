@@ -9,10 +9,10 @@ const Vehicle = () => {
   const { selected, disclaimer } = useContext(AppContext);
   const [active, setActive] = useState(selected.photos ? selected.photos[0] : {});
   const navigate = useNavigate();
-  const findIdx = () => selected.photos.findIndex((p) => p.uid === active.uid);
+  const findIdx = () => selected.photos.findIndex((p) => p === active);
 
   useEffect(() => {
-    if (!active.uid) {
+    if (!active) {
       if (selected.photos) {
         setActive(selected.photos[0]);
       } else navigate(-1);
@@ -42,39 +42,38 @@ const Vehicle = () => {
           <Icons name="left" />
           Back
         </button>
-        {selected.uid && (
-          <div className="vehicle-header">
-            <VehicleHeading data={selected} />
-            <VehicleDetails data={selected} />
-          </div>
-        )}
+        <div className="vehicle-header">
+          <VehicleHeading data={selected} />
+          <VehicleDetails data={selected} />
+        </div>
       </div>
       <div>
         <div className="vehicle-photos">
           {/* todo: style carousel */}
-          {selected.photos &&
-            selected.photos.map((p) => (
-              <button
-                key={p.uid}
-                className={
-                  active.uid === p.uid ? "active-vehicle-photo" : "vehicle-photo"
-                }
-                onClick={() => setActive(p)}>
-                <img src={p.src} alt={p.alt} className="vehicle-img" />
-              </button>
-            ))}
+          {selected.photos.map((p) => (
+            <button
+              key={p}
+              className={
+                active.vin === selected.vin
+                  ? "active-vehicle-photo"
+                  : "vehicle-photo"
+              }
+              onClick={() => setActive(p)}>
+              <img
+                src={p}
+                alt={`${selected.year} ${selected.make} ${selected.model}`}
+                className="vehicle-img"
+              />
+            </button>
+          ))}
         </div>
         <div className="hero-container">
-          {active.uid ? (
-            <img src={active.src} alt={active.alt} className="vehicle-hero" />
-          ) : (
-            selected.photos && (
-              <img
-                src={selected.photos[0].src}
-                alt={selected.photos[0].alt}
-                className="vehicle-hero"
-              />
-            )
+          {active && (
+            <img
+              src={active}
+              alt={`${selected.year} ${selected.make} ${selected.model}`}
+              className="vehicle-hero"
+            />
           )}
           <small className="disclaimer">{disclaimer}</small>
           <div className="display-gap">
@@ -106,13 +105,13 @@ const Vehicle = () => {
             </button>
           </div>
         </div>
-        {/* <div>{selected.uid && }</div> */}
+        {/* <div>{selected.vin && }</div> */}
       </div>
-      {selected.uid && (
+      {/* {selected.vin && (
         <div className="section">
           <h2>Features</h2>
           {selected.features.map((f) => (
-            <div key={f.uid} className="section-card">
+            <div key={f.vin} className="section-card">
               <p>Transmission: {f.transmission}</p>
               <p>Cylinders: {f.cylinders}</p>
               <p>Body Style: {f.bodyStyle}</p>
@@ -125,7 +124,7 @@ const Vehicle = () => {
             </div>
           ))}
         </div>
-      )}
+      )} */}
       {/* <p>NO warranty AS IS</p> */}
       {/* 
       TODO: add to saved
