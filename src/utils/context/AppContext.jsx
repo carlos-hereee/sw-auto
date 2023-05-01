@@ -110,11 +110,9 @@ export const AppState = ({ children }) => {
       });
     });
     const min = minPrice(20, 1500);
-    console.log("min", min);
     filters.minPrice = min;
     filters.maxPrice = min;
     filters.mileage = [25000, 50000, 75000, 100000, 150000, 200000];
-    console.log("filters", filters);
     dispatch({ type: "LOAD_FILTERS", payload: filters });
   };
   const updateBurger = (payload) => {

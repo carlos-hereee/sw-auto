@@ -52,32 +52,31 @@ const Cars = () => {
           <div className="filter-wrapper">
             {Object.keys(filters).map((f) => (
               <div key={f} className="filter-item">
-                {/* {f === "price" ? (
-                  <div className="item">
-                    <FieldQuantity
-                      data={{ values: { min: "", max: "" } }}
-                      change={handleFilter}
-                      max={filters[f][1]}
-                    />
-                  </div> */}
-                {/* ) : ( */}
                 <select
                   className={`dropdown-input ${f}`}
                   onChange={(e) => optionChange(e.target.value, f)}
-                  onSubmit={(e) => optionChange(e.target.value, f)}>
-                  <option name={f} value={f} className="dropdown-item">
-                    {f}
+                  onSubmit={(e) => optionChange(e.target.value, f)}
+                  value={f}>
+                  <option
+                    name={f}
+                    value={f}
+                    className="dropdown-item"
+                    selected
+                    disabled
+                    hidden>
+                    {f
+                      .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+                      .split(" ")
+                      .map(
+                        (str) => str.charAt(0).toLocaleUpperCase() + str.substring(1)
+                      )
+                      .join(" ")}
                   </option>
-                  {filters[f] &&
-                    filters[f]?.map((opt) => (
-                      <option
-                        key={opt}
-                        name={f}
-                        value={opt}
-                        className="dropdown-item">
-                        {opt}
-                      </option>
-                    ))}
+                  {filters[f]?.map((opt) => (
+                    <option key={opt} name={f} value={opt} className="dropdown-item">
+                      {opt}
+                    </option>
+                  ))}
                 </select>
                 {/* )} */}
               </div>
