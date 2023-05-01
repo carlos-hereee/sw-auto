@@ -54,13 +54,14 @@ export const AppState = ({ children }) => {
       const res = await axiosWithAuth.get("/Car_Model_List?limit=20");
       // restructure data
       let filters = [];
+      let brands = [];
       const data = res.data.results.map(
         ({ Make, Year, Model, Category, objectId }) => {
           const dummyData = {
             make: Make,
             year: Year,
-            model: Model,
             category: Category,
+            model: Model,
           };
           filters.push(dummyData);
           // load dummy data
@@ -73,6 +74,18 @@ export const AppState = ({ children }) => {
           };
         }
       );
+      for (let i = 0; i < data.length; i++) {
+        const current = data[i];
+        if (brands[current.make]) {
+          let some = brands[current.make].filter((b) => b === current.model);
+          if (!some[0]) {
+            brands[current.make].push(current.model);
+          }
+        } else {
+          brands[current.make] = [current.model];
+        }
+      }
+
       loadFilters(filters);
       dispatch({ type: "LOAD_CAR_ASSETS", payload: data });
     } catch (err) {

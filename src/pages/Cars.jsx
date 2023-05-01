@@ -24,8 +24,6 @@ const Cars = () => {
   const values = { search: "" };
 
   useEffect(() => {
-    console.log("render applied filters", appliedFilters);
-
     if (appliedFilters.length) {
       updateFilter(lot, appliedFilters);
     } else resetFilter(lot);
