@@ -24,6 +24,8 @@ const Cars = () => {
   const values = { search: "" };
 
   useEffect(() => {
+    console.log("render applied filters", appliedFilters);
+
     if (appliedFilters.length) {
       updateFilter(lot, appliedFilters);
     } else resetFilter(lot);
@@ -98,7 +100,10 @@ const Cars = () => {
                             type="button"
                             className="btn-main"
                             onClick={() =>
-                              updateAppliedFilter(appliedFilters, a[a.type], a.type)
+                              updateAppliedFilter(appliedFilters, {
+                                value: a[a.type],
+                                key: a.type,
+                              })
                             }>
                             {a[a.type]}
                             <Icons name="x" />
@@ -113,7 +118,10 @@ const Cars = () => {
                         type="button"
                         className="btn-main"
                         onClick={() =>
-                          updateAppliedFilter(appliedFilters, a[a.type], a.type)
+                          updateAppliedFilter(appliedFilters, {
+                            value: a[a.type],
+                            key: a.type,
+                          })
                         }>
                         {a[a.type]}
                         <Icons name="x" />

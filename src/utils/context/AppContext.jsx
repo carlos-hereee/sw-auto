@@ -153,17 +153,23 @@ export const AppState = ({ children }) => {
   const updateAppliedFilter = (filters, { key, value }) => {
     const entry = { [key]: value, type: key, key: shortid.generate() };
     if (filters.some((af) => key === af.type)) {
-      filters.map((f) => {
+      const data = filters.map((f) => {
+        // if (f.hasList) {
+        //   console.log("f", f);
+        // }
         if (f[key] !== value && key === f.type) {
-          f.hasList = true;
-          f.list = [...f.list, entry];
+          return {
+            hasList: true,
+            list: [...f.list, entry],
+          };
         }
-        return f;
       });
+      if (data[0] === undefined) {
+        filters = [];
+      }
     } else filters.push({ ...entry, hasList: false, list: [entry] });
-    if (filters.length > 0) {
-      dispatch({ type: "UPDATE_APPLIED_FILTER", payload: filters });
-    } else dispatch({ type: "RESET_FILTER", payload: [] });
+    console.log("filters", filters);
+    dispatch({ type: "UPDATE_APPLIED_FILTER", payload: filters });
   };
   return (
     <AppContext.Provider

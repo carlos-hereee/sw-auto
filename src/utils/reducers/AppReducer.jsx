@@ -96,7 +96,6 @@ const resetFilter = (state, action) => {
     isLoading: false,
     isFiltered: false,
     activeFilter: action.payload,
-    appliedFilters: action.payload,
   };
 };
 export const reducer = (state, action) => {
