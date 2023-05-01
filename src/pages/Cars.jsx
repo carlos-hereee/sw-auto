@@ -23,10 +23,11 @@ const Cars = () => {
   const values = { search: "" };
 
   useEffect(() => {
+    console.log("appliedFilters", appliedFilters);
     if (appliedFilters.length) {
       updateFilter(lot, appliedFilters);
     } else resetFilter(lot);
-  }, [appliedFilters.length]);
+  }, [appliedFilters]);
 
   const handleFilter = (data, isSubmit) => {
     if (isSubmit) {
@@ -86,20 +87,40 @@ const Cars = () => {
             <h3>Filters Applied: </h3>
             <div className="applied-filter">
               {appliedFilters.length > 0 &&
-                appliedFilters.map((a) => (
-                  <div key={a.key}>
-                    <h3>{a.type?.toUpperCase()}</h3>
-                    <button
-                      type="button"
-                      className="btn-main"
-                      onClick={() =>
-                        updateAppliedFilter(appliedFilters, a[a.type], a.type)
-                      }>
-                      {a[a.type]}
-                      <Icons name="x" />
-                    </button>
-                  </div>
-                ))}
+                appliedFilters.map((a) =>
+                  a.hasList ? (
+                    <div key={a.key} className="filter-list">
+                      <h3>{a.type?.toUpperCase()}</h3>
+                      <div>
+                        {a.list.map((a) => (
+                          <button
+                            key={a.key}
+                            type="button"
+                            className="btn-main"
+                            onClick={() =>
+                              updateAppliedFilter(appliedFilters, a[a.type], a.type)
+                            }>
+                            {a[a.type]}
+                            <Icons name="x" />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div key={a.key}>
+                      <h3>{a.type?.toUpperCase()}</h3>
+                      <button
+                        type="button"
+                        className="btn-main"
+                        onClick={() =>
+                          updateAppliedFilter(appliedFilters, a[a.type], a.type)
+                        }>
+                        {a[a.type]}
+                        <Icons name="x" />
+                      </button>
+                    </div>
+                  )
+                )}
             </div>
           </div>
         )}

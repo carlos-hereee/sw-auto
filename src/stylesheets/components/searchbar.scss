@@ -94,3 +94,12 @@
   display: flex;
   gap: 1rem;
 }
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  div {
+    display: flex;
+    gap: 1rem;
+  }
+}

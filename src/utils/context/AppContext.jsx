@@ -135,18 +135,31 @@ export const AppState = ({ children }) => {
   };
   const updateFilter = (data, appliedFilters) => {
     const lot = data.filter((d) => {
-      return appliedFilters.some((f) => {
-        return Object.keys(f).some((keys) => f[keys] === d[keys]);
-      });
+      if (appliedFilters.some((af) => af.hasList)) {
+        appliedFilters.some((af) => {
+          af.list.some((l) => {
+            return Object.keys(l).some((keys) => f[keys] === d[keys]);
+          });
+        });
+      } else {
+        return appliedFilters.some((f) => {
+          return Object.keys(f).some((keys) => f[keys] === d[keys]);
+        });
+      }
     });
     dispatch({ type: "UPDATE_FILTER", payload: lot });
   };
   const updateAppliedFilter = (filters, { key, value }) => {
-    if (filters.some((af) => af[key] === value)[0]) {
-      filters.pop({ [key]: keyword.key, type: key });
-    } else {
-      filters.push({ [key]: value, type: key, key: shortid.generate() });
-    }
+    const entry = { [key]: value, type: key, key: shortid.generate() };
+    if (filters.some((af) => key === af.type)) {
+      filters.map((f) => {
+        if (f[key] !== value && key === f.type) {
+          f.hasList = true;
+          f.list = [...f.list, entry];
+        }
+        return f;
+      });
+    } else filters.push({ ...entry, hasList: false, list: [entry] });
     if (filters.length > 0) {
       dispatch({ type: "UPDATE_APPLIED_FILTER", payload: filters });
     } else dispatch({ type: "RESET_FILTER", payload: [] });
