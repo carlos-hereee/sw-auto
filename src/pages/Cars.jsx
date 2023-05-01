@@ -54,16 +54,10 @@ const Cars = () => {
               <div key={f} className="filter-item">
                 <select
                   className={`dropdown-input ${f}`}
+                  defaultValue={f}
                   onChange={(e) => optionChange(e.target.value, f)}
-                  onSubmit={(e) => optionChange(e.target.value, f)}
-                  value={f}>
-                  <option
-                    name={f}
-                    value={f}
-                    className="dropdown-item"
-                    selected
-                    disabled
-                    hidden>
+                  onSubmit={(e) => optionChange(e.target.value, f)}>
+                  <option name={f} value={f} className="dropdown-item" disabled>
                     {f
                       .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
                       .split(" ")

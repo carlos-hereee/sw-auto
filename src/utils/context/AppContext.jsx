@@ -150,6 +150,8 @@ export const AppState = ({ children }) => {
   const updateFilter = (data, appliedFilters) => {
     const lot = data.filter((d) => {
       if (appliedFilters.some((af) => af.hasList)) {
+        if (appliedFilters.some((af) => console.log("af", af))) {
+        }
         return appliedFilters.some((af) => {
           return af.list.some((l) => {
             return Object.keys(l).some((lKey) => l[lKey] === d[lKey]);
