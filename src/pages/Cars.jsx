@@ -77,10 +77,7 @@ const Cars = () => {
                 <select
                   key={af.key}
                   className="dropdown-input"
-                  onChange={(e) => optionChange(e.target.value, af.type)}>
-                  <option value={af.make} disabled className="dropdown-item">
-                    Models
-                  </option>
+                  onChange={(e) => optionChange(e.target.value, "models")}>
                   {af.list.map((list) => (
                     <>
                       <option
@@ -88,12 +85,10 @@ const Cars = () => {
                         value={list.make}
                         className="dropdown-item make"
                         disabled>
-                        <strong className="dropdown-item-title">
-                          Model {list.make}
-                        </strong>
+                        Model {list.make}
                       </option>
                       {brands[list.make]?.map((brand) => (
-                        <option value={brand} className="dropdown-item">
+                        <option value={brand} key={brand} className="dropdown-item">
                           {brand}
                         </option>
                       ))}
@@ -105,7 +100,7 @@ const Cars = () => {
                   <select
                     key={af.key}
                     className="dropdown-input"
-                    onChange={(e) => optionChange(e.target.value, af.type)}>
+                    onChange={(e) => optionChange(e.target.value, "models")}>
                     <option value={af.make} className="dropdown-item" disabled>
                       Model {af.make}
                     </option>

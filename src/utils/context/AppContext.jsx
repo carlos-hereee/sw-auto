@@ -165,11 +165,11 @@ export const AppState = ({ children }) => {
     });
     dispatch({ type: "UPDATE_FILTER", payload: lot });
   };
-  const updateAppliedFilter = (filters, { key, value }) => {
+  const updateAppliedFilter = (applied, { key, value }) => {
+    console.log("filters, key, value", applied, key, value);
     const entry = { [key]: value, type: key, key: shortid.generate() };
-    if (filters.some((af) => key === af.type)) {
-      console.log("filters", filters);
-      const data = filters.map((f) => {
+    if (applied.some((af) => key === af.type)) {
+      const data = applied.map((f) => {
         if (f.hasList) {
           const list = f.list.filter((l) => {
             let keys = Object.keys(l).filter((i) => l[i] === value);
@@ -185,13 +185,13 @@ export const AppState = ({ children }) => {
         }
       });
       if (data[0] === undefined) {
-        filters = [];
+        applied = [];
       } else {
         dispatch({ type: "UPDATE_APPLIED_FILTER", payload: data });
       }
     } else {
-      filters.push({ ...entry, hasList: false, list: [entry] });
-      dispatch({ type: "UPDATE_APPLIED_FILTER", payload: filters });
+      applied.push({ ...entry, hasList: false, list: [entry] });
+      dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
     }
   };
   return (
