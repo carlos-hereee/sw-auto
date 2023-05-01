@@ -153,6 +153,7 @@ export const AppState = ({ children }) => {
   const updateAppliedFilter = (filters, { key, value }) => {
     const entry = { [key]: value, type: key, key: shortid.generate() };
     if (filters.some((af) => key === af.type)) {
+      console.log("filters", filters);
       const data = filters.map((f) => {
         if (f.hasList) {
           const list = f.list.filter((l) => {
@@ -160,6 +161,9 @@ export const AppState = ({ children }) => {
             return l[keys] !== value;
           });
           return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: list });
+        }
+        if (f[key] === value) {
+          return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: [] });
         }
         if (f[key] !== value) {
           return { ...f, hasList: true, list: [...f.list, entry] };
