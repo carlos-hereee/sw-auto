@@ -166,6 +166,7 @@ export const AppState = ({ children }) => {
     dispatch({ type: "UPDATE_FILTER", payload: lot });
   };
   const updateAppliedFilter = (applied, { key, value }) => {
+    // TODO: test all filter possibilities
     console.log("filters, key, value", applied, key, value);
     const entry = { [key]: value, type: key, key: shortid.generate() };
     if (applied.some((af) => key === af.type)) {
