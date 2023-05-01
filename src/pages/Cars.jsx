@@ -18,8 +18,15 @@ const Cars = () => {
     activeFilter,
     appliedFilters,
     updateAppliedFilter,
+    resetFilter,
   } = useContext(AppContext);
   const values = { search: "" };
+
+  useEffect(() => {
+    if (appliedFilters.length) {
+      updateFilter(lot, appliedFilters);
+    } else resetFilter(lot);
+  }, [appliedFilters.length]);
 
   const handleFilter = (data, isSubmit) => {
     if (isSubmit) {
@@ -30,11 +37,7 @@ const Cars = () => {
     }
   };
   const optionChange = (value, key) => {
-    if (isFiltered) {
-      console.log("activeFilter", activeFilter);
-      updateFilter(activeFilter, value, key);
-    } else updateFilter(lot, value, key);
-    updateAppliedFilter(appliedFilters, value, key);
+    updateAppliedFilter(appliedFilters, { value, key });
   };
   return (
     <div className="vehicle-container">
@@ -46,10 +49,9 @@ const Cars = () => {
         {filters && (
           <div className="filter-wrapper">
             {Object.keys(filters).map((f) => (
-              <>
+              <div key={f}>
                 {f === "price" ? (
                   <FieldQuantity
-                    key={f}
                     data={{ values: { min: "", max: "" } }}
                     change={handleFilter}
                     max={filters[f][1]}
@@ -57,7 +59,6 @@ const Cars = () => {
                 ) : (
                   <select
                     className="dropdown-input"
-                    key={f}
                     onChange={(e) => optionChange(e.target.value, f)}
                     onSubmit={(e) => optionChange(e.target.value, f)}>
                     <option name={f} value={f} className="dropdown-item">
@@ -76,7 +77,7 @@ const Cars = () => {
                     ))}
                   </select>
                 )}
-              </>
+              </div>
             ))}
           </div>
         )}
@@ -86,7 +87,7 @@ const Cars = () => {
             <div className="applied-filter">
               {appliedFilters.length > 0 &&
                 appliedFilters.map((a) => (
-                  <div key={a.type}>
+                  <div key={a.key}>
                     <h3>{a.type?.toUpperCase()}</h3>
                     <button
                       type="button"

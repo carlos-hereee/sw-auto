@@ -4,6 +4,7 @@ import { reducer } from "../reducers/AppReducer";
 import { app } from "./config";
 import { useNavigate } from "react-router-dom";
 import { vehicles, randomMileague, randomPrice } from "./variables";
+import shortid from "shortid";
 // import shortid from "shortid";
 
 export const AppContext = createContext();
@@ -129,29 +130,25 @@ export const AppState = ({ children }) => {
   const resetSelect = () => {
     dispatch({ type: "RESET_SELECTED", payload: {} });
   };
-  const updateFilter = (lot, keyword, key) => {
-    if (key) {
-      const data = lot.filter((l) => l[key] === keyword);
-      dispatch({ type: "UPDATE_FILTER", payload: data });
-      return data;
-    } else if (keyword) {
-      const data = lot.filter(
-        (l) =>
-          Object.keys(l).filter((f) => l[f].toString().includes(keyword)).length > 1
-      );
-      dispatch({ type: "UPDATE_FILTER", payload: data });
-    } else dispatch({ type: "RESET_FILTER", payload: lot });
+  const resetFilter = (lot) => {
+    dispatch({ type: "RESET_FILTER", payload: lot });
   };
-  const updateAppliedFilter = (appliedFilters, keyword, key) => {
-    if (appliedFilters.filter((af) => af[key] === keyword)[0]) {
-      appliedFilters.pop({ [key]: keyword, type: key });
-      // console.log("appliedFilters", appliedFilters);
+  const updateFilter = (data, appliedFilters) => {
+    const lot = data.filter((d) => {
+      return appliedFilters.some((f) => {
+        return Object.keys(f).some((keys) => f[keys] === d[keys]);
+      });
+    });
+    dispatch({ type: "UPDATE_FILTER", payload: lot });
+  };
+  const updateAppliedFilter = (filters, { key, value }) => {
+    if (filters.some((af) => af[key] === value)[0]) {
+      filters.pop({ [key]: keyword.key, type: key });
     } else {
-      appliedFilters.push({ [key]: keyword, type: key });
+      filters.push({ [key]: value, type: key, key: shortid.generate() });
     }
-    console.log("activeFilters", appliedFilters);
-    if (appliedFilters.length > 0) {
-      dispatch({ type: "UPDATE_APPLIED_FILTER", payload: appliedFilters });
+    if (filters.length > 0) {
+      dispatch({ type: "UPDATE_APPLIED_FILTER", payload: filters });
     } else dispatch({ type: "RESET_FILTER", payload: [] });
   };
   return (
@@ -187,6 +184,7 @@ export const AppState = ({ children }) => {
         resetSelect,
         updateFilter,
         updateAppliedFilter,
+        resetFilter,
       }}>
       {children}
     </AppContext.Provider>
