@@ -30,6 +30,7 @@ export const AppState = ({ children }) => {
     appliedFilters: [],
     activeFilter: [],
     filtered: [],
+    filterToggle: false,
     disclaimer:
       "** Photos are for illustrative purposes only. Not responsible for errors or omissions. **",
   };
@@ -136,9 +137,9 @@ export const AppState = ({ children }) => {
   const updateFilter = (data, appliedFilters) => {
     const lot = data.filter((d) => {
       if (appliedFilters.some((af) => af.hasList)) {
-        appliedFilters.some((af) => {
-          af.list.some((l) => {
-            return Object.keys(l).some((keys) => f[keys] === d[keys]);
+        return appliedFilters.some((af) => {
+          return af.list.some((l) => {
+            return Object.keys(l).some((lKey) => l[lKey] === d[lKey]);
           });
         });
       } else {
@@ -188,6 +189,7 @@ export const AppState = ({ children }) => {
         activeFilter: state.activeFilter,
         appliedFilters: state.appliedFilters,
         isFiltered: state.isFiltered,
+        filterToggle: state.filterToggle,
         updateBurger,
         updateMenu,
         newsletter,

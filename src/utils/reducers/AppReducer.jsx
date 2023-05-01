@@ -87,6 +87,7 @@ const updateAppliedFilter = (state, action) => {
     isLoading: false,
     isFiltered: true,
     appliedFilters: action.payload,
+    filterToggle: !state.filterToggle,
   };
 };
 const resetFilter = (state, action) => {

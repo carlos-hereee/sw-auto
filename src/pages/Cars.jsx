@@ -19,15 +19,15 @@ const Cars = () => {
     appliedFilters,
     updateAppliedFilter,
     resetFilter,
+    filterToggle,
   } = useContext(AppContext);
   const values = { search: "" };
 
   useEffect(() => {
-    console.log("appliedFilters", appliedFilters);
     if (appliedFilters.length) {
       updateFilter(lot, appliedFilters);
     } else resetFilter(lot);
-  }, [appliedFilters]);
+  }, [filterToggle]);
 
   const handleFilter = (data, isSubmit) => {
     if (isSubmit) {
