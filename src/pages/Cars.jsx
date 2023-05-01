@@ -31,11 +31,12 @@ const Cars = () => {
   }, [filterToggle]);
 
   const handleFilter = (data, isSubmit) => {
+    // search on change
     if (isSubmit) {
       // handle submit
       console.log("data, isSubmit", data, isSubmit);
     } else {
-      updateFilter(lot, data);
+      updateFilter(isFiltered ? activeFilter : lot, { value: data, key: "search" });
     }
   };
   const optionChange = (value, key) => {
