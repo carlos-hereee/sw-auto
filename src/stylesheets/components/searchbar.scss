@@ -11,23 +11,6 @@
   gap: 0.5rem;
   padding-bottom: 0.5rem;
   position: relative;
-  .form {
-    flex: auto;
-    order: 99;
-    flex-direction: row;
-    flex-wrap: wrap;
-    .field {
-      display: flex;
-      flex-wrap: wrap;
-    }
-  }
-  .filter-item {
-    display: flex;
-    flex: 1;
-    .form {
-      display: flex;
-    }
-  }
 }
 .filter-price {
   display: flex;

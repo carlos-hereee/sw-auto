@@ -51,30 +51,73 @@ const Cars = () => {
         {filters && (
           <div className="filter-wrapper">
             {Object.keys(filters).map((f) => (
-              <div key={f} className="filter-item">
-                <select
-                  className={`dropdown-input ${f}`}
-                  defaultValue={f}
-                  onChange={(e) => optionChange(e.target.value, f)}
-                  onSubmit={(e) => optionChange(e.target.value, f)}>
-                  <option name={f} value={f} className="dropdown-item" disabled>
-                    {f
-                      .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                      .split(" ")
-                      .map(
-                        (str) => str.charAt(0).toLocaleUpperCase() + str.substring(1)
-                      )
-                      .join(" ")}
+              <select
+                key={f}
+                className={`dropdown-input ${f}`}
+                defaultValue={f}
+                onChange={(e) => optionChange(e.target.value, f)}>
+                <option value={f} className="dropdown-item" disabled>
+                  {f
+                    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+                    .split(" ")
+                    .map(
+                      (str) => str.charAt(0).toLocaleUpperCase() + str.substring(1)
+                    )
+                    .join(" ")}
+                </option>
+                {filters[f]?.map((opt) => (
+                  <option key={opt} value={opt} className="dropdown-item">
+                    {opt}
                   </option>
-                  {filters[f]?.map((opt) => (
-                    <option key={opt} name={f} value={opt} className="dropdown-item">
-                      {opt}
-                    </option>
+                ))}
+              </select>
+            ))}
+            {appliedFilters.map((af) =>
+              af.hasList ? (
+                <select
+                  key={af.key}
+                  className="dropdown-input"
+                  onChange={(e) => optionChange(e.target.value, af.type)}>
+                  <option value={af.make} disabled className="dropdown-item">
+                    Models
+                  </option>
+                  {af.list.map((list) => (
+                    <>
+                      <option
+                        key={list.key}
+                        value={list.make}
+                        className="dropdown-item make"
+                        disabled>
+                        <strong className="dropdown-item-title">
+                          Model {list.make}
+                        </strong>
+                      </option>
+                      {brands[list.make]?.map((brand) => (
+                        <option value={brand} className="dropdown-item">
+                          {brand}
+                        </option>
+                      ))}
+                    </>
                   ))}
                 </select>
-                {/* )} */}
-              </div>
-            ))}
+              ) : (
+                af.type === "make" && (
+                  <select
+                    key={af.key}
+                    className="dropdown-input"
+                    onChange={(e) => optionChange(e.target.value, af.type)}>
+                    <option value={af.make} className="dropdown-item" disabled>
+                      Model {af.make}
+                    </option>
+                    {brands[af.make].map((b) => (
+                      <option value={b} key={b} className="dropdown-item">
+                        {b}
+                      </option>
+                    ))}
+                  </select>
+                )
+              )
+            )}
           </div>
         )}
         {isFiltered && (
@@ -105,7 +148,7 @@ const Cars = () => {
                       </div>
                     </div>
                   ) : (
-                    <div key={a.key}>
+                    <div key={a.key} className="filter-list">
                       <h3>{a.type?.toUpperCase()}</h3>
                       <button
                         type="button"
