@@ -79,7 +79,8 @@ export const AppState = ({ children }) => {
                 doors: getRandomArr(doors),
                 fuel: getRandomArr(fuel),
                 cylinders: getRandomArr(cylinders),
-                color: getRandomArr(color),
+                colorOutside: getRandomArr(color),
+                colorInside: getRandomArr(color),
               },
             ],
           };

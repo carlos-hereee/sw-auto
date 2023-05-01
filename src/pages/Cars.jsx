@@ -179,7 +179,7 @@ const Cars = () => {
                       src={a.photos[0]}
                       alt={`${a.make} ${a.model} ${a.year}`}
                     />
-                    <VehicleDetails data={a} />
+                    <VehicleHeading data={l} />
                   </button>
                 )
             )
@@ -194,7 +194,7 @@ const Cars = () => {
                   src={l.photos[0]}
                   alt={`${l.make} ${l.model}`}
                 />
-                <VehicleDetails data={l} />
+                <VehicleHeading data={l} />
               </button>
             ))}
       </div>

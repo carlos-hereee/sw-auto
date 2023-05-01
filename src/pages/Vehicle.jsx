@@ -108,7 +108,7 @@ const Vehicle = () => {
         {/* <div>{selected.vin && }</div> */}
       </div>
       <div>
-        <VehicleDetails data={selected} />
+        <VehicleDetails data={selected} showDetails={true} />
       </div>
       {/* {selected.vin && (
         <div className="section">
