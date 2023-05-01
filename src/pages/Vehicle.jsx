@@ -35,6 +35,7 @@ const Vehicle = () => {
       setActive(selected.photos[last]);
     }
   };
+  console.log("selected", selected);
   return (
     <div className="vehicle-container">
       <div>
@@ -44,13 +45,12 @@ const Vehicle = () => {
         </button>
         <div className="vehicle-header">
           <VehicleHeading data={selected} />
-          <VehicleDetails data={selected} />
         </div>
       </div>
       <div>
         <div className="vehicle-photos">
           {/* todo: style carousel */}
-          {selected.photos.map((p) => (
+          {selected.photos?.map((p) => (
             <button
               key={p}
               className={
@@ -106,6 +106,9 @@ const Vehicle = () => {
           </div>
         </div>
         {/* <div>{selected.vin && }</div> */}
+      </div>
+      <div>
+        <VehicleDetails data={selected} />
       </div>
       {/* {selected.vin && (
         <div className="section">

@@ -6,12 +6,22 @@ const VehicleDetails = ({ data }) => {
         {data.year} {data.make} {data.model}
       </h3>
       <div className="vehicle-details">
-        <p>
-          Miles: <span>{data.mileage?.toLocaleString() || 0}</span>
-        </p>
-        <p>
-          <strong>${data.price?.toLocaleString() || 0}</strong>
-        </p>
+        {data.features.map((f) => (
+          <div className="" key={f.vin}>
+            <p>
+              Miles: <span>{f.mileage?.toLocaleString() || 0}</span>
+            </p>
+            <p>Body Style: {f.category}</p>
+            <p>Engine: {f.engine}</p>
+            <p>Cylinders: {f.cylinders}</p>
+            <p>Fuel: {f.fuel}</p>
+            <p>Drive Train: {f.driveTrain}</p>
+            <p>Transmission: {f.transmission}</p>
+            <p>Exterior Color: {f.colorOutside}</p>
+            <p>Interior Color: {f.colorInside}</p>
+            <p>Doors: {f.doors}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

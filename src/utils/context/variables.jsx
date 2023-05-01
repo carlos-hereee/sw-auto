@@ -15,6 +15,19 @@ export let minPrice = (count, increment) => {
   }
   return prices;
 };
+
+export const driveTrain = [
+  "FWD - Front Wheel Drive",
+  "RWD - Rear Wheel Drive",
+  "4WD - 4 Wheel Drive",
+  "All Wheel Drive",
+];
+export const doors = ["4D", "2D"];
+export const color = ["red", "blue", "black", "white", "yellow", "brown"];
+export const fuel = ["gasoline", "deisel"];
+export const cylinders = ["four-cylinder", "six-cylinder", "eight-cylinder"];
+export const engines = ["4", "v", "straight-six", "v6", "v8"];
+export const getRandomArr = (arr) => arr[Math.floor(Math.random() * arr.length)];
 export const aboutMe1 =
   "SW Auto of Houston treats our customers with paramount concern. We have a great varieties of vehicles for you to choose from. We all know that your time is precious and you have high expectations. As a fast growing used car dealer in Houston, we enjoy the challenge of meeting and exceeding those standards each and every time. So, come see us and find out.";
 

@@ -3,7 +3,19 @@ import { axiosWithAuth } from "../functions/axios";
 import { reducer } from "../reducers/AppReducer";
 import { app } from "./config";
 import { useNavigate } from "react-router-dom";
-import { vehicles, randomMileague, randomPrice, minPrice } from "./variables";
+import {
+  vehicles,
+  randomMileague,
+  randomPrice,
+  minPrice,
+  getRandomArr,
+  engines,
+  driveTrain,
+  doors,
+  color,
+  fuel,
+  cylinders,
+} from "./variables";
 import shortid from "shortid";
 // import shortid from "shortid";
 
@@ -41,15 +53,7 @@ export const AppState = ({ children }) => {
   useEffect(() => {
     getCarAssets();
   }, []);
-  // const getAssets = async () => {
-  //   try {
-  //     const { data } = await axiosWithAuth.get("/app/glamourella");
-  //     dispatch({ type: "LOAD_CONTENT", payload: data });
-  //   } catch (error) {
-  //     dispatch({ type: "LOAD_CONTENT", payload: glamourella });
-  //     dispatch({ type: "ADD_MESSAGE_TO_LOG", payload: error.response.data });
-  //   }
-  // };
+
   const getCarAssets = async () => {
     try {
       const res = await axiosWithAuth.get("/Car_Model_List?limit=20");
@@ -68,6 +72,16 @@ export const AppState = ({ children }) => {
             model: Model,
             vin: objectId,
             photos: vehicles[Make.toLowerCase()],
+            features: [
+              {
+                engines: getRandomArr(engines),
+                driveTrain: getRandomArr(driveTrain),
+                doors: getRandomArr(doors),
+                fuel: getRandomArr(fuel),
+                cylinders: getRandomArr(cylinders),
+                color: getRandomArr(color),
+              },
+            ],
           };
         }
       );
