@@ -189,20 +189,19 @@ export const AppState = ({ children }) => {
       // list: [{ [key]: value, type: key }],
     };
     if (key === "Models") {
-      // check models option  exist
-      const check = applied.filter((a) => a.type === key).pop();
-      if (check === undefined) {
+      const getList = applied.filter((a) => a.type === key).pop();
+      // check models filter is active
+      if (getList === undefined) {
         // model does not exist add to applied filters
-        applied.push({ ...entry, list: [] });
+        applied.push({ ...entry, list: [entry] });
         return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
       } else {
-        // model exist remove from applied filters
-        const f = applied.filter((a) => a[key] === value).pop();
+        const isMatch = getList.list.filter((a) => a[key] === value).pop();
+        // if exist remove from applied filters
         const idx = applied.findIndex((a) => a.type === key);
-        if (f === undefined) {
+        if (isMatch === undefined) {
           // entry does not exist.
           if (applied[idx].list.length > 0) {
-            console.log("length greateer 1");
             applied[idx].list.push(entry);
           } else {
             // no items in list
@@ -218,18 +217,15 @@ export const AppState = ({ children }) => {
           }
           return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
         } else {
-          if (applied[idx].list.length > 0) {
-            const list = applied.filter((a) => a.type === key && a[key] !== value);
-            applied[idx].list = list;
-            return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
-          } else {
-            const multi = applied.filter((a) => a.type !== key);
-            return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: multi });
+          const list = getList.list.filter((a) => a[key] !== value);
+          if (list.length === 0) {
+            applied.pop(idx);
           }
+          applied.map((a) => a.type === key && (a.list = list));
+          return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
         }
       }
-    }
-    if (applied.some((af) => key === af.type)) {
+    } else if (applied.some((af) => key === af.type)) {
       const data = applied.map((f) => {
         if (f.hasList) {
           const list = f.list.filter((l) => {
