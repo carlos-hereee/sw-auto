@@ -5,7 +5,6 @@ import Select from "./molecules/navigation/Select";
 const FiltersNav = ({ change }) => {
   const { filters, appliedFilters, brands } = useContext(AppContext);
 
-  console.log("appliedFilters", appliedFilters);
   return (
     <div className="filter-wrapper">
       {Object.keys(filters).map((f) => (

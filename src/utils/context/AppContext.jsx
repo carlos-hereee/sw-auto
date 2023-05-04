@@ -182,8 +182,46 @@ export const AppState = ({ children }) => {
   };
   const updateAppliedFilter = (applied, { key, value }) => {
     // TODO: test all filter possibilities
-    console.log("filters, key, value", applied, key, value);
-    const entry = { [key]: value, type: key, key: shortid.generate() };
+    let entry = { [key]: value, type: key, key: shortid.generate() };
+    if (key === "Models") {
+      // check models option  exist
+      const check = applied.filter((a) => a.type === key).pop();
+      if (check === undefined) {
+        // model does not exist add to applied filters
+        applied.push({ ...entry, list: [] });
+        return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+      } else {
+        // model exist remove from applied filters
+        const f = applied.filter((a) => a[key] === value).pop();
+        if (f === undefined) {
+          // entry .
+          applied.map((a) => {
+            if (a.type === key) {
+              return { a, list: [entry] };
+            }
+            return a;
+          });
+          return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+        } else {
+          const idx = applied.findIndex((a) => a.type === key);
+          if (applied[idx].list.length > 0) {
+            const list = applied.filter((a) => a.type === key && a[key] !== value);
+            applied[idx].list = list;
+            return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+          } else {
+            // excluded
+            const multi = applied.filter((a) => a.type !== key);
+            return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: multi });
+          }
+          // match was found
+          // const match = applied.filter((a) => a[key] !== value);
+
+          // console.log("match", match);
+          // remove from list
+        }
+        // return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+      }
+    }
     if (applied.some((af) => key === af.type)) {
       const data = applied.map((f) => {
         if (f.hasList) {
@@ -197,7 +235,7 @@ export const AppState = ({ children }) => {
           return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: [] });
         }
         if (f[key] !== value) {
-          return { ...f, hasList: true, list: [...f.list, entry] };
+          return { ...f, list: [...f.list, entry] };
         }
       });
       if (data[0] === undefined) {
