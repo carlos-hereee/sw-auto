@@ -182,7 +182,12 @@ export const AppState = ({ children }) => {
   };
   const updateAppliedFilter = (applied, { key, value }) => {
     // TODO: test all filter possibilities
-    let entry = { [key]: value, type: key, key: shortid.generate() };
+    let entry = {
+      [key]: value,
+      type: key,
+      key: shortid.generate(),
+      // list: [{ [key]: value, type: key }],
+    };
     if (key === "Models") {
       // check models option  exist
       const check = applied.filter((a) => a.type === key).pop();
@@ -193,33 +198,35 @@ export const AppState = ({ children }) => {
       } else {
         // model exist remove from applied filters
         const f = applied.filter((a) => a[key] === value).pop();
+        const idx = applied.findIndex((a) => a.type === key);
         if (f === undefined) {
-          // entry .
-          applied.map((a) => {
-            if (a.type === key) {
-              return { a, list: [entry] };
-            }
-            return a;
-          });
+          // entry does not exist.
+          if (applied[idx].list.length > 0) {
+            console.log("length greateer 1");
+            applied[idx].list.push(entry);
+          } else {
+            // no items in list
+            applied[idx].list = [
+              {
+                [key]: applied[idx][key],
+                type: key,
+                key: shortid.generate(),
+              },
+              entry,
+            ];
+            return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+          }
           return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
         } else {
-          const idx = applied.findIndex((a) => a.type === key);
           if (applied[idx].list.length > 0) {
             const list = applied.filter((a) => a.type === key && a[key] !== value);
             applied[idx].list = list;
             return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
           } else {
-            // excluded
             const multi = applied.filter((a) => a.type !== key);
             return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: multi });
           }
-          // match was found
-          // const match = applied.filter((a) => a[key] !== value);
-
-          // console.log("match", match);
-          // remove from list
         }
-        // return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
       }
     }
     if (applied.some((af) => key === af.type)) {
