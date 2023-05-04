@@ -7,6 +7,7 @@ import SearchBar from "../component/molecules/SearchBar";
 import VehicleDetails from "../component/molecules/vehicle/VehicleDetails";
 import FieldQuantity from "../component/molecules/forms/FieldQuantity";
 import Hero from "../component/atoms/Hero";
+import FiltersNav from "../component/FiltersNav";
 
 const Cars = () => {
   const {
@@ -20,7 +21,6 @@ const Cars = () => {
     updateAppliedFilter,
     resetFilter,
     filterToggle,
-    brands,
   } = useContext(AppContext);
   const values = { search: "" };
 
@@ -49,73 +49,7 @@ const Cars = () => {
       </div>
       <div className="container-header">
         <h3>Filters </h3>
-        {filters && (
-          <div className="filter-wrapper">
-            {Object.keys(filters).map((f) => (
-              <select
-                key={f}
-                className={`dropdown-input ${f}`}
-                defaultValue={f}
-                onChange={(e) => optionChange(e.target.value, f)}>
-                <option value={f} className="dropdown-item" disabled>
-                  {f
-                    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-                    .split(" ")
-                    .map(
-                      (str) => str.charAt(0).toLocaleUpperCase() + str.substring(1)
-                    )
-                    .join(" ")}
-                </option>
-                {filters[f]?.map((opt) => (
-                  <option key={opt} value={opt} className="dropdown-item">
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            ))}
-            {appliedFilters.map((af) =>
-              af.hasList ? (
-                <select
-                  key={af.key}
-                  className="dropdown-input"
-                  onChange={(e) => optionChange(e.target.value, "models")}>
-                  {af.list.map((list) => (
-                    <>
-                      <option
-                        key={list.key}
-                        value={list.make}
-                        className="dropdown-item make"
-                        disabled>
-                        Model {list.make}
-                      </option>
-                      {brands[list.make]?.map((brand) => (
-                        <option value={brand} key={brand} className="dropdown-item">
-                          {brand}
-                        </option>
-                      ))}
-                    </>
-                  ))}
-                </select>
-              ) : (
-                af.type === "make" && (
-                  <select
-                    key={af.key}
-                    className="dropdown-input"
-                    onChange={(e) => optionChange(e.target.value, "models")}>
-                    <option value={af.make} className="dropdown-item" disabled>
-                      Model {af.make}
-                    </option>
-                    {brands[af.make].map((b) => (
-                      <option value={b} key={b} className="dropdown-item">
-                        {b}
-                      </option>
-                    ))}
-                  </select>
-                )
-              )
-            )}
-          </div>
-        )}
+        {filters && <FiltersNav change={optionChange} />}
         {isFiltered && (
           <div>
             <h3>Filters Applied: </h3>
@@ -180,7 +114,7 @@ const Cars = () => {
                       src={a.photos[0]}
                       alt={`${a.make} ${a.model} ${a.year}`}
                     />
-                    <VehicleHeading data={l} />
+                    <VehicleHeading data={a} />
                   </button>
                 )
             )

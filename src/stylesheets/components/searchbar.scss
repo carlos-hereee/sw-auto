@@ -17,12 +17,13 @@
   gap: 0.5rem;
 }
 .dropdown-input {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
   user-select: none;
   cursor: pointer;
-  max-width: 150px;
+  // max-width: 150px;
+  flex: 1;
   border-radius: 0.5rem;
   padding: 0.5rem;
 }

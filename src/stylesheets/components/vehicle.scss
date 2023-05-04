@@ -42,13 +42,16 @@
       width: 15rem;
       padding: 0.5rem 0;
       border-bottom: 1px solid #eee;
-      border-right: 1px solid #eee;
     }
   }
 }
 .vehicle-heading {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  flex: 1;
+  text-align: left;
+  border-top: 1px solid #eee;
   gap: 0.5rem;
   width: 100%;
 }
