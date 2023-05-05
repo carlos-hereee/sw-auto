@@ -173,21 +173,48 @@ export const AppState = ({ children }) => {
   // };
   const updateFilter = (arr, appliedFilters) => {
     let conditions = [];
+    let price = {};
 
     for (let af = 0; af < appliedFilters.length; af++) {
       const input = appliedFilters[af];
-      input.type === "model" && models.push(...input.list);
+      if (input.type === "minprice" || input.type === "maxprice") {
+        price[input.type] = input[input.type];
+      }
       conditions.push(...input.list);
     }
-    const check = arr.filter((item) => {
+    const check = arr.filter((i) => {
       for (let c = 0; c < conditions.length; c++) {
         const category = conditions[c].type;
         const value = conditions[c][category];
-        if (item[category] === value) {
+        if (category === "minprice") {
+          return i.price > value;
+        }
+        if (category === "maxprice") {
+          return i.price < value;
+        }
+        if (i[category] === value) {
           return true;
         }
       }
     });
+    console.log("check", check);
+    // if (price.minprice || price.maxprice) {
+    //   const { minprice, maxprice } = price;
+    //   if (check.length > 0) {
+    //     const priceRange = check.filter(
+    //       (c) => minprice || 0 > c.price > maxprice || 99999
+    //     );
+    //     return dispatch({ type: "UPDATE_FILTER", payload: priceRange });
+    //   } else {
+    //     const priceRange = arr.filter((a) => {
+    //       if (minprice || 0 > a.price > maxprice || 99999) {
+    //         return true;
+    //       }
+    //     });
+    //     console.log("priceRange", priceRange);
+    //     return dispatch({ type: "UPDATE_FILTER", payload: priceRange });
+    //   }
+    // }
 
     return dispatch({ type: "UPDATE_FILTER", payload: check });
   };
@@ -196,10 +223,12 @@ export const AppState = ({ children }) => {
   const updateAppliedFilter = (applied, { key, value }) => {
     let entry = { [key]: value, type: key, key: shortid.generate() };
     let list = getList(applied, key);
+
     if (list === undefined) {
       // model does not exist add to applied filters
       applied.push({ ...entry, list: [entry] });
-      return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+    } else if (key === "maxprice" || key === "minprice") {
+      list = { ...entry, list: [entry] };
     } else if (key === "model") {
       // check models filter is active
       const isMatch = list.list.filter((a) => a[key] === value).pop();
@@ -207,17 +236,12 @@ export const AppState = ({ children }) => {
       const idx = applied.findIndex((a) => a.type === key);
       if (isMatch === undefined) {
         // entry does not exist.
-        if (applied[idx].list.length > 0) {
-          applied[idx].list.push(entry);
-        } else {
-          // no items in list
-          applied[idx].list = [
-            { [key]: applied[idx][key], type: key, key: shortid.generate() },
-            entry,
-          ];
-          return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
-        }
-        return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+        applied[idx].list.length > 0
+          ? applied[idx].list.push(entry)
+          : (applied[idx].list = [
+              { [key]: applied[idx][key], type: key, key: shortid.generate() },
+              entry,
+            ]);
       } else {
         const excludeList = list.list.filter((a) => a[key] !== value);
         if (excludeList.length === 0) {
@@ -237,8 +261,8 @@ export const AppState = ({ children }) => {
       } else {
         list.list.push({ ...entry, list: [(prev) => prev, entry] });
       }
-      dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
     }
+    dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
   };
   return (
     <AppContext.Provider
