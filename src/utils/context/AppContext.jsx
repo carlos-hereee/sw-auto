@@ -173,36 +173,23 @@ export const AppState = ({ children }) => {
   // };
   const updateFilter = (arr, appliedFilters) => {
     let conditions = [];
-    let models = [];
 
     for (let af = 0; af < appliedFilters.length; af++) {
       const input = appliedFilters[af];
       input.type === "model" && models.push(...input.list);
       conditions.push(...input.list);
     }
-
     const check = arr.filter((item) => {
       for (let c = 0; c < conditions.length; c++) {
         const category = conditions[c].type;
         const value = conditions[c][category];
-        if (item[category] === value && category !== "model") {
+        if (item[category] === value) {
           return true;
         }
       }
     });
-    if (models.length > 0) {
-      const lot = check.filter((c) => {
-        for (let m = 0; m < models.length; m++) {
-          const category = models[m].type;
-          const value = models[m][category];
-          if (c[category] === value) {
-            return true;
-          }
-        }
-      });
-      console.log("lot", lot);
-      return dispatch({ type: "UPDATE_FILTER", payload: lot });
-    } else dispatch({ type: "UPDATE_FILTER", payload: check });
+
+    return dispatch({ type: "UPDATE_FILTER", payload: check });
   };
   const getList = (arr, key) => arr.filter((a) => a.type === key).pop();
 
