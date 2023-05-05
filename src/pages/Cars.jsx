@@ -42,7 +42,7 @@ const Cars = () => {
   const optionChange = (value, key) => {
     updateAppliedFilter(appliedFilters, { value, key });
   };
-  console.log("appliedFilters", appliedFilters);
+  // console.log("appliedFilters", appliedFilters);
   return (
     <div className="vehicle-container">
       <div className="container-header">

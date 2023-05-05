@@ -162,38 +162,40 @@ export const AppState = ({ children }) => {
   const resetFilter = (lot) => {
     dispatch({ type: "RESET_FILTER", payload: lot });
   };
-  const updateFilter = (data, appliedFilters) => {
-    const lot = data.filter((d) => {
-      if (appliedFilters.some((af) => af.hasList)) {
-        // if (appliedFilters.some((af) => console.log("af", af))) {
-        // }
-        return appliedFilters.some((af) => {
-          return af.list.some((l) => {
-            return Object.keys(l).some((lKey) => l[lKey] === d[lKey]);
-          });
+  const updateFilter = (arr, appliedFilters) => {
+    let lot = arr;
+    for (let i = 0; i < appliedFilters.length; i++) {
+      // traverse list of appliedFilters
+      const current = appliedFilters[i];
+      // traverse each list
+      for (let c = 0; c < current.list.length; c++) {
+        const elem = current.list[c];
+        // filter arr
+        const filter = lot.filter((d) => {
+          if (
+            d[elem.type.toLowerCase()]?.toString() ===
+            elem[elem.type.toLowerCase()]?.toString()
+          ) {
+            return d;
+          }
         });
-      } else {
-        return appliedFilters.some((f) => {
-          return Object.keys(f).some((keys) => f[keys] === d[keys]);
-        });
+        // console.log("lot", filter);
+        lot = filter;
       }
-    });
+    }
+    console.log("lot", lot);
     dispatch({ type: "UPDATE_FILTER", payload: lot });
   };
+  const getList = (arr, key) => arr.filter((a) => a.type === key).pop();
+
   const updateAppliedFilter = (applied, { key, value }) => {
-    // TODO: test all filter possibilities
-    let entry = {
-      [key]: value,
-      type: key,
-      key: shortid.generate(),
-      // list: [{ [key]: value, type: key }],
-    };
-    if (key === "Models") {
-      const getList = applied.filter((a) => a.type === key).pop();
+    let entry = { [key]: value, type: key, key: shortid.generate() };
+    if (key.toLowerCase() === "models") {
       // check models filter is active
-      if (getList === undefined) {
+      if (getList(applied, key) === undefined) {
         // model does not exist add to applied filters
         applied.push({ ...entry, list: [entry] });
+        console.log("applied", applied);
         return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
       } else {
         const isMatch = getList.list.filter((a) => a[key] === value).pop();
@@ -218,6 +220,7 @@ export const AppState = ({ children }) => {
           return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
         } else {
           const list = getList.list.filter((a) => a[key] !== value);
+          console.log("list", list);
           if (list.length === 0) {
             applied.pop(idx);
           }
@@ -227,7 +230,7 @@ export const AppState = ({ children }) => {
       }
     } else if (applied.some((af) => key === af.type)) {
       const data = applied.map((f) => {
-        if (f.hasList) {
+        if (f.list.length > 0) {
           const list = f.list.filter((l) => {
             let keys = Object.keys(l).filter((i) => l[i] === value);
             return l[keys] !== value;
@@ -247,7 +250,7 @@ export const AppState = ({ children }) => {
         dispatch({ type: "UPDATE_APPLIED_FILTER", payload: data });
       }
     } else {
-      applied.push({ ...entry, hasList: false, list: [entry] });
+      applied.push({ ...entry, list: [entry] });
       dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
     }
   };
