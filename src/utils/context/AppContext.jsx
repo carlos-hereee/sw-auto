@@ -162,27 +162,76 @@ export const AppState = ({ children }) => {
   const resetFilter = (lot) => {
     dispatch({ type: "RESET_FILTER", payload: lot });
   };
+  // const sort = (conditions, data) => {
+  //   for (let c = 0; c < conditions.length; c++) {
+  //     const category = conditions[c].type;
+  //     const value = conditions[c][category];
+  //     if (data[category] === value) {
+  //       return true;
+  //     }
+  //   }
+  // };
   const updateFilter = (arr, appliedFilters) => {
-    let lot = arr;
-    // console.log('app', app)
-    for (let i = 0; i < appliedFilters.length; i++) {
-      // traverse list of appliedFilters
-      const current = appliedFilters[i];
-      // traverse each list
-      for (let c = 0; c < current.list.length; c++) {
-        const value = current.list[c];
-        const category = value.type;
-        // filter arr
-        const filter = lot.filter((d) => {
-          if (d[category]) {
-            return d[category] === value[category];
-          }
-        });
-        console.log("filter", filter);
-        lot = filter;
-      }
+    let conditions = [];
+    let models = [];
+
+    for (let af = 0; af < appliedFilters.length; af++) {
+      const input = appliedFilters[af];
+      input.type === "model" && models.push(...input.list);
+      conditions.push(...input.list);
     }
-    dispatch({ type: "UPDATE_FILTER", payload: lot });
+
+    const check = arr.filter((item) => {
+      for (let c = 0; c < conditions.length; c++) {
+        const category = conditions[c].type;
+        const value = conditions[c][category];
+        if (item[category] === value && category !== "model") {
+          return true;
+        }
+      }
+    });
+    if (models.length > 0) {
+      const lot = check.filter((c) => {
+        for (let m = 0; m < models.length; m++) {
+          const category = models[m].type;
+          const value = models[m][category];
+          if (c[category] === value) {
+            return true;
+          }
+        }
+      });
+      return dispatch({ type: "UPDATE_FILTER", payload: lot });
+      // return
+    } else dispatch({ type: "UPDATE_FILTER", payload: check });
+
+    // const check = arr.filter((item) => {
+    //   for (var key in filter) {
+    //     if (item[key] === undefined || item[key] != filter[key]) {
+    //       return false;
+    //     }
+    //     return true;
+    //   }
+    // });
+    // console.log("check", check);
+    // const d = arr.filter((a) => {
+    //   // console.log('first', first)
+    //   // current.list.forEach(l=> console.log('l', l))
+    //   // if(a.includes(current))
+    // });
+    // for (let c = 0; c < current.list.length; c++) {
+    //   const value = current.list[c];
+    //   const category = value.type;
+    //   // filter arr
+    //   // data = arr.filter((d) => d[category] && d[category] === value[category]);
+    //   data = arr.filter((d) => {
+    //     if (d[category]) {
+    //       return d[category] === value[category];
+    //     }
+    //   });
+    // }
+    // lot += [...data];
+    // lot.push(...data);
+    // }
   };
   const getList = (arr, key) => arr.filter((a) => a.type === key).pop();
 

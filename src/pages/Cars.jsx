@@ -42,6 +42,7 @@ const Cars = () => {
   const optionChange = (value, key) => {
     updateAppliedFilter(appliedFilters, { value, key: key.toLowerCase() });
   };
+  // console.log("appliedFilters", appliedFilters);
   return (
     <div className="vehicle-container">
       <div className="container-header">
