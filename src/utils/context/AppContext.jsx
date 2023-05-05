@@ -208,68 +208,48 @@ export const AppState = ({ children }) => {
 
   const updateAppliedFilter = (applied, { key, value }) => {
     let entry = { [key]: value, type: key, key: shortid.generate() };
-    if (key === "model") {
+    let list = getList(applied, key);
+    if (list === undefined) {
+      // model does not exist add to applied filters
+      applied.push({ ...entry, list: [entry] });
+      return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+    } else if (key === "model") {
       // check models filter is active
-      console.log("getlist", getList(applied, key));
-      if (getList(applied, key) === undefined) {
-        // model does not exist add to applied filters
-        applied.push({ ...entry, list: [entry] });
+      const isMatch = list.list.filter((a) => a[key] === value).pop();
+      // if exist remove from applied filters
+      const idx = applied.findIndex((a) => a.type === key);
+      if (isMatch === undefined) {
+        // entry does not exist.
+        if (applied[idx].list.length > 0) {
+          applied[idx].list.push(entry);
+        } else {
+          // no items in list
+          applied[idx].list = [
+            { [key]: applied[idx][key], type: key, key: shortid.generate() },
+            entry,
+          ];
+          return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+        }
         return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
       } else {
-        const isMatch = getList(applied, key)
-          .list.filter((a) => a[key] === value)
-          .pop();
-        // if exist remove from applied filters
-        const idx = applied.findIndex((a) => a.type === key);
-        if (isMatch === undefined) {
-          // entry does not exist.
-          if (applied[idx].list.length > 0) {
-            applied[idx].list.push(entry);
-          } else {
-            // no items in list
-            applied[idx].list = [
-              {
-                [key]: applied[idx][key],
-                type: key,
-                key: shortid.generate(),
-              },
-              entry,
-            ];
-            return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
-          }
-          return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
-        } else {
-          const list = getList(applied, key).list.filter((a) => a[key] !== value);
-          if (list.length === 0) {
-            applied.pop(idx);
-          }
-          applied.map((a) => a.type === key && (a.list = list));
-          return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
+        const excludeList = list.list.filter((a) => a[key] !== value);
+        if (excludeList.length === 0) {
+          applied.pop(idx);
         }
-      }
-    } else if (applied.some((af) => key === af.type)) {
-      const data = applied.map((f) => {
-        if (f.list.length > 0) {
-          const list = f.list.filter((l) => {
-            let keys = Object.keys(l).filter((i) => l[i] === value);
-            return l[keys] !== value;
-          });
-          return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: list });
-        }
-        if (f[key] === value) {
-          return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: [] });
-        }
-        if (f[key] !== value) {
-          return { ...f, list: [...f.list, entry] };
-        }
-      });
-      if (data[0] === undefined) {
-        applied = [];
-      } else {
-        dispatch({ type: "UPDATE_APPLIED_FILTER", payload: data });
+        applied.map((a) => a.type === key && (a.list = excludeList));
+        return dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
       }
     } else {
-      applied.push({ ...entry, list: [entry] });
+      const isMatch = list.list.some((f) => f[key] === value);
+      if (isMatch) {
+        const idx = list.list.findIndex((l) => l[key] === value);
+        list.list.pop(idx);
+        if (!list.list.length) {
+          return dispatch({ type: "RESET_FILTER", payload: [] });
+        }
+      } else {
+        list.list.push({ ...entry, list: [(prev) => prev, entry] });
+      }
       dispatch({ type: "UPDATE_APPLIED_FILTER", payload: applied });
     }
   };

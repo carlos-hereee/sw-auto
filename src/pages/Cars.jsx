@@ -90,7 +90,7 @@ const Cars = () => {
                     type="button"
                     className="card"
                     onClick={() => seeDetails(a)}
-                    key={a.vin}>
+                    key={a.key}>
                     <img
                       className="vehicle-card-hero"
                       src={a.photos[0]}
@@ -104,7 +104,7 @@ const Cars = () => {
               <button
                 type="button"
                 onClick={() => seeDetails(l)}
-                key={l.vin}
+                key={l.key}
                 className="card">
                 <img
                   className="vehicle-card-hero"
