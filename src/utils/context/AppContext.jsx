@@ -200,45 +200,17 @@ export const AppState = ({ children }) => {
           }
         }
       });
+      console.log("lot", lot);
       return dispatch({ type: "UPDATE_FILTER", payload: lot });
-      // return
     } else dispatch({ type: "UPDATE_FILTER", payload: check });
-
-    // const check = arr.filter((item) => {
-    //   for (var key in filter) {
-    //     if (item[key] === undefined || item[key] != filter[key]) {
-    //       return false;
-    //     }
-    //     return true;
-    //   }
-    // });
-    // console.log("check", check);
-    // const d = arr.filter((a) => {
-    //   // console.log('first', first)
-    //   // current.list.forEach(l=> console.log('l', l))
-    //   // if(a.includes(current))
-    // });
-    // for (let c = 0; c < current.list.length; c++) {
-    //   const value = current.list[c];
-    //   const category = value.type;
-    //   // filter arr
-    //   // data = arr.filter((d) => d[category] && d[category] === value[category]);
-    //   data = arr.filter((d) => {
-    //     if (d[category]) {
-    //       return d[category] === value[category];
-    //     }
-    //   });
-    // }
-    // lot += [...data];
-    // lot.push(...data);
-    // }
   };
   const getList = (arr, key) => arr.filter((a) => a.type === key).pop();
 
   const updateAppliedFilter = (applied, { key, value }) => {
     let entry = { [key]: value, type: key, key: shortid.generate() };
-    if (key === "models") {
+    if (key === "model") {
       // check models filter is active
+      console.log("getlist", getList(applied, key));
       if (getList(applied, key) === undefined) {
         // model does not exist add to applied filters
         applied.push({ ...entry, list: [entry] });
