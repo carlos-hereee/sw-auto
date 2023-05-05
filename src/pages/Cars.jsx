@@ -40,9 +40,8 @@ const Cars = () => {
     }
   };
   const optionChange = (value, key) => {
-    updateAppliedFilter(appliedFilters, { value, key });
+    updateAppliedFilter(appliedFilters, { value, key: key.toLowerCase() });
   };
-  // console.log("appliedFilters", appliedFilters);
   return (
     <div className="vehicle-container">
       <div className="container-header">
@@ -59,7 +58,7 @@ const Cars = () => {
                 <div key={a.key} className="filter-list">
                   <h3>{a.type?.toUpperCase()}</h3>
                   <div>
-                    {a.list.map((a) => (
+                    {a.list?.map((a) => (
                       <button
                         key={a.key}
                         type="button"

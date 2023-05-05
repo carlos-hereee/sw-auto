@@ -5,10 +5,9 @@ import Select from "./molecules/navigation/Select";
 const FiltersNav = ({ change }) => {
   const { filters, appliedFilters, brands } = useContext(AppContext);
 
-  console.log("appliedFilters", appliedFilters);
   return (
     <div className="filter-wrapper">
-      {Object.keys(filters).map((f) => (
+      {Object.keys(filters)?.map((f) => (
         <Select key={f} value={f} change={change}>
           {filters[f]?.map((opt) => (
             <option key={opt} value={opt} className="dropdown-item">
@@ -17,10 +16,10 @@ const FiltersNav = ({ change }) => {
           ))}
         </Select>
       ))}
-      {appliedFilters.map(
+      {appliedFilters?.map(
         (af) =>
           af.type === "make" && (
-            <Select key={af.key} value="Models" change={change}>
+            <Select key={af.key} value="Model" change={change}>
               {af.list.map((list) => (
                 <>
                   <option
