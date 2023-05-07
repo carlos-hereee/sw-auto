@@ -1,7 +1,7 @@
+import CapFirstChar from "./CapFirstChar";
+
 const CamelSpace = ({ str }) => (
-  <span>
-    {str.charAt(0).toUpperCase} {str.slice(1)}
-  </span>
+  <CapFirstChar str={str.replace(/([a-z0-9])([A-Z])/g, "$1 $2")} />
 );
 
 export default CamelSpace;

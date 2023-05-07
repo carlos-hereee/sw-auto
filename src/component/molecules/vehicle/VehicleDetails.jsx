@@ -1,3 +1,6 @@
+import CamelSpace from "../../atoms/Text/CamelSpace";
+import CapFirstChar from "../../atoms/Text/CapFirstChar";
+
 const VehicleDetails = ({ data }) => {
   return (
     <div className="card-body">
@@ -16,7 +19,7 @@ const VehicleDetails = ({ data }) => {
             )}
             {Object.keys(feature).map((f) => (
               <p key={feature[f]}>
-                {f}: {feature[f]}
+                <CamelSpace str={f} />: <CapFirstChar str={feature[f]} />
               </p>
             ))}
             {/* {feature.category && <p>Body Style: {feature.category}</p>}

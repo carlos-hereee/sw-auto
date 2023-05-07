@@ -12,12 +12,10 @@ const Vehicle = () => {
 
   // console.log("selected", selected);
   useEffect(() => {
-    if (!active.vin) {
-      if (selected.photos) {
-        setActive(selected.photos[0]);
-      } else navigate(-1);
+    if (!selected.vin) {
+      navigate(-1);
     }
-  }, [active]);
+  }, [selected]);
 
   return (
     <div className="vehicle-container">
