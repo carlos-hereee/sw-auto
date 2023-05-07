@@ -56,7 +56,12 @@ export const AppState = ({ children }) => {
 
   const getPhotoAssest = (data) => {
     return vehicles[data.make.toLowerCase()].map((v) => {
-      return { ...data, src: v, uid: shortid.generate() };
+      return {
+        ...data,
+        src: v,
+        uid: shortid.generate(),
+        alt: `${data.year} ${data.make} ${data.model}`,
+      };
     });
   };
   const getCarAssets = async () => {
@@ -76,7 +81,7 @@ export const AppState = ({ children }) => {
             price: randomPrice(),
             model: Model,
             vin: objectId,
-            photos: getPhotoAssest({ ...dummyData }),
+            photos: getPhotoAssest({ ...dummyData, model: Model }),
             features: [
               {
                 engines: getRandomArr(engines),
