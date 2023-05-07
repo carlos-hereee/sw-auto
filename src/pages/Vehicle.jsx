@@ -10,7 +10,6 @@ const Vehicle = () => {
   const { selected, disclaimer } = useContext(AppContext);
   const navigate = useNavigate();
 
-  // console.log("selected", selected);
   useEffect(() => {
     if (!selected.vin) {
       navigate(-1);
