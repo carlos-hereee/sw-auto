@@ -35,7 +35,7 @@ const AppliedFilters = () => {
       <button
         type="reset"
         className="btn-main btn-reset"
-        onCLick={() => resetFilter(data)}>
+        onClick={() => resetFilter(data)}>
         Clear <Icons name="refresh" />
       </button>
     </div>

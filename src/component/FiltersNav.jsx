@@ -20,17 +20,17 @@ const FiltersNav = ({ change }) => {
       {appliedFilters?.map(
         (af) =>
           af.type === "make" && (
-            <Select key={af.key} value="Model" change={change}>
-              {af.list.map((list) => (
+            <Select key={af.vin} value="Model" change={change}>
+              {af.list.map((l) => (
                 <>
                   <option
-                    key={list.key}
-                    value={list.make}
+                    key={l.vin}
+                    value={l.make}
                     className="dropdown-item make"
                     disabled>
-                    Model {list.make}
+                    Model {l.make}
                   </option>
-                  {brands[list.make]?.map((brand) => (
+                  {brands[l.make]?.map((brand) => (
                     <option value={brand} key={brand} className="dropdown-item">
                       {brand}
                     </option>

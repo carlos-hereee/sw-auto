@@ -162,26 +162,32 @@ export const AppState = ({ children }) => {
   const resetFilter = (lot) => {
     dispatch({ type: "RESET_FILTER", payload: lot });
   };
-  // const sort = (conditions, data) => {
-  //   for (let c = 0; c < conditions.length; c++) {
-  //     const category = conditions[c].type;
-  //     const value = conditions[c][category];
-  //     if (data[category] === value) {
-  //       return true;
-  //     }
-  //   }
-  // };
+
   const filterInRange = (arr, min, max) => {
     return arr.filter((a) => min < a.price && a.price < max);
+  };
+  const filterByCategory = (arr, conditon) => {
+    return arr.filter((a) => {
+      for (let b = 0; b < conditon.length; b++) {
+        const current = conditon[b];
+        const category = conditon[b].type;
+        if (a[category] === current[category]) {
+          return true;
+        }
+      }
+    });
   };
   const updateFilter = (arr, appliedFilters) => {
     let conditions = [];
     let price = {};
+    let brands = [];
 
     for (let af = 0; af < appliedFilters.length; af++) {
       const input = appliedFilters[af];
       if (input.type === "minprice" || input.type === "maxprice") {
         price[input.type] = parseInt(input[input.type]);
+      } else if (input.type === "model") {
+        brands.push(...input.list);
       } else conditions.push(...input.list);
     }
     // if price filter  has value
@@ -189,18 +195,15 @@ export const AppState = ({ children }) => {
       const { minprice, maxprice } = price;
       arr = filterInRange(arr, minprice || 0, maxprice || 999999);
     }
-    const check = arr.filter((i) => {
-      if (conditions.length < 1) {
-        return true;
-      }
-      for (let c = 0; c < conditions.length; c++) {
-        const category = conditions[c].type;
-        const value = conditions[c][category];
-        return i[category] === value;
-      }
-    });
-
-    return dispatch({ type: "UPDATE_FILTER", payload: check });
+    // if models models are to be checked
+    if (brands.length > 0) {
+      arr = filterByCategory(arr, brands);
+    }
+    // check other filters
+    if (conditions.length > 0) {
+      arr = filterByCategory(arr, conditions);
+    }
+    dispatch({ type: "UPDATE_FILTER", payload: arr });
   };
   const getList = (arr, key) => arr.filter((a) => a.type === key).pop();
 
