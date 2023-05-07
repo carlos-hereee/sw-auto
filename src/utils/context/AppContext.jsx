@@ -163,8 +163,8 @@ export const AppState = ({ children }) => {
     dispatch({ type: "RESET_FILTER", payload: lot });
   };
 
-  const filterInRange = (arr, min, max) => {
-    return arr.filter((a) => min < a.price && a.price < max);
+  const filterInRange = (arr, min, max, category) => {
+    return arr.filter((a) => min < a[category] && a[category] < max);
   };
   const filterByCategory = (arr, conditon) => {
     return arr.filter((a) => {
@@ -181,6 +181,7 @@ export const AppState = ({ children }) => {
     let conditions = [];
     let price = {};
     let brands = [];
+    let mileage = 0;
 
     for (let af = 0; af < appliedFilters.length; af++) {
       const input = appliedFilters[af];
@@ -188,17 +189,24 @@ export const AppState = ({ children }) => {
         price[input.type] = parseInt(input[input.type]);
       } else if (input.type === "model") {
         brands.push(...input.list);
+      } else if (input.type === "mileage") {
+        // miles.push(...input.list);
+        mileage = input[input.type];
       } else conditions.push(...input.list);
     }
     // if price filter  has value
     if (price.minprice || price.maxprice) {
       const { minprice, maxprice } = price;
-      arr = filterInRange(arr, minprice || 0, maxprice || 999999);
+      arr = filterInRange(arr, minprice || 0, maxprice || 999999, "price");
     }
     // if models models are to be checked
     if (brands.length > 0) {
       arr = filterByCategory(arr, brands);
     }
+    if (mileage > 0) {
+      arr = filterInRange(arr, 0, mileage, "mileage");
+    }
+    console.log("mileage", mileage);
     // check other filters
     if (conditions.length > 0) {
       arr = filterByCategory(arr, conditions);
