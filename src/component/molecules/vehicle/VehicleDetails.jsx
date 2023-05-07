@@ -7,22 +7,27 @@ const VehicleDetails = ({ data }) => {
       </strong>
       <span>VIN: {data.vin.toUpperCase()}</span>
       <div className="vehicle-details">
-        {data.features?.map((f) => (
-          <div className="vehicle-details-wrapper" key={f.vin}>
+        {data.features?.map((feature) => (
+          <div className="vehicle-details-wrapper" key={feature.vin}>
             {data.mileage && (
               <p>
                 Miles: <span>{data.mileage?.toLocaleString() || 0}</span>
               </p>
             )}
-            {f.category && <p>Body Style: {f.category}</p>}
-            {f.engine && <p>Engine: {f.engine}</p>}
-            {f.cylinders && <p>Cylinders: {f.cylinders}</p>}
-            {f.fuel && <p>Fuel: {f.fuel}</p>}
-            {f.driveTrain && <p>Drive Train: {f.driveTrain}</p>}
-            {f.transmission && <p>Transmission: {f.transmission}</p>}
-            {f.colorOutside && <p>Exterior Color: {f.colorOutside}</p>}
-            {f.colorInside && <p>Interior Color: {f.colorInside}</p>}
-            {f.doors && <p>Doors: {f.doors}</p>}
+            {Object.keys(feature).map((f) => (
+              <p key={feature[f]}>
+                {f}: {feature[f]}
+              </p>
+            ))}
+            {/* {feature.category && <p>Body Style: {feature.category}</p>}
+            {feature.engine && <p>Engine: {feature.engine}</p>}
+            {feature.cylinders && <p>Cylinders: {feature.cylinders}</p>}
+            {feature.fuel && <p>Fuel: {feature.fuel}</p>}
+            {feature.driveTrain && <p>Drive Train: {feature.driveTrain}</p>}
+            {feature.transmission && <p>Transmission: {feature.transmission}</p>}
+            {feature.colorOutside && <p>Exterior Color: {feature.colorOutside}</p>}
+            {feature.colorInside && <p>Interior Color: {feature.colorInside}</p>}
+            {feature.doors && <p>Doors: {feature.doors}</p>} */}
           </div>
         ))}
       </div>
