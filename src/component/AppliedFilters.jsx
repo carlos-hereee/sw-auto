@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../utils/context/AppContext";
+import Icons from "./atoms/Icons";
 
 const AppliedFilters = () => {
   const { appliedFilters, updateAppliedFilter } = useContext(AppContext);

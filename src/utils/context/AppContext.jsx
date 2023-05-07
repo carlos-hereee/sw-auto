@@ -171,6 +171,9 @@ export const AppState = ({ children }) => {
   //     }
   //   }
   // };
+  const filterInRange = (arr, min, max) => {
+    return arr.filter((a) => min < a.price && a.price < max);
+  };
   const updateFilter = (arr, appliedFilters) => {
     let conditions = [];
     let price = {};
@@ -178,45 +181,24 @@ export const AppState = ({ children }) => {
     for (let af = 0; af < appliedFilters.length; af++) {
       const input = appliedFilters[af];
       if (input.type === "minprice" || input.type === "maxprice") {
-        price[input.type] = input[input.type];
-      }
-      conditions.push(...input.list);
+        price[input.type] = parseInt(input[input.type]);
+      } else conditions.push(...input.list);
     }
-    console.log("conditions", conditions);
-    console.log("price", price);
+    // if price filter  has value
+    if (price.minprice || price.maxprice) {
+      const { minprice, maxprice } = price;
+      arr = filterInRange(arr, minprice || 0, maxprice || 999999);
+    }
     const check = arr.filter((i) => {
+      if (conditions.length < 1) {
+        return true;
+      }
       for (let c = 0; c < conditions.length; c++) {
         const category = conditions[c].type;
         const value = conditions[c][category];
-        if (category === "minprice") {
-          return i.price > value;
-        }
-        if (category === "maxprice") {
-          return i.price < value;
-        }
-        if (i[category] === value) {
-          return true;
-        }
+        return i[category] === value;
       }
     });
-    console.log("check", check);
-    // if (price.minprice || price.maxprice) {
-    //   const { minprice, maxprice } = price;
-    //   if (check.length > 0) {
-    //     const priceRange = check.filter(
-    //       (c) => minprice || 0 > c.price > maxprice || 99999
-    //     );
-    //     return dispatch({ type: "UPDATE_FILTER", payload: priceRange });
-    //   } else {
-    //     const priceRange = arr.filter((a) => {
-    //       if (minprice || 0 > a.price > maxprice || 99999) {
-    //         return true;
-    //       }
-    //     });
-    //     console.log("priceRange", priceRange);
-    //     return dispatch({ type: "UPDATE_FILTER", payload: priceRange });
-    //   }
-    // }
 
     return dispatch({ type: "UPDATE_FILTER", payload: check });
   };
