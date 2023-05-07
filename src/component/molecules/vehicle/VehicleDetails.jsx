@@ -22,15 +22,6 @@ const VehicleDetails = ({ data }) => {
                 <CamelSpace str={f} />: <CapFirstChar str={feature[f]} />
               </p>
             ))}
-            {/* {feature.category && <p>Body Style: {feature.category}</p>}
-            {feature.engine && <p>Engine: {feature.engine}</p>}
-            {feature.cylinders && <p>Cylinders: {feature.cylinders}</p>}
-            {feature.fuel && <p>Fuel: {feature.fuel}</p>}
-            {feature.driveTrain && <p>Drive Train: {feature.driveTrain}</p>}
-            {feature.transmission && <p>Transmission: {feature.transmission}</p>}
-            {feature.colorOutside && <p>Exterior Color: {feature.colorOutside}</p>}
-            {feature.colorInside && <p>Interior Color: {feature.colorInside}</p>}
-            {feature.doors && <p>Doors: {feature.doors}</p>} */}
           </div>
         ))}
       </div>

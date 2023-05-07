@@ -30,16 +30,15 @@
 .vehicle-details {
   display: flex;
   justify-content: space-between;
-  gap: 0.5rem;
   border-top: 1px dashed #d3d1d1;
   border-bottom: 1px dashed #d3d1d1;
   .vehicle-details-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    justify-content: center;
     * {
-      width: 15rem;
+      flex: 1;
+      min-width: 200px;
       padding: 0.5rem 0;
       border-bottom: 1px solid #eee;
     }
