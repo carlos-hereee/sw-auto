@@ -1,22 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../utils/context/AppContext";
-import VehicleHeading from "../component/molecules/vehicle/VehicleHeading";
-import CardHeader from "../component/molecules/card/CardHeader";
-import Icons from "../component/atoms/Icons";
 import SearchBar from "../component/molecules/SearchBar";
-import VehicleDetails from "../component/molecules/vehicle/VehicleDetails";
-import FieldQuantity from "../component/molecules/forms/FieldQuantity";
-import Hero from "../component/atoms/Hero";
 import FiltersNav from "../component/FiltersNav";
+import AppliedFilters from "../component/AppliedFilters";
+import CardButton from "../component/molecules/card/CardButton";
 
 const Cars = () => {
   const {
     seeDetails,
     lot,
-    filters,
     isFiltered,
     updateFilter,
-    activeFilter,
+    filtered,
     appliedFilters,
     updateAppliedFilter,
     resetFilter,
@@ -36,7 +31,7 @@ const Cars = () => {
       // handle submit
       console.log("data, isSubmit", data, isSubmit);
     } else {
-      updateFilter(isFiltered ? activeFilter : lot, { value: data, key: "search" });
+      updateFilter(isFiltered ? filtered : lot, { value: data, key: "search" });
     }
   };
   const optionChange = (value, key) => {
@@ -49,70 +44,15 @@ const Cars = () => {
       </div>
       <div className="container-header">
         <h3>Filters </h3>
-        {filters && <FiltersNav change={optionChange} />}
-        {isFiltered && (
-          <div>
-            <h3>Filters Applied </h3>
-            <div className="applied-filter">
-              {appliedFilters.map((a) => (
-                <div key={a.key} className="filter-list">
-                  <h3>{a.type?.toUpperCase()}</h3>
-                  <div>
-                    {a.list?.map((a) => (
-                      <button
-                        key={a.key}
-                        type="button"
-                        className="btn-main"
-                        onClick={() =>
-                          updateAppliedFilter(appliedFilters, {
-                            value: a[a.type],
-                            key: a.type,
-                          })
-                        }>
-                        {a[a.type]}
-                        <Icons name="x" />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <FiltersNav change={optionChange} />
+        {isFiltered && <AppliedFilters />}
       </div>
       <div className="card-container">
         {isFiltered
-          ? activeFilter.map(
-              (a) =>
-                a.photos && (
-                  <button
-                    type="button"
-                    className="card"
-                    onClick={() => seeDetails(a)}
-                    key={a.key}>
-                    <img
-                      className="vehicle-card-hero"
-                      src={a.photos[0]}
-                      alt={`${a.make} ${a.model} ${a.year}`}
-                    />
-                    <VehicleHeading data={a} />
-                  </button>
-                )
-            )
-          : lot.map((l) => (
-              <button
-                type="button"
-                onClick={() => seeDetails(l)}
-                key={l.key}
-                className="card">
-                <img
-                  className="vehicle-card-hero"
-                  src={l.photos[0]}
-                  alt={`${l.make} ${l.model}`}
-                />
-                <VehicleHeading data={l} />
-              </button>
-            ))}
+          ? filtered.map((a) => (
+              <CardButton data={a} key={a.vin} click={seeDetails} />
+            ))
+          : lot.map((l) => <CardButton data={l} key={l.vin} click={seeDetails} />)}
       </div>
     </div>
   );

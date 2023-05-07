@@ -7,15 +7,16 @@ const FiltersNav = ({ change }) => {
 
   return (
     <div className="filter-wrapper">
-      {Object.keys(filters)?.map((f) => (
-        <Select key={f} value={f} change={change}>
-          {filters[f]?.map((opt) => (
-            <option key={opt} value={opt} className="dropdown-item">
-              {opt}
-            </option>
-          ))}
-        </Select>
-      ))}
+      {filters &&
+        Object.keys(filters)?.map((f) => (
+          <Select key={f} value={f} change={change}>
+            {filters[f]?.map((opt) => (
+              <option key={opt} value={opt} className="dropdown-item">
+                {opt}
+              </option>
+            ))}
+          </Select>
+        ))}
       {appliedFilters?.map(
         (af) =>
           af.type === "make" && (

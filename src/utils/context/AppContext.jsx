@@ -40,7 +40,7 @@ export const AppState = ({ children }) => {
     selected: {},
     isFiltered: false,
     appliedFilters: [],
-    activeFilter: [],
+    filtered: [],
     filtered: [],
     filterToggle: false,
     brands: [],
@@ -182,6 +182,8 @@ export const AppState = ({ children }) => {
       }
       conditions.push(...input.list);
     }
+    console.log("conditions", conditions);
+    console.log("price", price);
     const check = arr.filter((i) => {
       for (let c = 0; c < conditions.length; c++) {
         const category = conditions[c].type;
@@ -285,7 +287,7 @@ export const AppState = ({ children }) => {
         paymentType: state.paymentType,
         disclaimer: state.disclaimer,
         filters: state.filters,
-        activeFilter: state.activeFilter,
+        filtered: state.filtered,
         appliedFilters: state.appliedFilters,
         isFiltered: state.isFiltered,
         filterToggle: state.filterToggle,

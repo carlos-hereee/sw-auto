@@ -85,7 +85,7 @@ const updateFilter = (state, action) => {
     ...state,
     isLoading: false,
     isFiltered: true,
-    activeFilter: action.payload,
+    filtered: action.payload,
   };
 };
 const updateAppliedFilter = (state, action) => {
@@ -102,7 +102,7 @@ const resetFilter = (state, action) => {
     ...state,
     isLoading: false,
     isFiltered: false,
-    activeFilter: action.payload,
+    filtered: action.payload,
   };
 };
 export const reducer = (state, action) => {
