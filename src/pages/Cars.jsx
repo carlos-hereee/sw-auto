@@ -1,9 +1,7 @@
 import { useContext, useEffect } from "react";
 import { AppContext } from "../utils/context/AppContext";
-import SearchBar from "../component/molecules/SearchBar";
-import FiltersNav from "../component/FiltersNav";
-import AppliedFilters from "../component/AppliedFilters";
 import CardButton from "../component/molecules/card/CardButton";
+import Filters from "../component/Filters";
 
 const Cars = () => {
   const {
@@ -13,11 +11,9 @@ const Cars = () => {
     updateFilter,
     filtered,
     appliedFilters,
-    updateAppliedFilter,
     resetFilter,
     filterToggle,
   } = useContext(AppContext);
-  const values = { search: "" };
 
   useEffect(() => {
     if (appliedFilters.length) {
@@ -25,28 +21,9 @@ const Cars = () => {
     } else resetFilter(lot);
   }, [filterToggle]);
 
-  const handleFilter = (data, isSubmit) => {
-    // search on change
-    if (isSubmit) {
-      // handle submit
-      console.log("data, isSubmit", data, isSubmit);
-    } else {
-      updateFilter(isFiltered ? filtered : lot, { value: data, key: "search" });
-    }
-  };
-  const optionChange = (value, key) => {
-    updateAppliedFilter(appliedFilters, { value, key: key.toLowerCase() });
-  };
   return (
     <div className="vehicle-container">
-      <div className="container-header">
-        <SearchBar values={values} handleFilter={handleFilter} />
-      </div>
-      <div className="container-header">
-        <h3>Filters </h3>
-        <FiltersNav change={optionChange} />
-        {isFiltered && <AppliedFilters />}
-      </div>
+      <Filters />
       <div className="card-container">
         {isFiltered
           ? filtered.map((a) => (

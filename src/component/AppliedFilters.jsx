@@ -3,11 +3,12 @@ import { AppContext } from "../utils/context/AppContext";
 import Icons from "./atoms/Icons";
 
 const AppliedFilters = () => {
-  const { appliedFilters, updateAppliedFilter } = useContext(AppContext);
+  const { appliedFilters, updateAppliedFilter, resetFilter } =
+    useContext(AppContext);
   return (
-    <div>
-      <h3>Filters Applied </h3>
+    <div className="applied-filter-container">
       <div className="applied-filter">
+        <h3>Filters Applied </h3>
         {appliedFilters.map((a) => (
           <div key={a.key} className="filter-list">
             <h3>{a.type?.toUpperCase()}</h3>
@@ -31,6 +32,12 @@ const AppliedFilters = () => {
           </div>
         ))}
       </div>
+      <button
+        type="reset"
+        className="btn-main btn-reset"
+        onCLick={() => resetFilter(data)}>
+        Clear <Icons name="refresh" />
+      </button>
     </div>
   );
 };
