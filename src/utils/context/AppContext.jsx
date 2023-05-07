@@ -54,6 +54,11 @@ export const AppState = ({ children }) => {
     getCarAssets();
   }, []);
 
+  const getPhotoAssest = (data) => {
+    return vehicles[data.make.toLowerCase()].map((v) => {
+      return { ...data, src: v, uid: shortid.generate() };
+    });
+  };
   const getCarAssets = async () => {
     try {
       const res = await axiosWithAuth.get("/Car_Model_List?limit=20");
@@ -71,7 +76,7 @@ export const AppState = ({ children }) => {
             price: randomPrice(),
             model: Model,
             vin: objectId,
-            photos: vehicles[Make.toLowerCase()],
+            photos: getPhotoAssest({ ...dummyData }),
             features: [
               {
                 engines: getRandomArr(engines),
@@ -206,7 +211,6 @@ export const AppState = ({ children }) => {
     if (mileage > 0) {
       arr = filterInRange(arr, 0, mileage, "mileage");
     }
-    console.log("mileage", mileage);
     // check other filters
     if (conditions.length > 0) {
       arr = filterByCategory(arr, conditions);

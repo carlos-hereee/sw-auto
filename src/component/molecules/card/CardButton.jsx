@@ -5,7 +5,7 @@ const CardButton = ({ data, click }) => {
     <button type="button" onClick={() => click(data)} className="card">
       <img
         className="vehicle-card-hero"
-        src={data.photos[0]}
+        src={data.photos[0].src}
         alt={`${data.make} ${data.model}`}
       />
       <VehicleHeading data={data} />

@@ -1,6 +1,6 @@
 import ButtonLink from "../../atoms/buttons/ButtonLink";
 
-const ButtonLinkNavigation = ({ links }) => {
+const LinkNavigation = ({ links }) => {
   return (
     <nav className="navbar">
       {links.map((l) => (
@@ -10,4 +10,4 @@ const ButtonLinkNavigation = ({ links }) => {
   );
 };
 
-export default ButtonLinkNavigation;
+export default LinkNavigation;
